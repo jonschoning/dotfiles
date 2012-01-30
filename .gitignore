@@ -1,0 +1,69 @@
+# Ignore everything by default.
+*
+
+# Bash stuff (profile just sources bashrc, since it's the only thing sourced
+# when a shell is a login shell).
+!.bash*
+.*.swp
+.bash_history
+.bash_local
+.bash_logout
+!.profile
+
+# Git aliases, identification info
+!.gitconfig
+# The gitignore of this repository itself (!)
+!.gitignore
+# My global Git excludes file (acts as a global .gitignore)
+!.gitexcludes
+
+# IPython config (need directory here so gitignore works correctly.
+# This won't actually pull in the other contetns of the dir, though.
+# Which is good as all I care about is the...
+!.ipython
+# ipythonrc file!
+!.ipython/ipythonrc
+
+# IRb config
+!.irbrc
+
+# Vim plugins, ftplugins, syntax etc etc
+!.vim
+!.vim/*
+# But do ignore netrw history
+.vim/.netrwhist
+!.vim/autoload/*
+# Pathogen bundle stuff (WTB recursive gitignore excludes...)
+# e.g. .vim/bundle/<plugin>/syntax/special_syntax.vim
+# (Added a few more asterisks just to cover any deeper setups. Sigh.)
+!.vim/bundle
+!.vim/bundle/*
+!.vim/bundle/*/*
+!.vim/bundle/*/*/*
+!.vim/bundle/*/*/*/*
+!.vim/bundle/*/*/*/*/*
+!.vim/colors/*
+!.vim/doc/*
+!.vim/ftdetect/*
+!.vim/ftplugin/*
+!.vim/indent/*
+!.vim/plugin/*
+!.vim/spell/*
+!.vim/syntax/*
+# Vim settings
+!.vimrc
+
+# Local copies of tools/scripts
+#!bin
+#!bin/*
+
+# Screen, tmux
+!.screenrc
+!.tmux.conf
+
+# Gem config
+!.gemrc
+
+# Ack
+!.ackrc
+bin/backup

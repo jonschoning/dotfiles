@@ -1,0 +1,65 @@
+[user]
+    name = Jon Schoning
+    email = jonschoning@gmail.com
+[core]
+    symlinks = false
+    autocrlf = false
+    whitespace = cr-at-eol,-trailing-space,-space-before-tab
+    filemode = false
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
+    ui = true
+[pack]
+    packSizeLimit = 2g
+[help]
+    format = html
+[http]
+    sslCAinfo = /bin/curl-ca-bundle.crt
+[sendemail]
+    smtpserver = /bin/msmtp.exe
+[imap]
+    folder = \"[Gmail]/Drafts\"
+[alias]
+    b = branch -a
+    l = log --oneline --graph --decorate
+    ld = log --pretty=format:'%C(yellow)%h%Creset %C(yellow bold)%d%Creset %C(magenta bold)%cn%Creset %C(magenta dim)%cd%Creset %C(white dim)%s%Creset' --graph --decorate --date=local
+    ldr = log --pretty=format:'%C(yellow)%h%Creset %C(yellow bold)%d%Creset %C(magenta bold)%cn%Creset %C(magenta dim)%cr%Creset %C(white dim)%s%Creset' --graph --decorate
+    cb = checkout -b
+    db = branch -d
+    ck = checkout
+    cm = commit
+    s = status --short
+    a = add
+    sa = stash apply
+    sp = stash pop
+    sl = stash list
+    aa = add -A
+    cmtfs = commit -m 'tfs latest'
+    cmamtfs = commit --amend -m 'tfs latest'
+    tfe = tfs fetch
+    tpu = tfs pull
+    rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
+[gui]
+    fontdiff = -family \"Bitstream Vera Sans Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+    fontui = -family \"Bitstream Vera Sans\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+[push]
+    default = tracking
+[core]
+    editor = /usr/bin/vim
+[mergetool "mvimdiff"]
+    cmd = /usr/local/bin/gvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+[merge]
+    tool = mvimdiff
+[mergetool]
+    prompt = false
+    keepBackup = false
+[difftool "gvimdiff"]
+    path = /usr/local/bin/gvimdiff
+[diff]
+    tool = vimdiff
+    guitool = gvimdiff
+[difftool]
+    prompt = false
