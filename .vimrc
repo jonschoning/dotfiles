@@ -167,8 +167,8 @@ nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
 nmap <silent> <leader>sw :execute ":resize " . line('$')<cr>
 
 " Insert blank lines without going into insert mode
-nnoremap t o<ESC>k
-nnoremap T O<ESC>j
+nnoremap gt o<ESC>k
+nnoremap gT O<ESC>j
 
 " go to middle of line
 nnoremap gm :call cursor(0, len(getline('.'))/2)<cr>
@@ -177,7 +177,6 @@ nnoremap gm :call cursor(0, len(getline('.'))/2)<cr>
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
-
 
 " shortcuts for opening files located in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -235,22 +234,22 @@ let g:netrw_list_hide = '.*\.py[co]$,\.git$,\.swp$'
 so ~/.vim/plugin/matchit.vim
 
 if has("statusline") && !&cp
-  set laststatus=2  " always show the status bar
+    set laststatus=2  " always show the status bar
 
-  " Start the status line
-  set statusline=%f\ %m\ %r
+    " Start the status line
+    set statusline=%f\ %m\ %r
 
-  " Finish the statusline
-  set statusline+=Line:%l/%L[%p%%]
-  set statusline+=Col:%v
-  set statusline+=Buf:#%n
-  set statusline+=[%b][0x%B]
-  "
-  " Add fugitive
-  set statusline+=%{fugitive#statusline()}
+    " Finish the statusline
+    set statusline+=Line:%l/%L[%p%%]
+    set statusline+=Col:%v
+    set statusline+=Buf:#%n
+    set statusline+=[%b][0x%B]
+    "
+    " Add fugitive
+    set statusline+=%{fugitive#statusline()}
 
-  " Add taglist
-  set statusline+=[%{Tlist_Get_Tagname_By_Line()}]
+    " Add taglist
+    set statusline+=[%{Tlist_Get_Tagname_By_Line()}]
 endif
 
 set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
@@ -293,6 +292,9 @@ endif
 
 
 if has("autocmd")
+  " automatically reload vimrc when it's saved
+  au BufWritePost .vimrc so ~/.vimrc
+
   au VimEnter * set vb t_vb= " Stop beeping and flashing!
 
   " Jump to last known location in file
@@ -426,6 +428,7 @@ nnoremap <silent> <C-S-F2> :setlocal nospell<CR>
 nnoremap <silent> <F4> :bd<CR>
 nnoremap <silent> <S-F4> :bd!<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
+nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F8> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
 nnoremap <silent> <F9> :TlistToggle<CR>
@@ -527,7 +530,7 @@ if has("gui_running")
     set cursorline
     set background=light
 
-    colorscheme github
+    colorscheme deepblue
 
     "set gui font
     if has('win32')
@@ -554,7 +557,7 @@ else
     vnoremap OC <nop>
     vnoremap OB <nop>
 
-    colorscheme github
+    colorscheme deepblue
 endif
 
 " let Tlist_Process_File_Always = 1
