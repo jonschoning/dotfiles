@@ -67,3 +67,6 @@
 # Ack
 !.ackrc
 bin/backup
+
+# octave
+.octaverc

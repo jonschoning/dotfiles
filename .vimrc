@@ -129,7 +129,13 @@ nnoremap zk kzz
 nnoremap zj jzz
 
 " Make Y behave like other capitals
-map Y y$
+" map Y y$
+
+" Better comand-line editing
+cnoremap <C-j> <left>
+cnoremap <C-k> <right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 " use sane regexes
 " nnoremap / /\v
@@ -285,7 +291,7 @@ else
         exe join(['w | !/usr/bin/env ruby ', expand('%:p')], '')
     endfunction
     function! ReadRbResults_buffer()
-        exe join(['w | new | setl bt=nofile | r !/usr/bin/env ruby', expand('%:p')], '')
+        exe join(['w | new | setl bt=nofile | r !/usr/bin/env ruby ', expand('%:p')], '')
     endfunction
 endif
 
@@ -455,22 +461,22 @@ endif
 command! Work call Work()
 function! Work()
     if has('win32')
-        set path=C:\am\WellRight\Dev\Current\**
-        cd C:\am\WellRight\Dev\Current
-        command! Make make WellRight\WellRight.Web\Web.Public.csproj
+        set path=C:\Redbox_Ticketing\Main\**
+        cd C:\Redbox_Ticketing\Main
+        command! Make make Redbox.Ticketing\Redbox.Ticketing.sln
         nnoremap <silent> <leader>vs :!devenv /edit "%:p"<CR>
 
         " dbext options
         let g:dbext_default_profile = 'localSQLServer'
-        let g:dbext_default_profile_localSQLServer ='type=SQLSRV:integratedlogin=1:dbname=Wellright_Local'
+        let g:dbext_default_profile_localSQLServer ='type=SQLSRV:integratedlogin=1:dbname=Ticketing'
     else
-        set path=/cd/c/am/WellRight/Dev/Current/**
-        cd /cd/c/am/WellRight/Dev/Current
-        command! Make make WellRight/WellRight.Web/Web.Public.csproj
+        set path=/cd/c/Redbox_Ticketing/Main/**
+        cd /cd/c/Redbox_Ticketing/Main/
+        command! Make make Redbox.Ticketing/Redbox.Ticketing.sln
 
         " dbext options
         let g:dbext_default_profile = 'localODBC'
-        let g:dbext_default_profile_localODBC = 'type=ODBC:user=vim:passwd=dbext:dbname=Wellright_Local'
+        let g:dbext_default_profile_localODBC = 'type=ODBC:user=vim:passwd=dbext:dbname=Ticketing'
     endif
     set makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /property:RunCodeAnalysis=false\ /property:configuration=debug
 endfunction
@@ -530,11 +536,14 @@ if has("gui_running")
     set cursorline
     set background=light
 
-    colorscheme deepblue
+    colorscheme github
 
     "set gui font
     if has('win32')
         set guifont=Bitstream\ Vera\ Sans\ Mono
+        " set guifont=inconsolata:h10:w5
+        " set guifont=Monaco:h8:w6
+        " set guifont=Courier\ New
     else
         set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
     endif
@@ -557,7 +566,7 @@ else
     vnoremap OC <nop>
     vnoremap OB <nop>
 
-    colorscheme deepblue
+    colorscheme github
 endif
 
 " let Tlist_Process_File_Always = 1

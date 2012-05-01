@@ -3,7 +3,7 @@
     email = jonschoning@gmail.com
 [core]
     symlinks = false
-    autocrlf = false
+	autocrlf = false
     whitespace = cr-at-eol,-trailing-space,-space-before-tab
     filemode = false
 [color]
@@ -49,6 +49,7 @@
     default = tracking
 [core]
     editor = /usr/bin/vim
+	safecrlf = true
 [mergetool "mvimdiff"]
     cmd = /usr/local/bin/gvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
 [merge]

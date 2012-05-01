@@ -15,13 +15,13 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
-PATH=~/bin:$PATH
+PATH=~/bin:$PATH:/usr/local/WordNet-3.0/bin:/usr/lib/lapack/
 export PATH
 
 EDITOR='gvim -f'
 export EDITOR
 
-source /etc/bash_completion.d/git
+# source /etc/bash_completion.d/git
 
 #PS1='\$ '
 PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n$(__git_ps1 "(%s)")$ '
