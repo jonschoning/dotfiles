@@ -69,4 +69,4 @@
 bin/backup
 
 # octave
-.octaverc
+!.octaverc
