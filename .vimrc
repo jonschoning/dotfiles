@@ -263,17 +263,17 @@ set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
 " Execute python file being edited
 if has('win32')
     function! ReadPyResults_shell()
-        exe join(['w | !c:\Python27\python.exe ', expand('%:p')])
+        exe join(['w | !c:\Python27\python.exe ', shellescape(expand('%:p'))])
     endfunction
     function! ReadPyResults_buffer()
-        exe join(['w | new | setl bt=nofile | r !c:\Python27\python.exe ', expand('%:p')])
+        exe join(['w | new | setl bt=nofile | r !c:\Python27\python.exe ', shellescape(expand('%:p'))])
     endfunction
 else
     function! ReadPyResults_shell()
-        exe join(['w | !/usr/bin/env python ', expand('%:p')], '')
+        exe join(['w | !/usr/bin/env python ', shellescape(expand('%:p'))], '')
     endfunction
     function! ReadPyResults_buffer()
-        exe join(['w | new | setl bt=nofile | r !/usr/bin/env python ', expand('%:p')], '')
+        exe join(['w | new | setl bt=nofile | r !/usr/bin/env python ', shellescape(expand('%:p'))], '')
     endfunction
 endif
 "
@@ -281,17 +281,17 @@ endif
 if has('win32')
     noh
     function! ReadRbResults_shell()
-        exe join(['w | !c:\Ruby193\bin\ruby.exe ', expand('%:p')])
+        exe join(['w | !c:\Ruby193\bin\ruby.exe ', shellescape(expand('%:p'))])
     endfunction
     function! ReadRbResults_buffer()
-        exe join(['w | new | setl bt=nofile | r !c:\Ruby193\bin\ruby.exe ', expand('%:p')])
+        exe join(['w | new | setl bt=nofile | r !c:\Ruby193\bin\ruby.exe ', shellescape(expand('%:p'))])
     endfunction
 else
     function! ReadRbResults_shell()
-        exe join(['w | !/usr/bin/env ruby ', expand('%:p')], '')
+        exe join(['w | !/usr/bin/env ruby ', shellescape(expand('%:p'))], '')
     endfunction
     function! ReadRbResults_buffer()
-        exe join(['w | new | setl bt=nofile | r !/usr/bin/env ruby ', expand('%:p')], '')
+        exe join(['w | new | setl bt=nofile | r !/usr/bin/env ruby ', shellescape(expand('%:p'))], '')
     endfunction
 endif
 
@@ -457,30 +457,6 @@ if has('win32')
     let g:dbext_default_SQLSRV_cmd_options='-w 10000 -r -b'
 endif
 
-" set dev path
-command! Work call Work()
-function! Work()
-    if has('win32')
-        set path=C:\Redbox_Ticketing\Main\**
-        cd C:\Redbox_Ticketing\Main
-        command! Make make Redbox.Ticketing\Redbox.Ticketing.sln
-        nnoremap <silent> <leader>vs :!devenv /edit "%:p"<CR>
-
-        " dbext options
-        let g:dbext_default_profile = 'localSQLServer'
-        let g:dbext_default_profile_localSQLServer ='type=SQLSRV:integratedlogin=1:dbname=Ticketing'
-    else
-        set path=/cd/c/Redbox_Ticketing/Main/**
-        cd /cd/c/Redbox_Ticketing/Main/
-        command! Make make Redbox.Ticketing/Redbox.Ticketing.sln
-
-        " dbext options
-        let g:dbext_default_profile = 'localODBC'
-        let g:dbext_default_profile_localODBC = 'type=ODBC:user=vim:passwd=dbext:dbname=Ticketing'
-    endif
-    set makeprg=msbuild\ /nologo\ /v:q\ /property:GenerateFullPaths=true\ /property:RunCodeAnalysis=false\ /property:configuration=debug
-endfunction
-
 " call Work()
 cd ~
 
@@ -532,9 +508,10 @@ endif
 
 if has("gui_running")
     " set gui options
-    set guioptions=aegt
+    set guioptions=egt
     set cursorline
     set background=light
+    set clipboard=unnamed
 
     colorscheme github
 
@@ -584,3 +561,14 @@ endif
 " disable slow unimpaired.vim commands: prev/next file in tree
 nnoremap ]o <nop>
 nnoremap [o <nop>
+
+" CamelCaseMotion
+map <silent> <C-w> <Plug>CamelCaseMotion_w
+map <silent> <C-b> <Plug>CamelCaseMotion_b
+map <silent> <C-e> <Plug>CamelCaseMotion_e
+omap <silent> i<C-w> <Plug>CamelCaseMotion_iw
+xmap <silent> i<C-w> <Plug>CamelCaseMotion_iw
+omap <silent> i<C-b> <Plug>CamelCaseMotiojn_ib
+xmap <silent> i<C-b> <Plug>CamelCaseMotion_ib
+omap <silent> i<C-e> <Plug>CamelCaseMotion_ie
+xmap <silent> i<C-e> <Plug>CamelCaseMotion_ie

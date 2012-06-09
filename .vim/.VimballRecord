@@ -1,0 +1,2 @@
+vis.vba: call delete('/cygdrive/c/Users/JonSchoning/.vim/plugin/visPlugin.vim')|call delete('/cygdrive/c/Users/JonSchoning/.vim/autoload/vis.vim')|call delete('/cygdrive/c/Users/JonSchoning/.vim/plugin/cecutil.vim')|call delete('/cygdrive/c/Users/JonSchoning/.vim/doc/vis.txt')
+vissort.vba: call delete('/cygdrive/c/Users/JonSchoning/.vim/plugin/vissortPlugin.vim')|call delete('/cygdrive/c/Users/JonSchoning/.vim/doc/vissort.txt')|call delete('/cygdrive/c/Users/JonSchoning/.vim/autoload/vissort.vim')

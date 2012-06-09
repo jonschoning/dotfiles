@@ -43,8 +43,8 @@
     tpu = tfs pull
     rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
 [gui]
-    fontdiff = -family \"Bitstream Vera Sans Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
-    fontui = -family \"Bitstream Vera Sans\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui = -family \"DIN Neuzeit Grotesk Std Light\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
 [push]
     default = tracking
 [core]

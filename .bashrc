@@ -15,7 +15,7 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
-PATH=~/bin:$PATH:/usr/local/WordNet-3.0/bin:/usr/lib/lapack/
+PATH=~/bin:~/usr/local/bin/:$PATH:/usr/local/WordNet-3.0/bin:/usr/lib/lapack/
 export PATH
 
 EDITOR='gvim -f'
@@ -41,6 +41,8 @@ alias lt='ls -ltr'         # sort by date, most recent last
 alias lm='ls -al |more'    # pipe through 'more'
 alias lr='ls -lR'          # recursive ls
 #alias tree='tree -Csu'     # nice alternative to 'recursive ls'
+
+alias oct='octave -q'
 
 # If your version of 'ls' doesn't support --group-directories-first try this:
 # function ll() { ls -l "$@"| egrep "^d" ; ls -lXB "$@" 2>&-| egrep -v "^d|total "; }
