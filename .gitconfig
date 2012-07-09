@@ -23,25 +23,26 @@
 [imap]
     folder = \"[Gmail]/Drafts\"
 [alias]
-    b = branch -a
-    l = log --oneline --graph --decorate
-    ld = log --pretty=format:'%C(yellow)%h%Creset %C(yellow bold)%d%Creset %C(magenta bold)%cn%Creset %C(magenta dim)%cd%Creset %C(white dim)%s%Creset' --graph --decorate --date=local
-    ldr = log --pretty=format:'%C(yellow)%h%Creset %C(yellow bold)%d%Creset %C(magenta bold)%cn%Creset %C(magenta dim)%cr%Creset %C(white dim)%s%Creset' --graph --decorate
-    cb = checkout -b
-    db = branch -d
-    ck = checkout
-    cm = commit
-    s = status --short
-    a = add
-    sa = stash apply
-    sp = stash pop
-    sl = stash list
-    aa = add -A
-    cmtfs = commit -m 'tfs latest'
-    cmamtfs = commit --amend -m 'tfs latest'
-    tfe = tfs fetch
-    tpu = tfs pull
-    rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
+	b = branch -a
+	l = log --graph --decorate --oneline 
+	ld = log  --graph --decorate --date=local 		   	 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset'
+	ldr = log --graph --decorate 			  			 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
+	lg = log  --graph --decorate --abbrev-commit --color --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	cb = checkout -b
+	db = branch -d
+	ck = checkout
+	cm = commit
+	s = status --short
+	a = add
+	sa = stash apply
+	sp = stash pop
+	sl = stash list
+	aa = add -A
+	cmtfs = commit -m 'tfs latest'
+	cmamtfs = commit --amend -m 'tfs latest'
+	tfe = !git-tfs fetch
+	tpu = !git-tfs pull
+	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
 [gui]
 	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 	fontui = -family \"DIN Neuzeit Grotesk Std Light\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
