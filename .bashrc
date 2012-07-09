@@ -43,6 +43,7 @@ alias lr='ls -lR'          # recursive ls
 #alias tree='tree -Csu'     # nice alternative to 'recursive ls'
 
 alias oct='octave -q'
+alias g='gvim --remote-silent'
 
 # If your version of 'ls' doesn't support --group-directories-first try this:
 # function ll() { ls -l "$@"| egrep "^d" ; ls -lXB "$@" 2>&-| egrep -v "^d|total "; }
