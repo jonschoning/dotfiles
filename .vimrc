@@ -176,7 +176,7 @@ nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 " exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ')
 
 " Load matchit plugin
-so ~/.vim/plugin/matchit.vim
+so ~/vimfiles/plugin/matchit.vim
 
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
