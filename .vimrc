@@ -5,23 +5,24 @@ set cpoptions+=$
 set encoding=utf-8
 set hidden
 set ic
-set ignorecase
 set iskeyword-=\(
 set iskeyword-=\)
 set iskeyword-=\.
-set lbr
 set nocompatible
-set nowrap
 set preserveindent
 set ruler
 set scrolloff=1
 set showcmd
-set showmatch
-set smartcase
 set smartindent
 set splitright splitbelow
 set t_Co=256
 set ts=4 sts=4 sw=4 expandtab
+set modelines=0
+set ttyfast
+
+" long line handling
+set nowrap
+set lbr
 
 set nobackup
 set nowritebackup
@@ -40,8 +41,20 @@ set ssop-=options    " do not store global and local values in a session
 set synmaxcol=500    " Syntax coloring lines that are too long just slows down the world
 set virtualedit=all  " Allow the cursor to go in to invalid places
 set wildmenu         " Make the command-line completion better
+set wildmode=list:longest " Make the command-line completion show a list
 
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
+
+" searching/moving
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set gdefault
+set showmatch
+set smartcase
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " syntax
 syntax enable
@@ -51,8 +64,10 @@ syntax on
 call pathogen#infect()
 filetype plugin indent on
 
-" quick esc
+" quick esc/:
 inoremap jk <esc>
+nnoremap ; :
+
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -72,16 +87,6 @@ nnoremap <silent> <F10> :call <SID>SynStack()<CR>
 nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
 
-" disable keys
-map <left>  :echo "no!"<cr>
-map <right> :echo "no!"<cr>
-map <up>    :echo "no!"<cr>
-map <down>  :echo "no!"<cr>
-inoremap <esc> <nop>
-nnoremap <c-n> <nop>
-nnoremap <c-p> <nop>
-nnoremap <CR> :noh<CR><CR>
-
 " Moving around through wrapped lines
 vmap <C-j> gj
 vmap <C-k> gk
@@ -95,23 +100,23 @@ nmap <C-6> g^
 nmap <C-0> g^
 
 " leader mappings
-let mapleader = " "
+let mapleader = ","
 let maplocalleader = "\\"
 
 " Wipe out all buffers
 nmap <silent> <leader>bwa :1,9000bwipeout<cr>
 
 " window focusing
-noremap <leader>h :wincmd h<CR>
-noremap <leader>l :wincmd l<CR>
-noremap <leader>j :wincmd j<CR>
-noremap <leader>k :wincmd k<CR>
+noremap <space>h :wincmd h<CR>
+noremap <space>l :wincmd l<CR>
+noremap <space>j :wincmd j<CR>
+noremap <space>k :wincmd k<CR>
 
 " window moving
-noremap <leader>H :wincmd H<CR>
-noremap <leader>L :wincmd L<CR>
-noremap <leader>J :wincmd J<CR>
-noremap <leader>K :wincmd K<CR>
+noremap <space>H :wincmd H<CR>
+noremap <space>L :wincmd L<CR>
+noremap <space>J :wincmd J<CR>
+noremap <space>K :wincmd K<CR>
 
 " window resizing
 noremap <silent> <C-F9>  :vertical resize -10<CR>
@@ -129,10 +134,6 @@ cnoremap <C-k> <right>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-" use sane regexes
-nnoremap / /\v
-vnoremap / /\v
-
 " Underline the current line
 nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
 nmap <silent> <leader>u- :t.\|s/./-/g\|:nohls<cr>
@@ -144,22 +145,38 @@ nnoremap gT O<ESC>j
 " shortcuts for opening files located in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
+
 " open .vimrc window
-nnoremap <leader>vv :vsp $MYVIMRC<cr>
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " switch to alternate file
 nnoremap <leader><leader> <c-^>
 
+" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Sort CSS properties
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+" Quick wrap paragraph
+nnoremap <leader>q gqip
+
+" reselect the text that was just pasted
+nnoremap <leader>v V`]
+
+" Quick open vertical split
+nnoremap <leader>w <C-w>v<C-w>l
+
 " Shortcut to rapidly toggle `set list`
 nnoremap <leader>i :set list!<CR>
 
-" Load matchit plugin
-so ~/.vim/plugin/matchit.vim
-
-command! -nargs=* Wrap set wrap linebreak nolist " soft wrapping text
+command! -nargs=* Wrap set wrap lbr nolist " soft wrapping text
 nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
-" exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ') 
+" exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ')
+
+" Load matchit plugin
+so ~/.vim/plugin/matchit.vim
 
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
@@ -175,7 +192,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.json setlocal ft=javascript
 
   au FileType cs set commentstring=//%s   " use single-line comments for .cs
-  au FileType cs set errorformat=\ %#%f(%l\\\,%c):\ error\ CS%n:\ %m " Quickfix mode: command line msbuild error format 
+  au FileType cs set errorformat=\ %#%f(%l\\\,%c):\ error\ CS%n:\ %m " Quickfix mode: command line msbuild error format
 
   " check for changes on disk and prompt you to reload | fires after you move the cursor and then let it sit still for updatetime | milliseconds. (Default 4 seconds.)
   au CursorHold <buffer> checktime
@@ -189,7 +206,7 @@ if has("statusline") && !&cp
     set statusline=%f\ %m\ %r
 
     " Finish the statusline
-    set statusline+=#%n  
+    set statusline+=#%n
     set statusline+=\ C%v
     set statusline+=\ L%l/%L[%p%%]
 endif
