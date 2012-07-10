@@ -1,28 +1,27 @@
 "set defaults
-set nocompatible
-set encoding=utf-8
-set ts=4 sts=4 sw=4 expandtab
-set lbr
 set autoindent
-set smartindent
-set preserveindent
-set nowrap
-set ic
-set showcmd
-set showmatch
-set ignorecase
-set smartcase
-set ruler
-set nocompatible
-set splitright splitbelow
-set scrolloff=1
-set hidden
 set backspace=indent,eol,start
 set cpoptions+=$
-set t_Co=256
-set iskeyword-=\.
+set encoding=utf-8
+set hidden
+set ic
+set ignorecase
 set iskeyword-=\(
 set iskeyword-=\)
+set iskeyword-=\.
+set lbr
+set nocompatible
+set nowrap
+set preserveindent
+set ruler
+set scrolloff=1
+set showcmd
+set showmatch
+set smartcase
+set smartindent
+set splitright splitbelow
+set t_Co=256
+set ts=4 sts=4 sw=4 expandtab
 
 set nobackup
 set nowritebackup
@@ -30,17 +29,17 @@ set noswapfile
 
 set number
 
-set ssop-=options    " do not store global and local values in a session
-set ssop-=folds      " do not store folds
-set lazyredraw       " Don't update the display while executing macros
-set wildmenu         " Make the command-line completion better
-set synmaxcol=2048   " Syntax coloring lines that are too long just slows down the world
-set mousehide        " Hide the mouse pointer while typing
-set history=100      " Keep some stuff in the history
-set virtualedit=all  " Allow the cursor to go in to invalid places
-set diffopt+=iwhite  " Add ignorance of whitespace to diff
 set autoread         " Automatically read a file that has changed on disk
 set browsedir=buffer " Maki GUI File Open use current directory
+set diffopt+=iwhite  " Add ignorance of whitespace to diff
+set history=100      " Keep some stuff in the history
+set lazyredraw       " Don't update the display while executing macros
+set mousehide        " Hide the mouse pointer while typing
+set ssop-=folds      " do not store folds
+set ssop-=options    " do not store global and local values in a session
+set synmaxcol=500    " Syntax coloring lines that are too long just slows down the world
+set virtualedit=all  " Allow the cursor to go in to invalid places
+set wildmenu         " Make the command-line completion better
 
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
 
@@ -157,35 +156,10 @@ nnoremap <leader>i :set list!<CR>
 " Load matchit plugin
 so ~/.vim/plugin/matchit.vim
 
-if has("gui_running")
-    " set gui options
-    set guioptions=egt
-    set cursorline
-    set background=light
-    set clipboard=unnamed
-    if has('win32')
-        set guifont=Monaco-js:h9:cANSI
-    else
-        set guifont=Monaco 11
-    endif
-else
-    set nocursorline
-    set background=dark
-endif
+command! -nargs=* Wrap set wrap linebreak nolist " soft wrapping text
+nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
-colorscheme railscasts
-
-if has("statusline") && !&cp
-    set laststatus=2  " always show the status bar
-
-    " Start the status line
-    set statusline=%f\ %m\ %r
-
-    " Finish the statusline
-    set statusline+=#%n  
-    set statusline+=\ C%v
-    set statusline+=\ L%l/%L[%p%%]
-endif
+" exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ') 
 
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
@@ -208,42 +182,32 @@ if has("autocmd")
   au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
 endif
 
-command! -nargs=* Wrap set wrap linebreak nolist " soft wrapping text
-nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
+if has("statusline") && !&cp
+    set laststatus=2  " always show the status bar
 
-" Set tabstop, softtabstop and shiftwidth to the same value
-command! -nargs=* Stab call Stab()
-function! Stab()
-  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-  if l:tabstop > 0
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
-  call SummarizeTabs()
-endfunction
-function! SummarizeTabs()
-  try
-    echohl ModeMsg
-    echon 'tabstop='.&l:ts
-    echon ' shiftwidth='.&l:sw
-    echon ' softtabstop='.&l:sts
-    if &l:et
-      echon ' expandtab'
+    " Start the status line
+    set statusline=%f\ %m\ %r
+
+    " Finish the statusline
+    set statusline+=#%n  
+    set statusline+=\ C%v
+    set statusline+=\ L%l/%L[%p%%]
+endif
+
+if has("gui_running")
+    " set gui options
+    set guioptions=egt
+    set cursorline
+    set background=light
+    set clipboard=unnamed
+    if has('win32')
+        set guifont=Monaco-js:h9:cANSI
     else
-      echon ' noexpandtab'
+        set guifont=Monaco\ 11
     endif
-  finally
-    echohl None
-  endtry
-endfunction
+else
+    set nocursorline
+    set background=dark
+endif
 
-" exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ') 
-
-" CamelCaseMotion
-map <silent> <A-w> <Plug>CamelCaseMotion_w
-map <silent> <A-b> <Plug>CamelCaseMotion_b
-omap <silent> i<A-w> <Plug>CamelCaseMotion_iw
-xmap <silent> i<A-w> <Plug>CamelCaseMotion_iw
-omap <silent> i<A-b> <Plug>CamelCaseMotiojn_ib
-xmap <silent> i<A-b> <Plug>CamelCaseMotion_ib
+colorscheme railscasts
