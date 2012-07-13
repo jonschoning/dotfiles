@@ -55,6 +55,7 @@ set smartcase
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
+inoremap <tab> <C-P>
 
 " syntax
 syntax enable
@@ -66,7 +67,6 @@ filetype plugin indent on
 
 " quick esc/:
 inoremap jk <esc>
-nnoremap ; :
 
 
 " function key mappings
@@ -100,7 +100,7 @@ nmap <C-6> g^
 nmap <C-0> g^
 
 " leader mappings
-let mapleader = ","
+let mapleader = " "
 let maplocalleader = "\\"
 
 " Wipe out all buffers
@@ -149,8 +149,8 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " open .vimrc window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-" switch to alternate file
-nnoremap <leader><leader> <c-^>
+" only
+nnoremap <leader><leader> :on<cr>
 
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -169,6 +169,9 @@ nnoremap <leader>w <C-w>v<C-w>l
 
 " Shortcut to rapidly toggle `set list`
 nnoremap <leader>i :set list!<CR>
+
+" quick cmd
+nnoremap <leader>; :
 
 command! -nargs=* Wrap set wrap lbr nolist " soft wrapping text
 nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
