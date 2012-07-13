@@ -55,7 +55,6 @@ set smartcase
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
-inoremap <tab> <C-P>
 
 " syntax
 syntax enable
