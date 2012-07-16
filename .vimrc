@@ -19,6 +19,8 @@ set t_Co=256
 set ts=4 sts=4 sw=4 expandtab
 set modelines=0
 set ttyfast
+set noesckeys
+set timeoutlen=500
 
 " long line handling
 set nowrap
@@ -52,7 +54,6 @@ set ignorecase
 set gdefault
 set showmatch
 set smartcase
-nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
