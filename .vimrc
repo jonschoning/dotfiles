@@ -83,7 +83,8 @@ nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F8> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
 nnoremap <silent> <F9> :TlistToggle<CR>
-nnoremap <silent> <F10> :call <SID>SynStack()<CR>
+nnoremap <silent> <F10> :so ~\vimfiles\plugin\RainbowParenthsis.vim<CR>
+
 nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
 
@@ -192,6 +193,8 @@ if has("autocmd")
 
   au BufNewFile,BufRead *.cshtml setlocal filetype=html
   au BufNewFile,BufRead *.build set ft=xml
+  au BufNewFile,BufRead *.targets set ft=xml
+  au BufNewFile,BufRead *.xaml set ft=xml
   au BufNewFile,BufRead *.json setlocal ft=javascript
 
   au FileType cs set commentstring=//%s   " use single-line comments for .cs
@@ -219,15 +222,18 @@ if has("gui_running")
     set guioptions=egt
     set cursorline
     set background=light
-    set clipboard=unnamed
+    " set clipboard=unnamed
     if has('win32')
         set guifont=Monaco-js:h9:cANSI
     else
         set guifont=Monaco\ 11
     endif
+
+    " Disable all blinking:
+    set guicursor+=a:blinkon0
 else
     set nocursorline
     set background=dark
 endif
 
-colorscheme railscasts
+colorscheme herald
