@@ -1,3 +1,34 @@
+""" Setup Vundle BEGIN (https://github.com/gmarik/vundle) """
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdtree'
+Bundle 'godlygeek/tabular'
+Bundle 'vim-scripts/camelcasemotion'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'kien/ctrlp.vim' 
+Bundle 'Gist.vim'
+Bundle 'WebAPI.vim'
+Bundle 'matchit.zip'
+
+filetype plugin indent on     " required!
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+""" Setup Vundle END """
+
 "set defaults
 set autoindent
 set backspace=indent,eol,start
@@ -8,14 +39,12 @@ set ic
 set iskeyword-=\(
 set iskeyword-=\)
 set iskeyword-=\.
-set nocompatible
 set preserveindent
 set ruler
 set scrolloff=1
 set showcmd
 set smartindent
 set splitright splitbelow
-set t_Co=256
 set ts=4 sts=4 sw=4 expandtab
 set modelines=0
 set ttyfast
@@ -61,9 +90,6 @@ vnoremap <tab> %
 syntax enable
 syntax on
 
-" pathogen
-call pathogen#infect()
-filetype plugin indent on
 
 " quick esc/:
 inoremap jk <esc>
@@ -83,7 +109,7 @@ nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F8> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
 nnoremap <silent> <F9> :TlistToggle<CR>
-nnoremap <silent> <F10> :so ~\vimfiles\plugin\RainbowParenthsis.vim<CR>
+" nnoremap <silent> <F10> :so ~\vimfiles\plugin\RainbowParenthsis.vim<CR>
 
 nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
@@ -179,9 +205,6 @@ nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ')
 
-" Load matchit plugin
-so ~/vimfiles/plugin/matchit.vim
-
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
   au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
@@ -226,7 +249,7 @@ if has("gui_running")
     if has('win32')
         set guifont=Monaco-js:h9:cANSI
     else
-        set guifont=Monaco\ 11
+        set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
     endif
 
     " Disable all blinking:
@@ -235,5 +258,8 @@ else
     set nocursorline
     set background=dark
 endif
+if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == xterm-color-256"
+    set t_Co=256
+    colorscheme herald
+endif
 
-colorscheme herald
