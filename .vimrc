@@ -12,6 +12,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 Bundle 'godlygeek/tabular'
+Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kien/ctrlp.vim' 
@@ -109,7 +110,7 @@ nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F8> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
 nnoremap <silent> <F9> :TlistToggle<CR>
-" nnoremap <silent> <F10> :so ~\vimfiles\plugin\RainbowParenthsis.vim<CR>
+nnoremap <silent> <F10> :RainbowParenthesesToggle<CR>
 
 nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
@@ -226,7 +227,10 @@ if has("autocmd")
   " check for changes on disk and prompt you to reload | fires after you move the cursor and then let it sit still for updatetime | milliseconds. (Default 4 seconds.)
   au CursorHold <buffer> checktime
   au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
+
+  au VimEnter * RainbowParenthesesToggle
 endif
+
 
 if has("statusline") && !&cp
     set laststatus=2  " always show the status bar
@@ -262,4 +266,3 @@ if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == x
     set t_Co=256
     colorscheme herald
 endif
-
