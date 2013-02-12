@@ -44,8 +44,7 @@
 	fixup = !sh -c 'git commit --fixup=$1' -
     squash = !sh -c 'git commit --squash=$1' -
     ri = rebase --interactive --autosquash
-	tfe = !git-tfs fetch
-	tpu = !git-tfs pull
+	z = !git add -A && git commit -m
 [gui]
 	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
 	fontui = -family \"Bitstream Vera Sans\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
