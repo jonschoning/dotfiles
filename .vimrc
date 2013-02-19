@@ -10,12 +10,15 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-characterize'
 Bundle 'scrooloose/nerdtree'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'kien/ctrlp.vim' 
+Bundle 'wlangstroth/vim-racket'
+" vimscripts on vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
@@ -95,6 +98,11 @@ syntax on
 " quick esc/:
 inoremap jk <esc>
 
+" quickly switch between popular (and unpopular) tab modes
+nmap \t :set expandab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap \T :set expandab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nmap \M :set noexpadtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nmap \m :set expandab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -116,16 +124,16 @@ nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
 
 " Moving around through wrapped lines
-vmap <C-j> gj
-vmap <C-k> gk
-vmap <C-4> g$
-vmap <C-6> g^
-vmap <C-0> g^
-nmap <C-j> gj
-nmap <C-k> gk
-nmap <C-4> g$
-nmap <C-6> g^
-nmap <C-0> g^
+vmap <M-j> gj
+vmap <M-k> gk
+vmap <M-4> g$
+vmap <M-6> g^
+vmap <M-0> g^
+nmap <M-j> gj
+nmap <M-k> gk
+nmap <M-4> g$
+nmap <M-6> g^
+nmap <M-0> g^
 
 " leader mappings
 let mapleader = " "
@@ -156,11 +164,18 @@ noremap <silent> <C-F12> :vertical resize +10<CR>
 nnoremap zk kzz
 nnoremap zj jzz
 
-" Better comand-line editing
-cnoremap <C-j> <left>
-cnoremap <C-k> <right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
+" Emacs-style movement keys on command line
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
 
 " Underline the current line
 nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
@@ -230,7 +245,6 @@ if has("autocmd")
 
   au VimEnter * RainbowParenthesesToggle
 endif
-
 
 if has("statusline") && !&cp
     set laststatus=2  " always show the status bar
