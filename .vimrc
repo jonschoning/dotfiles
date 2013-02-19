@@ -1,5 +1,5 @@
 """ Setup Vundle BEGIN (https://github.com/gmarik/vundle) """
-set nocompatible
+set nocompatible 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -12,16 +12,18 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-characterize'
 Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'kien/ctrlp.vim' 
 Bundle 'godlygeek/tabular'
-Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'kien/ctrlp.vim' 
 Bundle 'wlangstroth/vim-racket'
+Bundle 'derekwyatt/vim-scala'
 " vimscripts on vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
+Bundle 'hexHighlight.vim'
 
 filetype plugin indent on     " required!
 " Brief help
@@ -99,10 +101,10 @@ syntax on
 inoremap jk <esc>
 
 " quickly switch between popular (and unpopular) tab modes
-nmap \t :set expandab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nmap \T :set expandab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
 nmap \M :set noexpadtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
-nmap \m :set expandab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -193,7 +195,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " only
-nnoremap <leader><leader> :on<cr>
+" nnoremap <leader><leader> :on<cr>
 
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -228,7 +230,7 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif     " Jump to last known location in file
 
   au BufNewFile,BufRead *.md setlocal filetype=markdown
-  au FileType markdown setlocal ai comments=n:> spell
+  " au FileType markdown setlocal ai comments=n:> spell
 
   au BufNewFile,BufRead *.cshtml setlocal filetype=html
   au BufNewFile,BufRead *.build set ft=xml
@@ -278,5 +280,5 @@ else
 endif
 if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == xterm-color-256"
     set t_Co=256
-    colorscheme herald
+    colorscheme badwolf
 endif
