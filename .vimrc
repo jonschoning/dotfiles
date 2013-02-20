@@ -1,4 +1,5 @@
 """ Setup Vundle BEGIN (https://github.com/gmarik/vundle) """
+
 set nocompatible 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -18,6 +19,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'Lokaltog/vim-powerline'
 " Bundle 'kien/ctrlp.vim' 
+" Bundle 'wincent/Command-T' 
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
@@ -157,10 +159,10 @@ noremap <C-j> :wincmd j<CR>
 noremap <C-k> :wincmd k<CR>
 
 " window moving
-noremap <space>H :wincmd H<CR>
-noremap <space>L :wincmd L<CR>
-noremap <space>J :wincmd J<CR>
-noremap <space>K :wincmd K<CR>
+noremap <M-h> :wincmd H<CR>
+noremap <M-l> :wincmd L<CR>
+noremap <M-j> :wincmd J<CR>
+noremap <M-k> :wincmd K<CR>
 
 " window resizing
 noremap <silent> <C-F9>  :vertical resize -10<CR>
@@ -209,7 +211,7 @@ nnoremap ql ^vg_gq
 nnoremap <leader>o :on<cr>
 
  " Clean trailing whitespace
-nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+nnoremap <leader>w %s/\s\+$//<cr>:let @/=''<cr>
 
 " Sort lines
 nnoremap <leader>s vip:!sort<cr>
@@ -232,9 +234,6 @@ nnoremap Vaa ggVG
 " reselect the text that was just pasted
 nnoremap <leader>V V`]
 
-" Quick open vertical split
-nnoremap <leader>w <C-w>v<C-w>l
-
 " Shortcut to rapidly toggle `set list`
 nnoremap <leader>i :set list!<CR>
 
@@ -248,6 +247,23 @@ nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+ " By Tim Pope
+function! OpenURL(url)
+  if has("win32")
+    exe "!start cmd /cstart /b ".a:url.""
+  elseif $DISPLAY !~ '^\w'
+    exe "silent !sensible-browser \"".a:url."\""
+  else
+    exe "silent !sensible-browser -T \"".a:url."\""
+  endif
+  redraw!
+endfunction
+command! -nargs=1 OpenURL :call OpenURL(<q-args>)
+
+" mapping to open URL under cursor
+nnoremap gb :OpenURL <cfile><CR>
+nnoremap gG :OpenURL http://www.duckduckgoog.com/?q=<cword><CR>
 
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
@@ -275,6 +291,9 @@ if has("autocmd")
   au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
 
   au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
 endif
 
 
@@ -308,7 +327,7 @@ else
     set nocursorline
     set background=dark
 endif
-if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == xterm-color-256"
+if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color" || $TERM == "screen-color" || $TERM == "xterm-color-256" || $TERM == "screen-256color"
     set t_Co=256
     colorscheme badwolf
 endif
