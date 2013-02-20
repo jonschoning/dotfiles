@@ -1,67 +1,67 @@
 [user]
-    name = Jon Schoning
-    email = jonschoning@gmail.com
+	name = Jon Schoning
+	email = jonschoning@gmail.com
 [core]
-    symlinks = false
-	autocrlf = false
-    whitespace = cr-at-eol,-trailing-space,-space-before-tab
-    filemode = false
+	symlinks = false
+	autocrlf = true
+	whitespace = cr-at-eol,-trailing-space,-space-before-tab
+	filemode = false
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = true
-    ui = true
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = true
+	ui = true
 [pack]
-    packSizeLimit = 2g
+	packSizeLimit = 2g
 [help]
-    format = html
-[http]
-    sslCAinfo = /bin/curl-ca-bundle.crt
-[sendemail]
-    smtpserver = /bin/msmtp.exe
+	format = html
+#[http]
+#	sslCAinfo = /bin/curl-ca-bundle.crt
+#[sendemail]
+#	smtpserver = /bin/msmtp.exe
 [imap]
-    folder = \"[Gmail]/Drafts\"
+	folder = \"[Gmail]/Drafts\"
 [alias]
 	b = branch -a
 	l = log --graph --decorate --oneline 
 	ld = log  --graph --decorate --date=local 		   	 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset'
-	ldr = log --graph --decorate 			  			 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
+	ldr = !git --no-pager log --graph --decorate --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
 	lg = log  --graph --decorate --abbrev-commit --color --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	cb = checkout -b
 	db = branch -d
 	ck = checkout
 	cm = commit
+	cma = commit --amend
+	cman = commit --amend --no-edit
 	s = status --short
 	a = add
+	aa = add -A
 	sa = stash apply
 	sp = stash pop
 	sl = stash list
-	aa = add -A
-	cmtfs = commit -m 'tfs latest'
-	cmamtfs = commit --amend -m 'tfs latest'
-	tfe = !git-tfs fetch
-	tpu = !git-tfs pull
 	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
+	fixup = !sh -c 'git commit --fixup=$1' -
+    squash = !sh -c 'git commit --squash=$1' -
+    ri = rebase --interactive --autosquash
+	z = !git add -A && git commit -m
 [gui]
-	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
-	fontui = -family \"DIN Neuzeit Grotesk Std Light\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui = -family \"Bitstream Vera Sans\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	spellingdictionary = none
 [push]
-    default = tracking
+	default = tracking
 [core]
-    editor = /usr/bin/vim
-	safecrlf = true
-[mergetool "mvimdiff"]
-    cmd = /usr/local/bin/gvimdiff -f "$LOCAL" "$MERGED" "$REMOTE"
+	editor = gvim -f
 [merge]
-    tool = mvimdiff
+	tool = gvimdiff
 [mergetool]
-    prompt = false
-    keepBackup = false
-[difftool "gvimdiff"]
-    path = /usr/local/bin/gvimdiff
+	prompt = false
+	keepBackup = false
 [diff]
-    tool = vimdiff
-    guitool = gvimdiff
+	tool = vimdiff
+	guitool = gvimdiff
 [difftool]
-    prompt = false
+	prompt = false
+[github]
+	user = jonschoning

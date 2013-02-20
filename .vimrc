@@ -1,5 +1,5 @@
 """ Setup Vundle BEGIN (https://github.com/gmarik/vundle) """
-set nocompatible
+set nocompatible 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -10,15 +10,21 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-characterize'
 Bundle 'scrooloose/nerdtree'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'kien/ctrlp.vim' 
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'kien/ctrlp.vim' 
+Bundle 'wlangstroth/vim-racket'
+Bundle 'derekwyatt/vim-scala'
+" vimscripts on vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
+Bundle 'hexHighlight.vim'
 
 filetype plugin indent on     " required!
 " Brief help
@@ -95,6 +101,11 @@ syntax on
 " quick esc/:
 inoremap jk <esc>
 
+" quickly switch between popular (and unpopular) tab modes
+nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nmap \M :set noexpadtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -116,16 +127,16 @@ nnoremap <silent> <F12> <c-]>
 nnoremap <silent> <C-k><C-r> g]
 
 " Moving around through wrapped lines
-vmap <C-j> gj
-vmap <C-k> gk
-vmap <C-4> g$
-vmap <C-6> g^
-vmap <C-0> g^
-nmap <C-j> gj
-nmap <C-k> gk
-nmap <C-4> g$
-nmap <C-6> g^
-nmap <C-0> g^
+vmap <M-j> gj
+vmap <M-k> gk
+vmap <M-4> g$
+vmap <M-6> g^
+vmap <M-0> g^
+nmap <M-j> gj
+nmap <M-k> gk
+nmap <M-4> g$
+nmap <M-6> g^
+nmap <M-0> g^
 
 " leader mappings
 let mapleader = " "
@@ -156,11 +167,18 @@ noremap <silent> <C-F12> :vertical resize +10<CR>
 nnoremap zk kzz
 nnoremap zj jzz
 
-" Better comand-line editing
-cnoremap <C-j> <left>
-cnoremap <C-k> <right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
+" Emacs-style movement keys on command line
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
 
 " Underline the current line
 nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
@@ -178,7 +196,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " only
-nnoremap <leader><leader> :on<cr>
+" nnoremap <leader><leader> :on<cr>
 
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -213,7 +231,7 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif     " Jump to last known location in file
 
   au BufNewFile,BufRead *.md setlocal filetype=markdown
-  au FileType markdown setlocal ai comments=n:> spell
+  " au FileType markdown setlocal ai comments=n:> spell
 
   au BufNewFile,BufRead *.cshtml setlocal filetype=html
   au BufNewFile,BufRead *.build set ft=xml
@@ -264,5 +282,5 @@ else
 endif
 if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == xterm-color-256"
     set t_Co=256
-    colorscheme herald
+    colorscheme badwolf
 endif
