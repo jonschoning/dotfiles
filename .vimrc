@@ -11,15 +11,20 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-characterize'
+Bundle 'tpope/vim-markdown'
+Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
+" Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'kien/ctrlp.vim' 
+" Bundle 'Lokaltog/vim-powerline'
+" Bundle 'kien/ctrlp.vim' 
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'wlangstroth/vim-racket'
 Bundle 'derekwyatt/vim-scala'
+" Bundle 'vim-scripts/YankRing.vim'
 " vimscripts on vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
@@ -56,7 +61,11 @@ set ts=4 sts=4 sw=4 expandtab
 set modelines=0
 set ttyfast
 set noesckeys
-set timeoutlen=500
+
+ " Time out on key codes but not mappings.
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
 " long line handling
 set nowrap
@@ -96,7 +105,10 @@ vnoremap <tab> %
 " syntax
 syntax enable
 syntax on
-
+ 
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
 
 " quick esc/:
 inoremap jk <esc>
@@ -104,7 +116,7 @@ inoremap jk <esc>
 " quickly switch between popular (and unpopular) tab modes
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-nmap \M :set noexpadtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nmap \M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
 nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
@@ -124,19 +136,12 @@ nnoremap <silent> <F9> :TlistToggle<CR>
 nnoremap <silent> <F10> :RainbowParenthesesToggle<CR>
 
 nnoremap <silent> <F12> <c-]>
-nnoremap <silent> <C-k><C-r> g]
 
-" Moving around through wrapped lines
-vmap <M-j> gj
-vmap <M-k> gk
-vmap <M-4> g$
-vmap <M-6> g^
-vmap <M-0> g^
-nmap <M-j> gj
-nmap <M-k> gk
-nmap <M-4> g$
-nmap <M-6> g^
-nmap <M-0> g^
+" Moving through wrapped lines
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
 
 " leader mappings
 let mapleader = " "
@@ -146,10 +151,10 @@ let maplocalleader = "\\"
 nmap <silent> <leader>bwa :1,9000bwipeout<cr>
 
 " window focusing
-noremap <space>h :wincmd h<CR>
-noremap <space>l :wincmd l<CR>
-noremap <space>j :wincmd j<CR>
-noremap <space>k :wincmd k<CR>
+noremap <C-h> :wincmd h<CR>
+noremap <C-l> :wincmd l<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
 
 " window moving
 noremap <space>H :wincmd H<CR>
@@ -180,10 +185,6 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
-" Underline the current line
-nmap <silent> <leader>u= :t.\|s/./=/g\|:nohls<cr>
-nmap <silent> <leader>u- :t.\|s/./-/g\|:nohls<cr>
-
 " Insert blank lines without going into insert mode
 nnoremap gt o<ESC>k
 nnoremap gT O<ESC>j
@@ -191,24 +192,45 @@ nnoremap gT O<ESC>j
 " shortcuts for opening files located in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-
 " open .vimrc window
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-" only
-" nnoremap <leader><leader> :on<cr>
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
 
-" strip all trailing whitespace in the current file
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
+" Reformat line.
+nnoremap ql ^vg_gq
+
+" only
+nnoremap <leader>o :on<cr>
+
+ " Clean trailing whitespace
+nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+
+" Sort lines
+nnoremap <leader>s vip:!sort<cr>
+vnoremap <leader>s :!sort<cr>ort<CR>:noh<CR>
 
 " Sort CSS properties
-nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+nnoremap <leader><C-s> ?{<CR>jV/^\s*\}?$<CR>k:s
 
 " Quick wrap paragraph
 nnoremap <leader>q gqip
 
+" pasting
+noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
+noremap <leader>P :silent! set paste<CR>"*P:set nopaste<CR>
+"
+" Select entire buffer
+nnoremap vaa ggvGg_
+nnoremap Vaa ggVG
+
 " reselect the text that was just pasted
-nnoremap <leader>v V`]
+nnoremap <leader>V V`]
 
 " Quick open vertical split
 nnoremap <leader>w <C-w>v<C-w>l
@@ -224,11 +246,17 @@ nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " exec "set path=".escape(escape(expand("%:p:h"), ' '), '\ ')
 
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
   au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
   au VimEnter * set vb t_vb=         " Stop beeping and flashing!
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif     " Jump to last known location in file
+
+  " Resize splits when the window is resized
+  au VimResized * :wincmd =
 
   au BufNewFile,BufRead *.md setlocal filetype=markdown
   " au FileType markdown setlocal ai comments=n:> spell
@@ -271,7 +299,7 @@ if has("gui_running")
     if has('win32')
         set guifont=Monaco-js:h9:cANSI
     else
-        set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
+       set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
     endif
 
     " Disable all blinking:
@@ -284,3 +312,7 @@ if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color || $TERM == x
     set t_Co=256
     colorscheme badwolf
 endif
+
+let g:Powerline_symbols = 'unicode'
+let g:Powerline_cache_enabled = 1
+let g:Powerline_colorscheme = 'badwolf'
