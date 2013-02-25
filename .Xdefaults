@@ -1,0 +1,16 @@
+XTerm*background:                      black
+XTerm*foreground:                      white
+XTerm*cursorColor:                     white
+XTerm*scrollBar:                       false
+XTerm*termName:                        xterm-256color
+XTerm*faceName:                        Bitstream Vera Sans Mono:pixelsize=11
+xterm*metaSendsEscape: true
+
+urxvt*background:                      black
+urxvt*foreground:                      white
+urxvt*cursorColor:                     white
+urxvt*scrollBar:                       false
+urxvt*utf8:                            2
+urxvt*rxvtName:                        xrxvt-256color
+urxvt*font:                            xft:Bitstream Vera Sans Mono:pixelsize=11
+urxvt*border:                          false
