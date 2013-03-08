@@ -165,6 +165,8 @@ for_window [class="XnView"] floating enable
 for_window [class="XnView"] border normal
 for_window [class="Vlc"] floating enable
 for_window [class="Vlc"] border normal
+for_window [class="Remmina"] floating enable
+for_window [class="Remmina"] border normal
 for_window [class="jetbrains-idea-ce"] border normal
 
 # autoruns
