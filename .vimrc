@@ -20,6 +20,7 @@ Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'Lokaltog/vim-powerline'
 " Bundle 'kien/ctrlp.vim' 
 " Bundle 'wincent/Command-T' 
+Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
@@ -103,6 +104,7 @@ set showmatch
 set smartcase
 nnoremap <tab> %
 vnoremap <tab> %
+nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " syntax
 syntax enable
@@ -116,10 +118,10 @@ set completeopt=longest,menuone,preview
 inoremap jk <esc>
 
 " quickly switch between popular (and unpopular) tab modes
-nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-nmap \M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
-nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nnoremap <leader>M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
+nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -138,6 +140,9 @@ nnoremap <silent> <F9> :TlistToggle<CR>
 nnoremap <silent> <F10> :RainbowParenthesesToggle<CR>
 
 nnoremap <silent> <F12> <c-]>
+
+" Save with CTRL+S
+nnoremap <C-S> :w<CR>
 
 " Moving through wrapped lines
 noremap j gj
@@ -211,7 +216,7 @@ nnoremap ql ^vg_gq
 nnoremap <leader>o :on<cr>
 
  " Clean trailing whitespace
-nnoremap <leader>w %s/\s\+$//<cr>:let @/=''<cr>
+nnoremap <leader>W ::%s/\s\+$//<cr>:let @/=''<cr>
 
 " Sort lines
 nnoremap <leader>s vip:!sort<cr>
@@ -228,8 +233,8 @@ noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
 noremap <leader>P :silent! set paste<CR>"*P:set nopaste<CR>
 "
 " Select entire buffer
-nnoremap vaa ggvGg_
-nnoremap Vaa ggVG
+" nnoremap vaa ggvGg_
+" nnoremap Vaa ggVG
 
 " reselect the text that was just pasted
 nnoremap <leader>V V`]
@@ -335,3 +340,5 @@ endif
 let g:Powerline_symbols = 'unicode'
 let g:Powerline_cache_enabled = 1
 let g:Powerline_colorscheme = 'badwolf'
+
+let g:EasyMotion_leader_key = '\'
