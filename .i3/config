@@ -134,9 +134,7 @@ bar {
 }
 
 # custom
-# new_window 1pixel
-new_window none
-#
+# new_window none
 
 # assignments
 assign [class="Google-chrome"] 2
@@ -149,7 +147,15 @@ for_window [class="Vlc"] floating enable
 for_window [class="Vlc"] border normal
 for_window [class="Remmina"] floating enable
 for_window [class="Remmina"] border normal
+for_window [class="Audacity"] floating enable
+for_window [class="Audacity"] border normal
+for_window [class="Hw6runner.rb"] floating enable
+for_window [class="Hw6runner.rb"] border normal
 for_window [class="jetbrains-idea-ce"] border normal
+for_window [class="processing-app-Base"] floating enable
+for_window [class="processing-app-Base"] border normal
+for_window [class="Teensy"] floating enable
+for_window [class="Teensy"] border normal
 
 # autoruns
 exec xfce4-terminal
