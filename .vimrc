@@ -209,9 +209,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-" Reformat line.
-nnoremap ql ^vg_gq
-
 " only
 nnoremap <leader>o :on<cr>
 
