@@ -7,6 +7,12 @@
 
 #force_xinerama
 
+#window                   border    bg        text
+client.focused            #242321   #242321   #f4cf86 #b88853
+client.focused_inactive   #000000   #000000   #0a7777 #000000
+client.unfocused          #000000   #000000   #45413b #000000
+client.urgent             #000000   #000000   #ff9eb8 #000000
+
 #
 # i3 config file (v4)
 #
