@@ -6,18 +6,20 @@
 #
 
 #force_xinerama
+#focus_follows_mouse no
 
 #window                   border    bg        text
 client.focused            #242321   #242321   #f4cf86 #b88853
 client.focused_inactive   #000000   #000000   #0a7777 #000000
 client.unfocused          #000000   #000000   #45413b #000000
-client.urgent             #000000   #000000   #ff9eb8 #000000
+client.urgent             #000000   #FF0099   #ff9eb8 #000000
 
 #
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $mod Mod4
+set $alt Mod1
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -135,12 +137,18 @@ bar {
         focused_workspace  #000000 #000000 #ffffff
         active_workspace   #000000 #000000 #ffffff
         inactive_workspace #000000 #000000 #888888
-        urgent_workspace   #000000 #000000 #ffffff
+        urgent_workspace   #000000 #000000 #FF0099
     }
 }
 
 # custom
-# new_window none
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Clipd
+bindsym $alt+e exec clipd menu
 
 # assignments
 assign [class="Google-chrome"] 2
@@ -162,6 +170,8 @@ for_window [class="processing-app-Base"] floating enable
 for_window [class="processing-app-Base"] border normal
 for_window [class="Teensy"] floating enable
 for_window [class="Teensy"] border normal
+for_window [class="Pidgin"] floating enable
+for_window [class="Pidgin"] border normal
 
 # autoruns
 exec xfce4-terminal
@@ -170,6 +180,8 @@ exec xfce4-power-manager
 exec xfce4-volumed
 exec xflux -z 60148
 exec google-chrome
+exec pidgin
+exec clipd
 
 #bindings
 bindsym $mod+c exec google-chrome 2> /dev/null
