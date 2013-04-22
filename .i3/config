@@ -12,7 +12,7 @@
 client.focused            #242321   #242321   #f4cf86 #b88853
 client.focused_inactive   #000000   #000000   #0a7777 #000000
 client.unfocused          #000000   #000000   #45413b #000000
-client.urgent             #000000   #FF0099   #ff9eb8 #000000
+client.urgent             #000000   #000000   #ff0099 #000000
 
 #
 # i3 config file (v4)
@@ -182,9 +182,10 @@ exec xflux -z 60148
 exec google-chrome
 exec pidgin
 exec clipd
+exec xautolock -time 10 -locker i3lock -c 000000
 
 #bindings
-bindsym $mod+c exec google-chrome 2> /dev/null
+bindsym $mod+c exec chromium-browser 2> /dev/null
 
 #Changing border style
 bindsym $mod+t border normal

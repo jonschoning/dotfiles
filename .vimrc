@@ -17,9 +17,9 @@ Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
 " Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline'
 " Bundle 'kien/ctrlp.vim' 
-" Bundle 'wincent/Command-T' 
+Bundle 'wincent/Command-T' 
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
@@ -27,12 +27,14 @@ Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'wlangstroth/vim-racket'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'mikewest/vimroom'
 " Bundle 'vim-scripts/YankRing.vim'
 " vimscripts on vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
+Bundle 'terryma/vim-multiple-cursors'
 
 filetype plugin indent on     " required!
 " Brief help
@@ -92,8 +94,21 @@ set synmaxcol=500    " Syntax coloring lines that are too long just slows down t
 set virtualedit=all  " Allow the cursor to go in to invalid places
 set wildmenu         " Make the command-line completion better
 set wildmode=list:longest " Make the command-line completion show a list
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=_build                           " Sphinx build dir
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store
+set wildignore+=*.rdb                            " Redis database file
+set wildignore+=*CACHE                           " django compressor cache
 
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
+set linespace=-2
+set nojoinspaces
 
 " searching/moving
 nnoremap / /\v
@@ -104,7 +119,6 @@ set showmatch
 set smartcase
 nnoremap <tab> %
 vnoremap <tab> %
-nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " syntax
 syntax enable
@@ -117,11 +131,6 @@ set completeopt=longest,menuone,preview
 " quick esc/:
 inoremap jk <esc>
 
-" quickly switch between popular (and unpopular) tab modes
-nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-nnoremap <leader>M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
-nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " function key mappings
 nnoremap <silent> <F1> :bn<CR>
@@ -156,6 +165,15 @@ let maplocalleader = "\\"
 
 " Wipe out all buffers
 nmap <silent> <leader>bwa :1,9000bwipeout<cr>
+
+" quickly switch between popular (and unpopular) tab modes
+nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nnoremap <leader>M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
+nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+
+" Clear current serach 
+nnoremap <silent> <leader>/ :let @/ = ""<CR>
 
 " window focusing
 noremap <C-h> :wincmd h<CR>
@@ -209,6 +227,7 @@ cnoremap w!! w !sudo tee % >/dev/null
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
+
 " only
 nnoremap <leader>o :on<cr>
 
@@ -221,9 +240,6 @@ vnoremap <leader>s :!sort<cr>ort<CR>:noh<CR>
 
 " Sort CSS properties
 nnoremap <leader><C-s> ?{<CR>jV/^\s*\}?$<CR>k:s
-
-" Quick wrap paragraph
-nnoremap <leader>q gqip
 
 " pasting
 noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
