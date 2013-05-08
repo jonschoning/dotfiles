@@ -28,6 +28,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'wlangstroth/vim-racket'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'mikewest/vimroom'
+Bundle 'mattn/zencoding-vim'
 " Bundle 'vim-scripts/YankRing.vim'
 " vimscripts on vim.org
 Bundle 'Gist.vim'

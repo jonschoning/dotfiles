@@ -1,67 +1,47 @@
 [user]
-	name = Jon Schoning
-	email = jonschoning@gmail.com
+    name = Jon Schoning
+    email = jonschoning@gmail.com
 [core]
-	symlinks = false
-	autocrlf = true
-	whitespace = cr-at-eol,-trailing-space,-space-before-tab
-	filemode = false
+    symlinks = false
+	#autocrlf = true
+    whitespace = cr-at-eol,-trailing-space,-space-before-tab
+    filemode = false
+	safecrlf = true
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = true
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
 	ui = true
 [pack]
-	packSizeLimit = 2g
+    packSizeLimit = 2g
 [help]
-	format = html
-#[http]
-#	sslCAinfo = /bin/curl-ca-bundle.crt
-#[sendemail]
-#	smtpserver = /bin/msmtp.exe
+    format = html
 [imap]
-	folder = \"[Gmail]/Drafts\"
+    folder = \"[Gmail]/Drafts\"
 [alias]
 	b = branch -a
 	l = log --graph --decorate --oneline 
 	ld = log  --graph --decorate --date=local 		   	 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset'
-	ldr = !git --no-pager log --graph --decorate --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
+	ldr = log --graph --decorate 			  			 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
 	lg = log  --graph --decorate --abbrev-commit --color --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	cb = checkout -b
 	db = branch -d
 	ck = checkout
 	cm = commit
-	cma = commit --amend
-	cman = commit --amend --no-edit
 	s = status --short
 	a = add
-	aa = add -A
 	sa = stash apply
 	sp = stash pop
 	sl = stash list
+	aa = add -A
+	tfe = !git-tfs fetch
+	tpu = !git-tfs pull
 	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
-	fixup = !sh -c 'git commit --fixup=$1' -
-    squash = !sh -c 'git commit --squash=$1' -
-    ri = rebase --interactive --autosquash
-	z = !git add -A && git commit -m
-[gui]
-	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
-	fontui = -family \"Bitstream Vera Sans\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
-	spellingdictionary = none
 [push]
-	default = tracking
-[core]
-	editor = gvim -f
-[merge]
-	tool = gvimdiff
+	default = current
 [mergetool]
-	prompt = false
-	keepBackup = false
-[diff]
-	tool = vimdiff
-	guitool = gvimdiff
-[difftool]
-	prompt = false
+    prompt = false
+    keepBackup = false
 [github]
 	user = jonschoning
