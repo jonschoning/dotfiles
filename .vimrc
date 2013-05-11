@@ -80,7 +80,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set number
+set relativenumber
 
 set autoread         " Automatically read a file that has changed on disk
 set browsedir=buffer " Maki GUI File Open use current directory
@@ -262,7 +262,7 @@ nnoremap <leader>i :set list!<CR>
 nnoremap <leader>; :
 
 " soft wrapping text
-command! -nargs=* Wrap set wrap lbr nolist 
+command! -nargs=* Wrap set wrap lbr nolist
 nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " highlight VCS conflict markers
@@ -331,7 +331,7 @@ endif
 
 if has("statusline") && !&cp
     " always show the status bar
-    set laststatus=2  
+    set laststatus=2
 
     " start the status line
     set statusline=%f\ %m\ %r
