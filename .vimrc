@@ -161,8 +161,14 @@ noremap gk k
 let mapleader = " "
 let maplocalleader = "\\"
 
-" Wipe buffers
-nmap <silent> <leader>bwa :1,9000bwipeout<cr>
+" list buffers
+nnoremap <leader>l :ls<CR>
+
+" delete buffer without losing the split window
+nnoremap <leader>c :bp\|bd #<CR>
+
+" wipe buffers
+nnoremap <silent> <leader>bwa :1,9000bwipeout<cr>
 
 " tab modes
 nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
@@ -191,6 +197,9 @@ noremap <silent> <C-F10> :resize -10<CR>
 noremap <silent> <C-F11> :resize +10<CR>
 noremap <silent> <C-F12> :vertical resize +10<CR>
 
+" focus window (only)
+nnoremap <leader>o :on<cr>
+
 " nudge screen
 nnoremap zk kzz
 nnoremap zj jzz
@@ -207,6 +216,17 @@ cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
+
+" clipboard paste
+noremap <leader>p :silent! set paste<CR>"*P:set nopaste<CR>
+noremap <leader>P :silent! set paste<CR>"+P:set nopaste<CR>
+
+" clipboard yank
+noremap <leader>y "*y
+noremap <leader>Y "+y
+
+" select pasted text
+nnoremap <leader>V V`]
 
 " insert blank line
 nnoremap gt o<ESC>k
@@ -225,10 +245,7 @@ cnoremap w!! w !sudo tee % >/dev/null
 " the normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
-" only
-nnoremap <leader>o :on<cr>
-
- " clean trailing whitespace
+" clean trailing whitespace
 nnoremap <leader>W ::%s/\s\+$//<cr>:let @/=''<cr>
 
 " sort lines
@@ -237,13 +254,6 @@ vnoremap <leader>s :!sort<cr>ort<CR>:noh<CR>
 
 " sort css
 nnoremap <leader><C-s> ?{<CR>jV/^\s*\}?$<CR>k:s
-
-" paste
-noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
-noremap <leader>P :silent! set paste<CR>"*P:set nopaste<CR>
-
-" select pasted text
-nnoremap <leader>V V`]
 
 " toggle `set list`
 nnoremap <leader>i :set list!<CR>
