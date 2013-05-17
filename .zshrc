@@ -65,11 +65,11 @@ alias -g gp='| grep -i'
 
 alias -s html=chromium-browser
 
-g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
-xnview () { command xnview $@  2> /dev/null & }
-sumatrapdf () { command wine /opt/sumatra-pdf/SumatraPDF.exe $@  2> /dev/null & }
-psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
-fname() { find . -iname "*$@*"; }
+# g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
+# xnview () { command xnview $@  2> /dev/null & }
+# sumatrapdf () { command wine /opt/sumatra-pdf/SumatraPDF.exe $@  2> /dev/null & }
+# psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+# fname() { find . -iname "*$@*"; }
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
