@@ -38,21 +38,38 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+#
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
 EDITOR='vi'
 export EDITOR
 
 alias xclip="xclip -selection c"
 alias h="history"
+alias v="vi"
+
+alias fc-list-family="fc-list -f \"%{family}\n\" | sort | uniq"
+
+# networking
 alias nslt="netstat -tlnp"
 alias lsoft="lsof -nPi tcp"
 alias iptL="sudo iptables -L -v -n"
 alias iptNL="sudo iptables -t nat -L -v -n"
 alias iptNF="sudo iptables -t nat -F"
 
+alias lock="i3lock -c 000000"
 alias -g gp='| grep -i'
 
 alias -s html=chromium-browser
 
+g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
+xnview () { command xnview $@  2> /dev/null & }
+sumatrapdf () { command wine /opt/sumatra-pdf/SumatraPDF.exe $@  2> /dev/null & }
+psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+fname() { find . -iname "*$@*"; }
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
