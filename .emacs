@@ -1,5 +1,11 @@
-(setq viper-mode t)
-(require 'viper)
+;(setq viper-mode t)
+;(require 'viper)
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(set-cursor-color "#0a9dff")
+(provide 'init-themes)
+(load-theme 'badwolf t)
+
 (setq inhibit-startup-message t
   inhibit-startup-echo-area-message t) 
 (custom-set-variables
