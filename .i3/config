@@ -151,9 +151,10 @@ bindsym $mod+minus scratchpad show
 # bindsym $alt+e exec clipd menu
 
 # assignments
-assign [class="Google-chrome"] 2
+# assign [class="Google-chrome"] 2
 # assign [class="jetbrains-idea-ce"] 3
 # assign [class="jetbrains-pycharm"] 3
+#
 for_window [class="XnView"] floating enable
 for_window [class="XnView"] border normal
 for_window [class="Vlc"] floating enable
@@ -163,8 +164,8 @@ for_window [class="Remmina"] border normal
 for_window [class="Audacity"] floating enable
 for_window [class="Audacity"] border normal
 # for_window [class="jetbrains-idea-ce"] border normal
-for_window [class="processing-app-Base"] floating enable
-for_window [class="processing-app-Base"] border normal
+# for_window [class="processing-app-Base"] floating enable
+# for_window [class="processing-app-Base"] border normal
 for_window [class="Teensy"] floating enable
 for_window [class="Teensy"] border normal
 for_window [class="Pidgin"] floating enable
@@ -180,7 +181,6 @@ exec wicd-gtk -t
 exec xfce4-power-manager
 exec xfce4-volumed
 exec xflux -z 60148
-exec google-chrome
 exec pidgin
 exec xautolock -time 10 -locker i3lock -c 000000
 exec xfce4-clipman

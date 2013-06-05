@@ -38,6 +38,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 #
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -46,6 +47,7 @@ fi
 
 EDITOR='vi'
 export EDITOR
+export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_21
 
 alias xclip="xclip -selection c"
 alias h="history"
@@ -57,10 +59,12 @@ alias fc-list-family="fc-list -f \"%{family}\n\" | sort | uniq"
 alias nslt="netstat -tlnp"
 alias lsoft="lsof -nPi tcp"
 alias iptL="sudo iptables -L -v -n"
+alias iptF="sudo iptables -F"
 alias iptNL="sudo iptables -t nat -L -v -n"
 alias iptNF="sudo iptables -t nat -F"
 
 alias lock="i3lock -c 000000"
+alias tmux="TERM=screen-256color-bce tmux"
 alias -g gp='| grep -i'
 
 alias -s html=chromium-browser
@@ -71,5 +75,10 @@ alias -s html=chromium-browser
 # psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 # fname() { find . -iname "*$@*"; }
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
