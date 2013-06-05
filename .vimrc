@@ -36,6 +36,7 @@ Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
+Bundle 'pig.vim'
 
 filetype plugin indent on
 " Brief help
@@ -206,8 +207,8 @@ nnoremap zj jzz
 
 " emacs-style movement in EX Mode
 cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
+" cnoremap <C-b>  <Left>
+" cnoremap <C-f>  <Right>
 cnoremap <C-d>  <Delete>
 cnoremap <M-b>  <S-Left>
 cnoremap <M-f>  <S-Right>
@@ -326,6 +327,7 @@ if has("autocmd")
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
+  au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
 endif
 
 
@@ -360,7 +362,7 @@ else
     set nocursorline
     set background=dark
 endif
-if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color" || $TERM == "screen-color" || $TERM == "xterm-color-256" || $TERM == "screen-256color"
+if has("gui_running") || $TERM == "xterm" || $TERM == "xterm-color" || $TERM == "screen-color" || $TERM == "xterm-color-256" || $TERM == "screen-256color" || $TERM == "putty-256color"
     set t_Co=256
     colorscheme badwolf
 endif
