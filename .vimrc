@@ -15,8 +15,8 @@ Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
 " Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'wincent/Command-T'
+" Bundle 'Lokaltog/vim-powerline'
+" Bundle 'wincent/Command-T'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
@@ -37,6 +37,12 @@ Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
 Bundle 'pig.vim'
+Bundle 'taglist.vim'
+
+Bundle 'vim-scripts/clipbrd'
+Bundle 'vim-scripts/genutils'
+Bundle 'multvals.vim'
+
 
 filetype plugin indent on
 " Brief help
@@ -81,7 +87,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set relativenumber
+set rnu
 
 set autoread         " Automatically read a file that has changed on disk
 set browsedir=buffer " Maki GUI File Open use current directory
@@ -147,7 +153,7 @@ nnoremap <silent> <F8> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
 nnoremap <silent> <F9> :TlistToggle<CR>
 nnoremap <silent> <F10> :RainbowParenthesesToggle<CR>
-nnoremap <silent> <F12> <c-]>
+nnoremap <silent> <F12> g<C-]>
 
 " save with ctrl+s
 nnoremap <C-S> :w<CR>
