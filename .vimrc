@@ -304,6 +304,29 @@ if 1:
 endpython
 endfunction
 
+function! HEX2RGB(hex) " {{{1
+  let hex = substitute(a:hex, '#\|\s','','')
+  if hex =~ '[^0-9a-fA-F]'
+"echoerr "HEX2RGB: '" . a:hex . "' is not a hexadecimal value."
+    return []
+  endif
+  let l = len(hex)
+  if (l - (3*(l/3))) != 0 " l mod 3
+"echoerr "HEX2RGB: '" . a:hex . "' is a badly formatted string."
+    return []
+  endif
+  let l = l/3
+  let rgb = [strpart(hex,0,l),strpart(hex,l,l),strpart(hex,(2*l),l)]
+  let i = 0
+  for h in rgb
+    let rgb[i] = '0x'.rgb[i] + 0
+    let i += 1
+  endfor
+  echo rgb
+endfunction " }}}1
+command! -nargs=1 HEX2RGB :call HEX2RGB(<q-args>)
+nnoremap gh :HEX2RGB <cword><CR>
+
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
   au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
@@ -320,6 +343,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.build set ft=xml
   au BufNewFile,BufRead *.targets set ft=xml
   au BufNewFile,BufRead *.xaml set ft=xml
+  au BufNewFile,BufRead *.vssettings set ft=xml
   au BufNewFile,BufRead *.json setlocal ft=javascript
 
   au FileType cs set commentstring=//%s   " use single-line comments for .cs
@@ -378,3 +402,4 @@ let g:Powerline_cache_enabled = 1
 let g:Powerline_colorscheme = 'badwolf'
 
 let g:EasyMotion_leader_key = '\'
+set tags=c:\Redbox_CoreWeb\Dev\tags
