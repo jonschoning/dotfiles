@@ -131,6 +131,11 @@ vnoremap <tab> %
 syntax enable
 syntax on
 
+" undo
+set undodir=$HOME/.vim/undo
+set undolevels=1000
+set undoreload=10000
+
 " completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
