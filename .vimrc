@@ -31,16 +31,16 @@ Bundle 'terryma/vim-multiple-cursors'
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
 
-" vim.org
+
+Bundle 'vim-scripts/clipbrd'
+Bundle 'vim-scripts/genutils'
+
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
 Bundle 'pig.vim'
 Bundle 'taglist.vim'
-
-Bundle 'vim-scripts/clipbrd'
-Bundle 'vim-scripts/genutils'
 Bundle 'multvals.vim'
 
 
