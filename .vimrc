@@ -28,19 +28,21 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'PProvost/vim-ps1'
 Bundle 'mattn/zencoding-vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'Shougo/vimproc.vim'
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
 
-
-Bundle 'vim-scripts/clipbrd'
-Bundle 'vim-scripts/genutils'
-
+" vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
 Bundle 'pig.vim'
 Bundle 'taglist.vim'
+
+Bundle 'vim-scripts/clipbrd'
+Bundle 'vim-scripts/genutils'
 Bundle 'multvals.vim'
 
 
