@@ -365,6 +365,11 @@ if has("autocmd")
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
+  
+  " Highlighting the current line & column in VIM
+  au WinLeave * set nocursorline nocursorcolumn
+  au WinEnter * set cursorline cursorcolumn
+  set cursorline cursorcolumn
 endif
 
 
