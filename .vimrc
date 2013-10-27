@@ -89,6 +89,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set nu
 set rnu
 
 set autoread         " Automatically read a file that has changed on disk
@@ -415,3 +416,5 @@ let g:Powerline_colorscheme = 'badwolf'
 
 let g:EasyMotion_leader_key = '\'
 set tags=c:\Redbox_CoreWeb\Dev\tags
+let g:loaded_zipPlugin= 1
+let g:loaded_zip      = 1  
