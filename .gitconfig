@@ -7,6 +7,7 @@
     whitespace = cr-at-eol,-trailing-space,-space-before-tab
     filemode = false
 	safecrlf = true
+	pager = less -F -X
 [color]
     diff = auto
     status = auto
@@ -45,3 +46,6 @@
     keepBackup = false
 [github]
 	user = jonschoning
+[gui]
+	fontui = -family \"Gravur Condensed\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
