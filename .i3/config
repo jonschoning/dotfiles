@@ -163,30 +163,51 @@ for_window [class="Remmina"] floating enable
 for_window [class="Remmina"] border normal
 for_window [class="Audacity"] floating enable
 for_window [class="Audacity"] border normal
-# for_window [class="jetbrains-idea-ce"] border normal
+for_window [class="jetbrains-idea-ce"] border normal
 # for_window [class="processing-app-Base"] floating enable
-# for_window [class="processing-app-Base"] border normal
+for_window [class="processing-app-Base"] border normal
 for_window [class="Teensy"] floating enable
 for_window [class="Teensy"] border normal
 for_window [class="Pidgin"] floating enable
 for_window [class="Pidgin"] border normal
 for_window [class="Pidgin"] floating enable
+for_window [class="Guvcview"] border normal
+for_window [class="Guvcview"] floating enable
+for_window [class="guvcview"] border normal
+for_window [class="guvcview"] floating enable
 for_window [class="Nvidia-settings"] border normal
+for_window [class="Gmrun"] floating enable
+for_window [class="Gmrun"] border 1pixel
+for_window [class="Player"] floating enable
+for_window [class="Player"] border normal
+for_window [class="Genymotion"] floating enable
+for_window [class="Genymotion"] border normal
+for_window [class="VirtualBox"] floating enable
+for_window [class="VirtualBox"] border normal
+
+for_window [title="Hangouts"] floating enable
+for_window [title="Hangouts"] border normal
 # for_window [class="jetbrains-pycharm"] floating enable
 # for_window [class="jetbrains-pycharm"] border normal
 
 # autoruns
 exec xfce4-terminal
 exec wicd-gtk -t
-exec xfce4-power-manager
+exec sudo xfce4-power-manager
 exec xfce4-volumed
-exec xflux -z 60148
+# exec xflux -z 60148
+# exec redshift
 exec pidgin
 exec xautolock -time 10 -locker i3lock -c 000000
-exec xfce4-clipman
+exec xmodmap .xmodmap
+# exec xfce4-clipman
+exec sudo wmname LG3D
 
 #bindings
-bindsym $mod+c exec chromium-browser 2> /dev/null
+bindsym $mod+c exec chrome 2> /dev/null
+
+# new_window none
+# new_float none
 
 #Changing border style
 bindsym $mod+t border normal
