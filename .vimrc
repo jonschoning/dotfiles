@@ -22,8 +22,10 @@ Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'wlangstroth/vim-racket'
-Bundle 'derekwyatt/vim-scala'
+" Bundle 'wlangstroth/vim-racket'
+Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-classpath'
+Bundle 'guns/vim-clojure-static'
 " Bundle 'mikewest/vimroom'
 Bundle 'PProvost/vim-ps1'
 Bundle 'mattn/zencoding-vim'
@@ -218,6 +220,9 @@ nnoremap <leader>o :on<cr>
 " nudge screen
 nnoremap zk kzz
 nnoremap zj jzz
+
+" Format text (instead of going to Ex mode!)
+nnoremap Q gq 
 
 " emacs-style movement in EX Mode
 cnoremap <C-a>  <Home>
