@@ -168,6 +168,9 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+if [ -d "$HOME/opt/chrome-linux" ] ; then
+    PATH="$HOME/opt/chrome-linux:$PATH"
+fi
 
 
 # export PATH=/opt/sbt/bin:$PATH
@@ -191,6 +194,7 @@ psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 fname() { find . -iname "*$@*"; }
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$HOME/.cabal/bin:$PATH # Add Cabal to PATH
 
 PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
 
@@ -200,13 +204,14 @@ export DRIP_SHUTDOWN=30
 export VMAIL_HTML_PART_READER='elinks -dump'
 export WINEARCH=win32
 export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_21
+export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome_sandbox
 
 # set -o vi
 alias c='xclip -selection clipboard'
 alias v='xclip -o'
 alias enable_alert='PS1="$PS1\a"'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-source "bin/t-completion.sh"
+# source "bin/t-completion.sh"
 
 alias ga='git add'
 alias gp='git push'
@@ -215,3 +220,38 @@ alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias g='git'
+
+
+function ranger-cd {
+    tempfile='/tmp/chosendir'
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+      cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+  }
+
+bind '"\C-g":"ranger-cd\C-m"'
+
+export MARKPATH=$HOME/.marks
+function jump { 
+    cd -P $MARKPATH/$1 2>/dev/null || echo "No such mark: $1"
+}
+function mark { 
+    mkdir -p $MARKPATH; ln -s $(pwd) $MARKPATH/$1
+}
+function unmark { 
+    rm -i $MARKPATH/$1 
+}
+function marks {
+    ls -l $MARKPATH | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+function _marks() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$( ls $MARKPATH )" -- $cur) )
+}
+complete -F _marks jump
+complete -F _marks unmark
+
+shopt -s autocd
