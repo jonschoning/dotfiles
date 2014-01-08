@@ -282,7 +282,6 @@ nnoremap <leader>i :set list!<CR>
 nnoremap <leader>; :
 
 " soft wrapping text
-command! -nargs=* Wrap set wrap lbr nolist
 nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " highlight VCS conflict markers
@@ -371,11 +370,16 @@ if has("autocmd")
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
-  
+
+
   " Highlighting the current line & column in VIM
-  au WinLeave * set nocursorline nocursorcolumn
-  au WinEnter * set cursorline cursorcolumn
-  set cursorline cursorcolumn
+  " au WinLeave * set nocursorline nocursorcolumn
+  " au WinEnter * set cursorline cursorcolumn
+  " set cursorline cursorcolumn
+
+  "use docx2txt.pl to allow VIm to view the text content of a .docx file directly.
+  autocmd BufReadPre *.docx set ro
+  autocmd BufReadPost *.docx %!docx2txt.pl 
 endif
 
 
