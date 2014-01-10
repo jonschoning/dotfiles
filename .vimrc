@@ -30,7 +30,7 @@ Bundle 'guns/vim-clojure-static'
 Bundle 'PProvost/vim-ps1'
 Bundle 'mattn/zencoding-vim'
 Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'eagletmt/ghcmod-vim'
+Bundle 'bitc/vim-hdevtools'
 Bundle 'Shougo/vimproc.vim'
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
@@ -159,10 +159,10 @@ nnoremap <silent> <F4> :bd<CR>
 nnoremap <silent> <S-F4> :bd!<CR>
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
 nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
-nnoremap <silent> <F8> :cwin <bar> cn<CR>
-nnoremap <silent> <S-F8> :cwin <bar> cp<CR>
-nnoremap <silent> <F9> :TlistToggle<CR>
-nnoremap <silent> <F10> :RainbowParenthesesToggle<CR>
+nnoremap <silent> <F9> :cwin <bar> cn<CR>
+nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
+nnoremap <silent> <F10> :TlistToggle<CR>
+nnoremap <silent> <F11> :RainbowParenthesesToggle<CR>
 nnoremap <silent> <F12> g<C-]>
 
 " save with ctrl+s
@@ -371,6 +371,13 @@ if has("autocmd")
   au Syntax * RainbowParenthesesLoadBraces
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
 
+  " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
+  au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
+  au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
+  au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
+
+  autocmd BufEnter *.hs set formatprg=xargs\ -0\ pointfree
+  " autocmd BufEnter *.hs set formatprg=pointful
 
   " Highlighting the current line & column in VIM
   " au WinLeave * set nocursorline nocursorcolumn
@@ -427,3 +434,10 @@ let g:EasyMotion_leader_key = '\'
 set tags=c:\Redbox_CoreWeb\Dev\tags
 let g:loaded_zipPlugin= 1
 let g:loaded_zip      = 1  
+
+" let g:syntastic_auto_loc_list=1
+map <silent> <Leader>E :Errors<CR>
+map <Leader>S :SyntasticToggleMode<CR>
+
+nnoremap <leader>pf :set formatprg=xargs\ -0\ pointfree<CR>
+nnoremap <leader>pl :set formatprg=xargs\ -0\ pointful<CR>
