@@ -13,10 +13,11 @@ Bundle 'tpope/vim-characterize'
 Bundle 'tpope/vim-markdown'
 Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'scrooloose/syntastic'
+" Bundle 'majutsushi/tagbar'
+Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'Lokaltog/vim-powerline'
-" Bundle 'wincent/Command-T'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'wincent/Command-T'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
@@ -26,12 +27,18 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
 Bundle 'guns/vim-clojure-static'
-" Bundle 'mikewest/vimroom'
+Bundle 'mikewest/vimroom'
+" Bundle 'bilalq/lite-dfm'
 Bundle 'PProvost/vim-ps1'
 Bundle 'mattn/zencoding-vim'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'bitc/vim-hdevtools'
 Bundle 'Shougo/vimproc.vim'
+Bundle 'altercation/vim-colors-solarized'
+
+Bundle 'bitc/vim-hdevtools'
+Bundle 'travitch/hasksyn'
+Bundle 'Twinside/vim-haskellFold'
+
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
 
@@ -119,6 +126,7 @@ set wildignore+=*.rdb                            " Redis database file
 set wildignore+=*CACHE                           " django compressor cache
 
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These commands open folds
+set foldlevelstart=20
 set linespace=0
 set nojoinspaces
 
@@ -247,6 +255,9 @@ noremap <leader>Y "+y
 
 " select pasted text
 nnoremap <leader>V V`]
+
+" repeat in visual mode
+vnoremap . :norm.<CR>
 
 " insert blank line
 nnoremap gt o<ESC>k
@@ -437,7 +448,7 @@ let g:loaded_zip      = 1
 
 " let g:syntastic_auto_loc_list=1
 map <silent> <Leader>E :Errors<CR>
-map <Leader>S :SyntasticToggleMode<CR>
+" map <Leader>S :SyntasticToggleMode<CR>
 
 nnoremap <leader>pf :set formatprg=xargs\ -0\ pointfree<CR>
 nnoremap <leader>pl :set formatprg=xargs\ -0\ pointful<CR>
