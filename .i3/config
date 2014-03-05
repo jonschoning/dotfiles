@@ -9,10 +9,10 @@
 #focus_follows_mouse no
 
 #window                   border    bg        text
-client.focused            #242321   #242321   #f4cf86 #b88853
-client.focused_inactive   #000000   #000000   #0a7777 #000000
-client.unfocused          #000000   #000000   #45413b #000000
-client.urgent             #000000   #000000   #ff0099 #000000
+client.focused            #242321   #242321   #FF0099 #b88853
+client.focused_inactive   #000000   #000000   #d9cec3 #000000
+client.unfocused          #000000   #000000   #d9cec3 #000000
+client.urgent             #FF0099   #000000   #d9cec3 #FF0099
 
 #
 # i3 config file (v4)
@@ -87,6 +87,9 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+# toggle between whatever two workspaces you were on last.
+bindsym $mod+Tab workspace back_and_forth
 
 # move focused container to workspace
 bindsym $mod+Shift+exclam move container to workspace 1
@@ -185,8 +188,13 @@ for_window [class="Genymotion"] border normal
 for_window [class="VirtualBox"] floating enable
 for_window [class="VirtualBox"] border normal
 
+for_window [class="Firefox"] floating enable
+for_window [class="Firefox"] border normal
+
 for_window [title="Hangouts"] floating enable
-for_window [title="Hangouts"] border normal
+for_window [title="Hangouts"] border none
+
+# for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
 # for_window [class="jetbrains-pycharm"] floating enable
 # for_window [class="jetbrains-pycharm"] border normal
 
@@ -202,6 +210,9 @@ exec xautolock -time 10 -locker i3lock -c 000000
 exec xmodmap .xmodmap
 # exec xfce4-clipman
 exec sudo wmname LG3D
+
+# diable touchpad
+exec xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
 
 #bindings
 bindsym $mod+c exec chrome 2> /dev/null
