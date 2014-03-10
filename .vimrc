@@ -17,6 +17,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
+" Bundle 'bling/vim-airline'
 Bundle 'wincent/Command-T'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
@@ -30,12 +31,14 @@ Bundle 'guns/vim-clojure-static'
 Bundle 'mikewest/vimroom'
 " Bundle 'bilalq/lite-dfm'
 Bundle 'PProvost/vim-ps1'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'wavded/vim-stylus'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'altercation/vim-colors-solarized'
 
 Bundle 'bitc/vim-hdevtools'
+" Bundle 'eagletmt/ghcmod-vim'
 Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
 
@@ -74,6 +77,7 @@ set ic
 set iskeyword-=\(
 set iskeyword-=\)
 set iskeyword-=\.
+set iskeyword+=-
 set preserveindent
 set ruler
 set scrolloff=1
@@ -362,7 +366,8 @@ if has("autocmd")
   au BufNewFile,BufRead *.md setlocal filetype=markdown
   " au FileType markdown setlocal ai comments=n:> spell
 
-  au BufNewFile,BufRead *.cshtml setlocal filetype=html
+  au BufNewFile,BufRead *.cshtml setlocal filetype=html foldcolumn=1
+  au BufNewFile,BufRead *.ascx setlocal filetype=html foldcolumn=1
   au BufNewFile,BufRead *.build set ft=xml
   au BufNewFile,BufRead *.targets set ft=xml
   au BufNewFile,BufRead *.xaml set ft=xml
@@ -383,10 +388,14 @@ if has("autocmd")
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
 
   " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
+  
   au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
   au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
   au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
-
+  " au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
+  " au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
+  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :GhcModInfo<CR>
+  
   autocmd BufEnter *.hs set formatprg=xargs\ -0\ pointfree
   " autocmd BufEnter *.hs set formatprg=pointful
 
@@ -421,7 +430,7 @@ if has("gui_running")
     set background=light
     " set clipboard=unnamed
     if has('win32')
-        set guifont=Monaco-js:h9:cANSI
+        set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
     else
        set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
     endif
@@ -445,6 +454,8 @@ let g:EasyMotion_leader_key = '\'
 set tags=c:\Redbox_CoreWeb\Dev\tags
 let g:loaded_zipPlugin= 1
 let g:loaded_zip      = 1  
+
+let g:airline_powerline_fonts = 1
 
 " let g:syntastic_auto_loc_list=1
 map <silent> <Leader>E :Errors<CR>
