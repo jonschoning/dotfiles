@@ -6,8 +6,8 @@
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
 (set-cursor-color "#0a9dff")
-;(setq viper-mode t)
-;(require 'viper)
+(setq default-directory "~/")
+(set-default 'truncate-lines t)
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -48,6 +48,7 @@
 ; haskell
 (autoload 'ghc-init "ghc" nil t)
 
+
 ; hooks
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -61,4 +62,5 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
 ; packages end /********************************************************************************/ 
