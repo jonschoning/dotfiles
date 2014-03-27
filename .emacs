@@ -49,6 +49,12 @@
 (eval-after-load 'paredit '(progn (define-key paredit-mode-map (kbd "M-r") 'move-to-window-line-top-bottom)
 				  (define-key paredit-mode-map (kbd "M-R") 'paredit-raise-sexp)))
 
+; markdown
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ; rainbow
 (add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
 (require 'rainbow-delimiters)
