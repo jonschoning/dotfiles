@@ -2,7 +2,7 @@
 (setq inhibit-startup-message t
   inhibit-startup-echo-area-message t)
 (setq initial-scratch-message "")
-(put 'downcase-region 'disabled nil)
+ (put 'downcase-region 'disabled nil)
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
 (set-cursor-color "#0a9dff")
@@ -13,6 +13,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (provide 'init-themes)
 (load-theme 'badwolf t)
+
+;;; ido
+(require 'ido)
+(ido-mode t)
 
 ; custom vars
 (custom-set-variables
@@ -31,9 +35,19 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+(require 'iy-go-to-char)
+(global-set-key (kbd "C-c f") 'iy-go-to-char)
+(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+(global-set-key (kbd "C-c t") 'iy-go-up-to-char)
+(global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
+
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(eval-after-load 'paredit '(progn (define-key paredit-mode-map (kbd "M-r") 'move-to-window-line-top-bottom)
+				  (define-key paredit-mode-map (kbd "M-R") 'paredit-raise-sexp)))
 
 ; rainbow
 (add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
@@ -48,6 +62,11 @@
 ; haskell
 (autoload 'ghc-init "ghc" nil t)
 
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'rinari)
+(global-rinari-mode)
 
 ; hooks
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
