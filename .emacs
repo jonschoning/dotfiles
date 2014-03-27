@@ -46,6 +46,8 @@
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(eval-after-load 'paredit '(progn (define-key paredit-mode-map (kbd "M-r") 'move-to-window-line-top-bottom)
+				  (define-key paredit-mode-map (kbd "M-R") 'paredit-raise-sexp)))
 
 ; rainbow
 (add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
