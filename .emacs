@@ -1,4 +1,3 @@
-; default
 (setq inhibit-startup-message t
   inhibit-startup-echo-area-message t)
 (setq initial-scratch-message "")
@@ -8,11 +7,31 @@
 (set-cursor-color "#0a9dff")
 (setq default-directory "~/")
 (set-default 'truncate-lines t)
+(global-set-key "\M- " 'hippie-expand)
+
+;; (setq
+;;    backup-by-copying t      ; don't clobber symlinks
+;;    backup-directory-alist
+;;     '(("." . "~/.saves"))    ; don't litter my fs tree
+;;    delete-old-versions t
+;;    kept-new-versions 6
+;;    kept-old-versions 2
+;;    version-control t)       ; use versioned backups
+
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (provide 'init-themes)
 (load-theme 'badwolf t)
+
+(defun font-size (n)
+   "Prompt the user for font-size n, and apply to set-face-attribute :height"
+  (interactive "nfont-size: ")
+  (set-face-attribute 'default nil :height (* 10 n)))
 
 ;;; ido
 (require 'ido)
@@ -75,6 +94,7 @@
 (global-rinari-mode)
 
 (projectile-global-mode)
+
 
 ; hooks
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
