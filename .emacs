@@ -9,6 +9,9 @@
 (set-default 'truncate-lines t)
 (global-set-key "\M- " 'hippie-expand)
 
+(show-paren-mode 1)
+(set-face-background 'show-paren-match "#444")
+
 ;; (setq
 ;;    backup-by-copying t      ; don't clobber symlinks
 ;;    backup-directory-alist
