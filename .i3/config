@@ -199,20 +199,19 @@ for_window [title="Hangouts"] border none
 # for_window [class="jetbrains-pycharm"] border normal
 
 # autoruns
-exec xfce4-terminal
-exec wicd-gtk -t
-exec sudo xfce4-power-manager
-exec xfce4-volumed
-# exec xflux -z 60148
-# exec redshift
-exec pidgin
-exec xautolock -time 10 -locker i3lock -c 000000
-exec xmodmap .xmodmap
-# exec xfce4-clipman
-exec sudo wmname LG3D
+exec --no-startup-id udisks-glue
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id wicd-gtk -t
+exec --no-startup-id sudo xfce4-power-manager
+exec --no-startup-id xfce4-volumed
+exec --no-startup-id pidgin
+exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+exec --no-startup-id xmodmap .xmodmap
+exec --no-startup-id sudo wmname LG3D
+exec --no-startup-id emacs --daemon
 
 # diable touchpad
-exec xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
+exec --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
 
 #bindings
 bindsym $mod+c exec chrome 2> /dev/null
