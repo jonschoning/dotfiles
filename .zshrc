@@ -32,7 +32,7 @@ ZSH_THEME="prose"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(cabal)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,6 +47,10 @@ if [ -d "$HOME/bin" ] ; then
 fi
 if [ -d "$HOME/opt/chrome-linux" ] ; then
     PATH="$HOME/opt/chrome-linux:$PATH"
+fi
+
+if [ "$COLORTERM" = "xfce4-terminal" ]; then
+    export TERM=xterm-256color
 fi
 
 EDITOR='vi'
@@ -76,6 +80,7 @@ alias -g gp='| grep -i'
 
 alias gn='git-number --column -s'
 alias ga='git-number add'
+alias bigdirs='du -sk * | sort -nr | head -10'
 alias -s html=chrome
 export BROWSER=chrome
 
@@ -131,3 +136,6 @@ function _marks {
 }
 compctl -K _marks jump
 compctl -K _marks unmark
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
