@@ -194,20 +194,27 @@ for_window [class="Firefox"] border normal
 for_window [title="Hangouts"] floating enable
 for_window [title="Hangouts"] border none
 
+for_window [class="Wicd-client.py"] floating enable
+for_window [class="Wicd-client.py"] border 1pixel
+
 # for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
 # for_window [class="jetbrains-pycharm"] floating enable
 # for_window [class="jetbrains-pycharm"] border normal
 
 # autoruns
 exec --no-startup-id udisks-glue
-exec --no-startup-id xfce4-terminal
-exec --no-startup-id wicd-gtk -t
-exec --no-startup-id sudo xfce4-power-manager
-exec --no-startup-id xfce4-volumed
-exec --no-startup-id pidgin
-exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+
+exec --no-startup-id xset m 9/3 0
 exec --no-startup-id xmodmap .xmodmap
+
+exec --no-startup-id sudo xfce4-power-manager
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id xfce4-volumed
+exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
 exec --no-startup-id sudo wmname LG3D
+exec --no-startup-id pidgin
+exec --no-startup-id wicd-gtk -t
+
 exec --no-startup-id emacs --daemon
 
 # diable touchpad
