@@ -13,34 +13,36 @@ Bundle 'tpope/vim-characterize'
 Bundle 'tpope/vim-markdown'
 Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
-" Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
-" Bundle 'bling/vim-airline'
-Bundle 'wincent/Command-T'
+" Bundle 'wincent/Command-T'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'digitaltoad/vim-jade'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 " Bundle 'wlangstroth/vim-racket'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
 Bundle 'guns/vim-clojure-static'
-Bundle 'mikewest/vimroom'
+" Bundle 'mikewest/vimroom'
 " Bundle 'bilalq/lite-dfm'
 Bundle 'PProvost/vim-ps1'
-Bundle 'mattn/emmet-vim'
-Bundle 'wavded/vim-stylus'
-Bundle 'terryma/vim-multiple-cursors'
+" Bundle 'mattn/zencoding-vim'
+" Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'altercation/vim-colors-solarized'
 
-Bundle 'bitc/vim-hdevtools'
-" Bundle 'eagletmt/ghcmod-vim'
+Bundle 'Shougo/neocomplcache.vim'
+
+Bundle 'eagletmt/neco-ghc'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'lukerandall/haskellmode-vim'
 Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
+" Bundle 'bitc/vim-hdevtools'
 
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
@@ -51,7 +53,9 @@ Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
 Bundle 'pig.vim'
-Bundle 'taglist.vim'
+
+Bundle 'majutsushi/tagbar'
+" Bundle 'taglist.vim'
 
 Bundle 'vim-scripts/clipbrd'
 Bundle 'vim-scripts/genutils'
@@ -77,14 +81,13 @@ set ic
 set iskeyword-=\(
 set iskeyword-=\)
 set iskeyword-=\.
-set iskeyword+=-
 set preserveindent
 set ruler
 set scrolloff=1
 set showcmd
 set smartindent
 set splitright splitbelow
-set ts=4 sts=4 sw=4 expandtab
+set ts=2 sts=2 sw=2 expandtab
 set modelines=0
 set ttyfast
 set noesckeys
@@ -173,7 +176,8 @@ nnoremap <silent> <F5> :NERDTreeToggle<CR>
 nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F9> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
-nnoremap <silent> <F10> :TlistToggle<CR>
+" nnoremap <silent> <F10> :TlistToggle<CR>
+nnoremap <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F11> :RainbowParenthesesToggle<CR>
 nnoremap <silent> <F12> g<C-]>
 
@@ -200,10 +204,10 @@ nnoremap <leader>c :bp\|bd #<CR>
 nnoremap <silent> <leader>bwa :1,9000bwipeout<cr>
 
 " tab modes
-nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-nnoremap <leader>M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
-nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+" nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+" nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+" nnoremap <leader>M :set noexpadtab tabstop=8 soft=4 shiftwidth=4<CR>
+" nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " clear serach
 nnoremap <silent> <leader>/ :let @/ = ""<CR>
@@ -366,8 +370,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.md setlocal filetype=markdown
   " au FileType markdown setlocal ai comments=n:> spell
 
-  au BufNewFile,BufRead *.cshtml setlocal filetype=html foldcolumn=1
-  au BufNewFile,BufRead *.ascx setlocal filetype=html foldcolumn=1
+  au BufNewFile,BufRead *.cshtml setlocal filetype=html
   au BufNewFile,BufRead *.build set ft=xml
   au BufNewFile,BufRead *.targets set ft=xml
   au BufNewFile,BufRead *.xaml set ft=xml
@@ -388,16 +391,22 @@ if has("autocmd")
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
 
   " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
-  
-  au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
-  au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
-  au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
-  " au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
-  " au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
-  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :GhcModInfo<CR>
-  
-  autocmd BufEnter *.hs set formatprg=xargs\ -0\ pointfree
-  " autocmd BufEnter *.hs set formatprg=pointful
+
+  " au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
+  " au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
+  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
+
+  au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
+  au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
+  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
+
+  au FileType haskell ia <buffer> un undefined
+  au FileType haskell set formatprg=xargs\ -0\ pointfree
+  au FileType haskell setlocal omnifunc=necoghc#omnifunc
+  au FileType haskell NeoComplCacheEnable
+	au FileType haskell inoremap <expr><Tab>  neocomplcache#start_manual_complete()
+  au FileType haskell compiler ghc
+  " au FileType haskell set formatprg=pointful
 
   " Highlighting the current line & column in VIM
   " au WinLeave * set nocursorline nocursorcolumn
@@ -430,7 +439,7 @@ if has("gui_running")
     set background=light
     " set clipboard=unnamed
     if has('win32')
-        set guifont=DejaVu_Sans_Mono_for_Powerline:h9:cANSI
+        set guifont=Monaco-js:h9:cANSI
     else
        set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
     endif
@@ -455,11 +464,41 @@ set tags=c:\Redbox_CoreWeb\Dev\tags
 let g:loaded_zipPlugin= 1
 let g:loaded_zip      = 1  
 
-let g:airline_powerline_fonts = 1
-
 " let g:syntastic_auto_loc_list=1
 map <silent> <Leader>E :Errors<CR>
 " map <Leader>S :SyntasticToggleMode<CR>
-
+" let g:syntastic_haskell_checkers = ["ghc_mod","hlint"]
+let g:syntastic_haskell_checkers = ["hlint"]
+let g:haddock_browser="surf"
 nnoremap <leader>pf :set formatprg=xargs\ -0\ pointfree<CR>
 nnoremap <leader>pl :set formatprg=xargs\ -0\ pointful<CR>
+
+if executable('lushtags')
+    let g:tagbar_type_haskell = {
+        \ 'ctagsbin' : 'lushtags',
+        \ 'ctagsargs' : '--ignore-parse-error --',
+        \ 'kinds' : [
+            \ 'm:module:0',
+            \ 'e:exports:1',
+            \ 'i:imports:1',
+            \ 't:declarations:0',
+            \ 'd:declarations:1',
+            \ 'n:declarations:1',
+            \ 'f:functions:0',
+            \ 'c:constructors:0'
+        \ ],
+        \ 'sro' : '.',
+        \ 'kind2scope' : {
+            \ 'd' : 'data',
+            \ 'n' : 'newtype',
+            \ 'c' : 'constructor',
+            \ 't' : 'type'
+        \ },
+        \ 'scope2kind' : {
+            \ 'data' : 'd',
+            \ 'newtype' : 'n',
+            \ 'constructor' : 'c',
+            \ 'type' : 't'
+        \ }
+    \ }
+endif
