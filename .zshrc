@@ -82,6 +82,9 @@ alias gn='git-number --column -s'
 alias ga='git-number add'
 alias bigdirs='du -sk * | sort -nr | head -10'
 alias -s html=chrome
+alias ghc-sandbox="ghc -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
+alias ghci-sandbox="ghci -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
+alias runhaskell-sandbox="runhaskell -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
 export BROWSER=chrome
 
 # g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
