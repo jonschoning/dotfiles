@@ -8,9 +8,9 @@
 (setq default-directory "~/")
 (set-default 'truncate-lines t)
 (global-set-key "\M- " 'hippie-expand)
+; (setq debug-on-error t)
 
-(show-paren-mode 1)
-(set-face-background 'show-paren-match "#444")
+
 
 ;; (setq
 ;;    backup-by-copying t      ; don't clobber symlinks
@@ -82,6 +82,9 @@
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
+(show-paren-mode 1)
+(set-face-background 'show-paren-match "#444")
+
 ; arduino
 (add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
 (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
@@ -89,9 +92,16 @@
 
 ; haskell
 (autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
-(require 'yasnippet)
-(yas-global-mode 1)
+; (add-hook 'haskell-mode-hook 'turn-on-haskell-font-lock)
+; (let ((font "Hasklig"))
+;   (set-default-font font nil t)
+;   (set-fontset-font t '(8500 . 8800) font))
+; (setq haskell-font-lock-symbols t)
+
+; (require 'yasnippet)
+; (yas-global-mode 1)
 
 (require 'rinari)
 (global-rinari-mode)
@@ -107,10 +117,20 @@
 (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(add-hook 'inferior-haskell-mode-hook 'turn-on-ghci-completion)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+; (add-hook 'inferior-haskell-mode-hook 'turn-on-ghci-completion)
+; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
+(require 'ac-nrepl)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
 ; packages end /********************************************************************************/ 
