@@ -1,7 +1,13 @@
 servers = (
   {
-    address = "irc.freenode.net";
+    address = "chat.freenode.net";
     chatnet = "freenode";
+    port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.oftc.net";
+    chatnet = "oftc";
     port = "6667";
     autoconnect = "no";
   },
@@ -28,26 +34,26 @@ servers = (
     port = "6667";
   },
   {
-    address = "irc.omgwtfhax.net";
-    chatnet = "omgwtfhax";
-    port = "6667";
-  },
-  {
     address = "p4fsi4ockecnea7l.onion";
     chatnet = "freetor";
     port = "6667";
-  }
+  },
+  { address = "irc.twice-irc.de"; chatnet = "twice"; port = "6667"; }
 );
 
 chatnets = {
-  freenode = {
+  f = { autosendcmd = "/msg nickserv identify PASSWORD"; type = "IRC"; };
+  oftc = { 
     type = "IRC";
+    autosendcmd = "/msg nickserv identify PASSWORD";
   };
   snoonet = {
     type = "IRC";
+    autosendcmd = "/msg nickserv identify PASSWORD";
   };
   bitlbee = { 
     type = "IRC";
+    autosendcmd = "/^MSG root identify PASSWORD";
   };
   quakenet = {
     type = "IRC";
@@ -58,7 +64,10 @@ chatnets = {
   freetor = { type = "IRC"; };
   foonetic = {
     type = "IRC";
+    autosendcmd = "/msg nickserv identify PASSWORD";
   };
+  twice = { type = "IRC"; };
+  freenode = { type = "IRC"; };
 };
 
 channels = ( 
@@ -233,9 +242,9 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "USERNAME";
-    user_name = "USERNAME";
-    nick = "USERNAME";
+    real_name = "Jon Schoning";
+    user_name = "platz";
+    nick = "platz";
     timestamp_format = "%H:%M:%S";
     log_timestamp = "%Y-%m-%dT%H-%M-%S";
   };
@@ -261,20 +270,22 @@ settings = {
     timestamps = "no";
     autolog_path = "~/fs/irclogs/$tag/$0.log";
   };
-  "irc/core" = { alternate_nick = "USERNAMEUSERNAME"; skip_motd = "yes"; };
+  "irc/core" = { alternate_nick = "platz_"; skip_motd = "yes"; };
   "perl/core/scripts" = {
     awl_display_key = "$Q%K|%n$H$C$S";
     awl_block = "-15";
     screen_away_repeat = "30";
     screen_away_message = "not here... leave a message";
+    growl_net_client = "straightflush.dnsdojo.com";
+    growl_net_pass = "PASSWORD";
     vim_mode_cmd_seq = "j";
   };
 };
-hilights = ( { text = "USERNAME"; nick = "yes"; word = "yes"; } );
-ignores = (
-  { level = "JOINS PARTS QUITS"; },
-  { level = "MODES NICKS"; channels = ( "&bitlbee" ); }
-);
+hilights = ( { text = "platz"; nick = "yes"; word = "yes"; } );
+
+ignores = ( { level = "MODES NICKS"; channels = ( "&bitlbee" ); } );
+# { level = "JOINS PARTS QUITS"; },
+
 logs = { };
 windows = {
   1 = {
