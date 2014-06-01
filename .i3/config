@@ -188,8 +188,8 @@ for_window [class="Genymotion"] border normal
 for_window [class="VirtualBox"] floating enable
 for_window [class="VirtualBox"] border normal
 
-for_window [class="Firefox"] floating enable
-for_window [class="Firefox"] border normal
+# for_window [class="Firefox"] floating enable
+# for_window [class="Firefox"] border normal
 
 for_window [title="Hangouts"] floating enable
 for_window [title="Hangouts"] border none
@@ -204,7 +204,7 @@ for_window [class="Wicd-client.py"] border 1pixel
 # autoruns
 exec --no-startup-id udisks-glue
 
-exec --no-startup-id xset m 9/3 0
+exec --no-startup-id xset m 5/3 0
 exec --no-startup-id xmodmap .xmodmap
 
 exec --no-startup-id sudo xfce4-power-manager
