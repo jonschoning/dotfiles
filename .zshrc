@@ -55,7 +55,7 @@ fi
 
 EDITOR='vi'
 export EDITOR
-export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_25
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_05
 export _JAVA_AWT_WM_NONREPARENTING=1
 # export AWT_TOOLKIT=MToolkit
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome_sandbox
@@ -63,7 +63,9 @@ export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome_sandbox
 alias xclip="xclip -selection c"
 alias h="history"
 alias v="vi"
-
+alias rdesktop-ex="rdesktop ADDRESS -d DOMAIN -u USER -p - "
+alias 7zap='7za a -tzip -p -mem=AES256'
+alias 7zae='7za e'
 alias fc-list-family="fc-list -f \"%{family}\n\" | sort | uniq"
 
 # networking
@@ -136,6 +138,13 @@ function marks {
 }
 function _marks {
     reply=($(ls $MARKPATH))
+}
+
+function show {
+    (surf `readlink -e $1` 2> /dev/null &)
+}
+function showi {
+    (surf `readlink -e index.html` 2> /dev/null &)
 }
 
 function cabal_sandbox_info() {
