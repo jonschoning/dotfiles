@@ -6,6 +6,7 @@ Bundle 'gmarik/vundle'
 
 " github
 Bundle 'tpope/vim-fugitive'
+Bundle 'goldfeld/vim-seek'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -42,8 +43,10 @@ Bundle 'eagletmt/ghcmod-vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
+" Bundle 'Twinside/vim-haskellConceal'
 " Bundle 'bitc/vim-hdevtools'
 
+Bundle "jnwhiteh/vim-golang"
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
 
@@ -59,6 +62,7 @@ Bundle 'majutsushi/tagbar'
 
 Bundle 'vim-scripts/clipbrd'
 Bundle 'vim-scripts/genutils'
+Bundle 'vim-scripts/autoclose--alves'
 Bundle 'multvals.vim'
 
 
@@ -104,6 +108,9 @@ set lbr
 set nobackup
 set nowritebackup
 set noswapfile
+
+" encryption
+set cryptmethod=blowfish
 
 set nu
 set rnu
