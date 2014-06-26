@@ -25,9 +25,17 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'kien/rainbow_parentheses.vim'
 " Bundle 'wlangstroth/vim-racket'
+
+Bundle 'tpope/vim-projectionist.git'
+
+Bundle 'guns/vim-clojure-static'
+Bundle 'guns/vim-sexp'
+Bundle 'tpope/vim-sexp-mappings-for-regular-people'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
-Bundle 'guns/vim-clojure-static'
+Bundle 'tpope/vim-leiningen'
+
+
 " Bundle 'mikewest/vimroom'
 " Bundle 'bilalq/lite-dfm'
 Bundle 'PProvost/vim-ps1'
@@ -35,8 +43,9 @@ Bundle 'PProvost/vim-ps1'
 " Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'Shougo/unite.vim'
 
-Bundle 'Shougo/neocomplcache.vim'
+Bundle 'Shougo/neocomplete.vim'
 
 Bundle 'eagletmt/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
@@ -45,6 +54,10 @@ Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
 " Bundle 'Twinside/vim-haskellConceal'
 " Bundle 'bitc/vim-hdevtools'
+
+" Bundle 'raichoo/haskell-vim'
+Bundle 'raichoo/purescript-vim'
+Bundle 'idris-hackers/idris-vim'
 
 Bundle "jnwhiteh/vim-golang"
 " Bundle 'nosami/Omnisharp'
@@ -410,8 +423,8 @@ if has("autocmd")
   au FileType haskell ia <buffer> un undefined
   au FileType haskell set formatprg=xargs\ -0\ pointfree
   au FileType haskell setlocal omnifunc=necoghc#omnifunc
-  au FileType haskell NeoComplCacheEnable
-	au FileType haskell inoremap <expr><Tab>  neocomplcache#start_manual_complete()
+  au FileType haskell NeoCompleteEnable
+	au FileType haskell inoremap <expr><Tab>  neocomplete#start_manual_complete()
   au FileType haskell compiler ghc
   " au FileType haskell set formatprg=pointful
 
