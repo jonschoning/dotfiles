@@ -1,0 +1,43 @@
+[global]
+    font = "Gotham Rounded 11"
+    allow_markup = yes
+    format = "<b>%s %p</b>\n%b"
+    sort = yes
+    indicate_hidden = true
+    idle_threshold = 0
+    geometry = "300x5+0+0"
+    alignment = center
+    show_age_threshold = 60
+    sticky_history = yes
+    follow = mouse
+    word_wrap = yes
+    separator_height = 2
+    padding = 2
+    horizontal_padding = 2
+    separator_color = frame
+
+
+[frame]
+    width = 1
+    color = "#000000"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#1c1b1a"
+    foreground = "#97919b"
+    timeout = 3
+
+[urgency_normal]
+    background = "#1c1b1a"
+    foreground = "#8cbaff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#ff0099"
+    foreground = "#000000"
+    timeout = 0
