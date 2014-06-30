@@ -21,11 +21,11 @@
     width = 1
     color = "#000000"
 
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+# [shortcuts]
+#     close = ctrl+space
+#     close_all = ctrl+shift+space
+#     history = ctrl+grave
+#     context = ctrl+shift+period
 
 [urgency_low]
     background = "#1c1b1a"
@@ -35,7 +35,7 @@
 [urgency_normal]
     background = "#1c1b1a"
     foreground = "#8cbaff"
-    timeout = 10
+    timeout = 8
 
 [urgency_critical]
     background = "#ff0099"
