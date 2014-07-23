@@ -40,6 +40,10 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
+if [ "$COLORTERM" = "xfce4-terminal" ]; then
+    export TERM=xterm-256color
+fi
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -164,6 +168,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+source /usr/local/share/chruby/chruby.sh
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -193,8 +200,8 @@ lt() { ls -ltrsa "$@" | tail; }
 psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 fname() { find . -iname "*$@*"; }
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$HOME/.cabal/bin:$PATH # Add Cabal to PATH
+PATH=$HOME/npm/bin:$PATH # Add npm to path
 
 PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
 
@@ -203,14 +210,13 @@ export VMAIL_VIM=gvim
 export DRIP_SHUTDOWN=30
 export VMAIL_HTML_PART_READER='elinks -dump'
 export WINEARCH=win32
-export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_21
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_05
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome_sandbox
 
 # set -o vi
 alias c='xclip -selection clipboard'
 alias v='xclip -o'
 alias enable_alert='PS1="$PS1\a"'
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # source "bin/t-completion.sh"
 
 alias ga='git add'
@@ -220,6 +226,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias g='git'
+alias bigdirs='du -sk * | sort -nr | head -10'
 
 
 function ranger-cd {
