@@ -221,7 +221,7 @@ exec --no-startup-id emacs --daemon
 exec --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
 
 #bindings
-bindsym $mod+c exec chrome 2> /dev/null
+bindsym $mod+c exec google-chrome 2> /dev/null
 
 # new_window none
 # new_float none
