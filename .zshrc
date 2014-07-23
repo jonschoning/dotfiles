@@ -35,18 +35,19 @@ ZSH_THEME="prose"
 plugins=(cabal)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/chruby/chruby.sh
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 PATH=$HOME/.cabal/bin:$PATH # Add Cabal to PATH
+PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
+PATH=$HOME/npm/bin:$PATH # Add npm to path
+PATH=$PATH:/usr/local/heroku/bin  ### Added by the Heroku Toolbelt
+
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
-fi
-if [ -d "$HOME/opt/chrome-linux" ] ; then
-    PATH="$HOME/opt/chrome-linux:$PATH"
 fi
 
 if [ "$COLORTERM" = "xfce4-terminal" ]; then
@@ -58,7 +59,6 @@ export EDITOR
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_05
 export _JAVA_AWT_WM_NONREPARENTING=1
 # export AWT_TOOLKIT=MToolkit
-export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome_sandbox
 
 alias xclip="xclip -selection c"
 alias h="history"
@@ -79,15 +79,16 @@ alias iptNF="sudo iptables -t nat -F"
 alias lock="i3lock -c 000000"
 alias tmux="TERM=screen-256color-bce tmux"
 alias -g gp='| grep -i'
+alias -g gpv='| grep -iv'
 
 alias gn='git-number --column -s'
 alias ga='git-number add'
 alias bigdirs='du -sk * | sort -nr | head -10'
-alias -s html=chrome
+alias -s html=google-chrome
 alias ghc-sandbox="ghc -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
 alias ghci-sandbox="ghci -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
 alias runhaskell-sandbox="runhaskell -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d"
-export BROWSER=chrome
+export BROWSER=google-chrome
 
 # g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
 # xnview () { command xnview $@  2> /dev/null & }
@@ -95,11 +96,6 @@ export BROWSER=chrome
 # psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 # fname() { find . -iname "*$@*"; }
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
-
-PATH=$PATH:~/.cabal/bin # Add cabal to path
 
 autoload -U edit-command-line
 zle -N edit-command-line
@@ -161,5 +157,4 @@ RPROMPT="\$(cabal_sandbox_info) $RPROMPT"
 compctl -K _marks jump
 compctl -K _marks unmark
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+chruby 2.1.2
