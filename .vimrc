@@ -16,6 +16,7 @@ Bundle 'othree/html5.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-powerline'
 " Bundle 'wincent/Command-T'
 Bundle 'airblade/vim-gitgutter'
@@ -37,6 +38,8 @@ Bundle 'tpope/vim-sexp-mappings-for-regular-people'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
 Bundle 'tpope/vim-leiningen'
+
+Bundle 'mxw/vim-jsx'
 
 
 " Bundle 'mikewest/vimroom'
@@ -256,10 +259,6 @@ noremap <silent> <C-F12> :vertical resize +10<CR>
 " focus window (only)
 nnoremap <leader>o :on<cr>
 
-" nudge screen
-nnoremap zk kzz
-nnoremap zj jzz
-
 " Format text (instead of going to Ex mode!)
 nnoremap Q gq 
 
@@ -344,43 +343,6 @@ command! -nargs=1 OpenURL :call OpenURL(<q-args>)
 nnoremap gb :OpenURL <cfile><CR>
 nnoremap gG :OpenURL http://www.duckduckgoog.com/?q=<cword><CR>
 
-" insert a uuid4
-nnoremap <leader>4 :call InsertUUID4()<CR>
-function! InsertUUID4()
-python << endpython
-if 1:
-    import uuid, vim
-    s = str(uuid.uuid4())
-    cpos = vim.current.window.cursor
-    cline = vim.current.line
-    vim.current.line = cline[:cpos[1] + 1] + s + cline[cpos[1] + 1:]
-    vim.current.window.cursor = (cpos[0], cpos[1] + len(s))
-endpython
-endfunction
-
-function! HEX2RGB(hex) " {{{1
-  let hex = substitute(a:hex, '#\|\s','','')
-  if hex =~ '[^0-9a-fA-F]'
-"echoerr "HEX2RGB: '" . a:hex . "' is not a hexadecimal value."
-    return []
-  endif
-  let l = len(hex)
-  if (l - (3*(l/3))) != 0 " l mod 3
-"echoerr "HEX2RGB: '" . a:hex . "' is a badly formatted string."
-    return []
-  endif
-  let l = l/3
-  let rgb = [strpart(hex,0,l),strpart(hex,l,l),strpart(hex,(2*l),l)]
-  let i = 0
-  for h in rgb
-    let rgb[i] = '0x'.rgb[i] + 0
-    let i += 1
-  endfor
-  echo rgb
-endfunction " }}}1
-command! -nargs=1 HEX2RGB :call HEX2RGB(<q-args>)
-nnoremap gh :HEX2RGB <cword><CR>
-
 if has("autocmd")
   au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
   au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
@@ -446,10 +408,7 @@ if has("statusline") && !&cp
     " always show the status bar
     set laststatus=2
 
-    " start the status line
     set statusline=%f\ %m\ %r
-
-    " finish the statusline
     set statusline+=#%n
     set statusline+=\ C%v
     set statusline+=\ L%l/%L[%p%%]
@@ -483,7 +442,6 @@ let g:Powerline_cache_enabled = 1
 let g:Powerline_colorscheme = 'badwolf'
 
 let g:EasyMotion_leader_key = '\'
-set tags=c:\Redbox_CoreWeb\Dev\tags
 let g:loaded_zipPlugin= 1
 let g:loaded_zip      = 1  
 
@@ -525,3 +483,5 @@ if executable('lushtags')
         \ }
     \ }
 endif
+
+" let g:ghcmod_ghc_options = ['-fdefer-type-errors']
