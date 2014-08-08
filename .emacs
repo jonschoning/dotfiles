@@ -42,13 +42,21 @@
 
 ; custom vars
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
  '(column-number-mode t)
- '(blink-cursor-mode)
+ '(haskell-process-show-debug-tips nil)
  '(tool-bar-mode nil))
 
 ; custom fonts
 (custom-set-faces
- '(flymake-errline ((((class color)) (:background "Gray30")))) '(flymake-warnline ((((class color)) (:background "Gray20"))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
 
 ; packages begin /********************************************************************************/ 
@@ -91,8 +99,18 @@
 (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
 
 ; haskell
-(autoload 'ghc-init "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+; (autoload 'ghc-init "ghc" nil t)
+; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(eval-after-load "haskell-mode"
+  '(progn
+     (define-key haskell-mode-map (kbd "C-x C-d") nil)
+     (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+     (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+     (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
+     (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+     (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+     (define-key haskell-mode-map (kbd "C-c M-.") nil)
+     (define-key haskell-mode-map (kbd "C-c C-d") nil)))
 
 ; (add-hook 'haskell-mode-hook 'turn-on-haskell-font-lock)
 ; (let ((font "Hasklig"))
