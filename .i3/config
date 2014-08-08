@@ -208,12 +208,12 @@ exec --no-startup-id xset m 5/3 0
 exec --no-startup-id xmodmap .xmodmap
 
 exec --no-startup-id sudo xfce4-power-manager
-exec --no-startup-id xfce4-terminal
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
 exec --no-startup-id sudo wmname LG3D
 exec --no-startup-id pidgin
 exec --no-startup-id wicd-gtk -t
+exec --no-startup-id xmodmap .xmodmap.laptop
 
 exec --no-startup-id emacs --daemon
 
@@ -230,3 +230,12 @@ bindsym $mod+c exec google-chrome 2> /dev/null
 bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
 bindsym $mod+u border none
+
+exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/jon/.i3/workspace-2.json'"
+exec --no-startup-id thunderbird
+exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1.json'"
+exec --no-startup-id google-chrome
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id xfce4-terminal
