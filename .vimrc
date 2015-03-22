@@ -1,8 +1,8 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 " github
 Bundle 'tpope/vim-fugitive'
@@ -40,7 +40,9 @@ Bundle 'tpope/vim-classpath'
 Bundle 'tpope/vim-leiningen'
 
 Bundle 'mxw/vim-jsx'
+Bundle 'mattn/emmet-vim'
 
+Bundle 'morhetz/gruvbox'
 
 " Bundle 'mikewest/vimroom'
 " Bundle 'bilalq/lite-dfm'
@@ -65,7 +67,7 @@ Bundle 'Twinside/vim-haskellFold'
 Bundle 'raichoo/purescript-vim'
 Bundle 'idris-hackers/idris-vim'
 
-Bundle "jnwhiteh/vim-golang"
+Bundle 'lambdatoast/elm.vim'
 " Bundle 'nosami/Omnisharp'
 " Bundle 'vim-scripts/YankRing.vim'
 
@@ -84,6 +86,16 @@ Bundle 'vim-scripts/genutils'
 Bundle 'vim-scripts/autoclose--alves'
 Bundle 'multvals.vim'
 
+Bundle 'joom/latex-unicoder.vim'
+
+Bundle 'jcfaria/Vim-R-plugin'
+
+Bundle "fatih/vim-go"
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Bundle 'kongo2002/fsharp-vim'
+Bundle 'ajh17/Spacegray.vim'
+Bundle 'junegunn/seoul256.vim'
+Bundle 'zeis/vim-kolor'
 
 filetype plugin indent on
 " Brief help
@@ -104,6 +116,7 @@ set ic
 set iskeyword-=\(
 set iskeyword-=\)
 set iskeyword-=\.
+set iskeyword-=-
 set preserveindent
 set ruler
 set scrolloff=1
@@ -114,6 +127,7 @@ set ts=2 sts=2 sw=2 expandtab
 set modelines=0
 set ttyfast
 set noesckeys
+set hls
 
 " Time out on key codes but not mappings.
 set notimeout
@@ -132,7 +146,6 @@ set noswapfile
 set cryptmethod=blowfish
 
 set nu
-set rnu
 
 set autoread         " Automatically read a file that has changed on disk
 set browsedir=buffer " Maki GUI File Open use current directory
@@ -439,7 +452,7 @@ endif
 
 let g:Powerline_symbols = 'unicode'
 let g:Powerline_cache_enabled = 1
-let g:Powerline_colorscheme = 'badwolf'
+" let g:Powerline_colorscheme = 'badwolf'
 
 let g:EasyMotion_leader_key = '\'
 let g:loaded_zipPlugin= 1
@@ -485,3 +498,7 @@ if executable('lushtags')
 endif
 
 " let g:ghcmod_ghc_options = ['-fdefer-type-errors']
+let g:unicoder_cancel_normal = 1
+let g:unicoder_cancel_insert = 1
+let g:unicoder_cancel_visual = 1
+nnoremap <leader>x :call unicoder#start(0)<CR>
