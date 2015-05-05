@@ -8,63 +8,27 @@
         {
             "border": "normal",
             "floating": "auto_off",
-            "layout": "splitv",
-            "percent": 0.5,
+            "layout": "tabbed",
+            "percent": 0.497410917563443,
             "type": "con",
             "nodes": [
                 {
-                    "border": "normal",
+                    "border": "none",
+                    "current_border_width": 0,
                     "floating": "auto_off",
-                    "layout": "tabbed",
-                    "percent": 0.502589082436557,
-                    "type": "con",
-                    "nodes": [
-                        {
-                            "border": "none",
-                            "current_border_width": 0,
-                            "floating": "auto_off",
-                            "geometry": {
-                               "height": 410,
-                               "width": 34,
-                               "x": 0,
-                               "y": 0
-                            },
-                            "percent": 1,
-                            "swallows": [
-                               {
-                               "class": "^Xfce4"
-                               }
-                            ],
-                            "type": "con"
-                        }
-                    ]
-                },
-                {
-                    "border": "normal",
-                    "floating": "auto_off",
-                    "layout": "tabbed",
-                    "percent": 0.497410917563443,
-                    "type": "con",
-                    "nodes": [
-                        {
-                            "border": "none",
-                            "current_border_width": 0,
-                            "floating": "auto_off",
-                            "geometry": {
-                               "height": 410,
-                               "width": 34,
-                               "x": 0,
-                               "y": 0
-                            },
-                            "percent": 1,
-                            "swallows": [
-                               {
-                                 "class": "^Xfce4"
-                               }
-                            ],
-                            "type": "con"
-                        }
-                    ]
+                    "geometry": {
+                       "height": 410,
+                       "width": 34,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "percent": 1,
+                    "swallows": [
+                       {
+                         "class": "^Xfce4"
+                       }
+                    ],
+                    "type": "con"
                 }
             ]
         },

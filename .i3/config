@@ -195,6 +195,8 @@ for_window [class="R_x11"] border normal
 for_window [title="Hangouts"] floating enable
 for_window [title="Hangouts"] border normal
 
+for_window [class="<interactive>"] floating enable
+for_window [class="<interactive>"] border normal
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="Wicd-client.py"] border 1pixel
 for_window [class="jclient-LoginFrame"] floating enable
@@ -204,7 +206,7 @@ for_window [class="jclient-LoginFrame"] floating enable
 # for_window [class="jetbrains-pycharm"] border normal
 
 # autoruns
-exec xrandr --output DP-3 --left-of LVDS-0 --dpi 100
+exec xrandr-on
 
 exec --no-startup-id xset m 6/3 0
 
@@ -238,7 +240,6 @@ bindsym $mod+u border none
 # exec --no-startup-id thunderbird
 exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1.json'"
 exec --no-startup-id google-chrome
-exec --no-startup-id xfce4-terminal
 exec --no-startup-id xfce4-terminal
 exec --no-startup-id xfce4-terminal
 exec --no-startup-id xfce4-terminal
