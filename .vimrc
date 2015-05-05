@@ -43,6 +43,7 @@ Bundle 'mxw/vim-jsx'
 Bundle 'mattn/emmet-vim'
 
 Bundle 'morhetz/gruvbox'
+Bundle 'endel/vim-github-colorscheme'
 
 " Bundle 'mikewest/vimroom'
 " Bundle 'bilalq/lite-dfm'
@@ -68,7 +69,8 @@ Bundle 'raichoo/purescript-vim'
 Bundle 'idris-hackers/idris-vim'
 
 Bundle 'lambdatoast/elm.vim'
-" Bundle 'nosami/Omnisharp'
+Bundle 'OmniSharp/omnisharp-vim'
+Bundle 'tpope/vim-dispatch'
 " Bundle 'vim-scripts/YankRing.vim'
 
 " vim.org
@@ -77,7 +79,7 @@ Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
 Bundle 'hexHighlight.vim'
 Bundle 'pig.vim'
-
+Bundle 'elubow/cql-vim'
 Bundle 'majutsushi/tagbar'
 " Bundle 'taglist.vim'
 
@@ -88,14 +90,17 @@ Bundle 'multvals.vim'
 
 Bundle 'joom/latex-unicoder.vim'
 
-Bundle 'jcfaria/Vim-R-plugin'
+" Bundle 'jcfaria/Vim-R-plugin'
 
 Bundle "fatih/vim-go"
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Bundle 'kongo2002/fsharp-vim'
+" Bundle 'kongo2002/fsharp-vim'
+Bundle 'OrangeT/vim-csharp'
 Bundle 'ajh17/Spacegray.vim'
 Bundle 'junegunn/seoul256.vim'
+Bundle 'twerth/ir_black'
 Bundle 'zeis/vim-kolor'
+" Bundle 'fsharpbinding-vim'
 
 filetype plugin indent on
 " Brief help
@@ -387,6 +392,7 @@ if has("autocmd")
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
   au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
+  au BufNewFile,BufRead *.cql set filetype=cql syntax=cql 
 
   " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
 

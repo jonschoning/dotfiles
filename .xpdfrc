@@ -1,0 +1,3 @@
+initialZoom width
+continuousView yes
+urlCommand  "surf %s"
