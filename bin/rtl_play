@@ -1,0 +1,1 @@
+play -r 32k -t raw -e s -b 16 -c 1 -V1 -

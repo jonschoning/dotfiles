@@ -1,0 +1,2 @@
+surf `readlink -e ~/.cabal/share/doc/index.html` 2> /dev/null &
+

@@ -1,0 +1,2 @@
+#!/bin/sh
+while inotifywait -qe modify *.cs; do xbuild /nologo /verbosity:m; done
