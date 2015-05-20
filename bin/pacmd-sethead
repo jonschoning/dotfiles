@@ -1,0 +1,1 @@
+pacmd set-default-sink "alsa_output.usb-Logitech_Inc._Logitech_USB_Headset_H340-00-H340.analog-stereo"
