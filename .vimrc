@@ -59,7 +59,7 @@ Bundle 'Shougo/neocomplete.vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'lukerandall/haskellmode-vim'
-Bundle 'travitch/hasksyn'
+" Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
 " Bundle 'Twinside/vim-haskellConceal'
 " Bundle 'bitc/vim-hdevtools'
@@ -87,10 +87,11 @@ Bundle 'vim-scripts/clipbrd'
 Bundle 'vim-scripts/genutils'
 Bundle 'vim-scripts/autoclose--alves'
 Bundle 'multvals.vim'
+Bundle 'csv.vim'
 
 Bundle 'joom/latex-unicoder.vim'
 
-" Bundle 'jcfaria/Vim-R-plugin'
+Bundle 'jcfaria/Vim-R-plugin'
 
 Bundle "fatih/vim-go"
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
@@ -101,6 +102,9 @@ Bundle 'junegunn/seoul256.vim'
 Bundle 'twerth/ir_black'
 Bundle 'zeis/vim-kolor'
 " Bundle 'fsharpbinding-vim'
+"
+
+Plugin 'amoffat/snake'
 
 filetype plugin indent on
 " Brief help
@@ -345,6 +349,14 @@ nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
 " highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+function! VimGrepAlias()
+  call inputsave()
+  let searchstr = input('')
+  call inputrestore()
+  execute 'vimgrep /\v'.expand(searchstr).'/gj '.expand('%') | copen
+endfunction
+nnoremap <silent> gf :call VimGrepAlias()<CR>
 
 " open url under cursor
 function! OpenURL(url)
