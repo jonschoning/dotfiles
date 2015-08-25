@@ -10,17 +10,6 @@
 (global-set-key "\M- " 'hippie-expand)
 ; (setq debug-on-error t)
 
-
-
-;; (setq
-;;    backup-by-copying t      ; don't clobber symlinks
-;;    backup-directory-alist
-;;     '(("." . "~/.saves"))    ; don't litter my fs tree
-;;    delete-old-versions t
-;;    kept-new-versions 6
-;;    kept-old-versions 2
-;;    version-control t)       ; use versioned backups
-
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -42,10 +31,6 @@
 
 ; custom vars
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(haskell-process-show-debug-tips nil)
@@ -53,10 +38,6 @@
 
 ; custom fonts
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
 
 ; packages begin /********************************************************************************/ 
@@ -65,13 +46,27 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-(require 'iy-go-to-char)
-(global-set-key (kbd "C-c f") 'iy-go-to-char)
-(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
-(global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
-(global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
-(global-set-key (kbd "C-c t") 'iy-go-up-to-char)
-(global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
+(require 'evil)    
+(evil-mode 1)  
+(require 'undo-tree)
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+(evil-commentary-mode)
+
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-u")
+  (lambda ()
+    (interactive)
+    (evil-delete (point-at-bol) (point))))
+
+(require 'key-chord)
+(key-chord-mode 1)
+(setq key-chord-two-keys-delay 0.5)
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-mode 1)
 
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
@@ -86,69 +81,61 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ; rainbow
-(add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
+; (add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
 (require 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+(rainbow-delimiters-mode)
 
 (show-paren-mode 1)
 (set-face-background 'show-paren-match "#444")
 
-; arduino
-(add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
-(setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-(autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
-
-; haskell
-; (autoload 'ghc-init "ghc" nil t)
-; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(eval-after-load "haskell-mode"
-  '(progn
-     (define-key haskell-mode-map (kbd "C-x C-d") nil)
-     (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-     (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
-     (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
-     (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
-     (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-     (define-key haskell-mode-map (kbd "C-c M-.") nil)
-     (define-key haskell-mode-map (kbd "C-c C-d") nil)))
-
-; (add-hook 'haskell-mode-hook 'turn-on-haskell-font-lock)
-; (let ((font "Hasklig"))
-;   (set-default-font font nil t)
-;   (set-fontset-font t '(8500 . 8800) font))
-; (setq haskell-font-lock-symbols t)
-
-; (require 'yasnippet)
-; (yas-global-mode 1)
-
 (require 'rinari)
 (global-rinari-mode)
 
-(projectile-global-mode)
-
-
-; hooks
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       #'rainbow-delimiters-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook          #'enable-paredit-mode)
+; (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-; (add-hook 'inferior-haskell-mode-hook 'turn-on-ghci-completion)
-; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
-(require 'ac-nrepl)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
+; ; (require 'yasnippet)
+; ; (yas-global-mode 1)
 
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
-(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
-; packages end /********************************************************************************/ 
+
+; (projectile-global-mode)
+
+; ; arduino
+; (add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
+; (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
+; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+
+; ; haskell
+; ; (autoload 'ghc-init "ghc" nil t)
+; ; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+; (eval-after-load "haskell-mode"
+;   '(progn
+;      (define-key haskell-mode-map (kbd "C-x C-d") nil)
+;      (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+;      (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+;      (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
+;      (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+;      (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+;      (define-key haskell-mode-map (kbd "C-c M-.") nil)
+;      (define-key haskell-mode-map (kbd "C-c C-d") nil)))
+
+; ; (add-hook 'haskell-mode-hook 'turn-on-haskell-font-lock)
+; ; (let ((font "Hasklig"))
+; ;   (set-default-font font nil t)
+; ;   (set-fontset-font t '(8500 . 8800) font))
+; ; (setq haskell-font-lock-symbols t)
+
+;; (require 'iy-go-to-char)
+;; (global-set-key (kbd "C-c f") 'iy-go-to-char)
+;; (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
+;; (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+;; (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+;; (global-set-key (kbd "C-c t") 'iy-go-up-to-char)
+;; (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
+
