@@ -20,7 +20,7 @@
     (bwc-dirtyblonde "#f4cf86")
     (bwc-taffy "#ff2c4b")
     (bwc-saltwatertaffy "#8cffba")
-    (bwc-tardis "#0a9dff")
+    (bwc-tardis "#ff0099")
     (bwc-orange "#ffa724")
     (bwc-lime "#aeee00")
     (bwc-dress "#ff9eb8")
