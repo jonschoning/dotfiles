@@ -31,13 +31,22 @@
 
 ; custom vars
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(haskell-process-show-debug-tips nil)
  '(tool-bar-mode nil))
 
+
 ; custom fonts
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
 
 ; packages begin /********************************************************************************/ 
@@ -68,8 +77,6 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
 
-(evil-set-initial-state 'haskell-interactive-mode 'emacs)
-
 ;; modes to map to different default states
 (dolist (mode-map '((ag-mode . emacs)
                     (cider-repl-mode . emacs)
@@ -80,7 +87,6 @@
                     (git-commit-mode . insert)
                     (git-rebase-mode . emacs)
                     (help-mode . emacs)
-                    (paradox-menu-mode . emacs)
                     (term-mode . emacs)))
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
 (global-set-key (kbd "C-z") 'evil-mode)
@@ -114,17 +120,20 @@
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'emacs-lisp-mode-hook       #'rainbow-delimiters-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-; (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+; (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 ; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(setq haskell-process-show-debug-tips nil)
 
 ; ; (require 'yasnippet)
 ; ; (yas-global-mode 1)
 
 ; (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
-; (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 ; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 ; (projectile-global-mode)
