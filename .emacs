@@ -68,6 +68,26 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
 
+(evil-set-initial-state 'haskell-interactive-mode 'emacs)
+
+;; modes to map to different default states
+(dolist (mode-map '((ag-mode . emacs)
+                    (cider-repl-mode . emacs)
+                    (comint-mode . emacs)
+                    (haskell-interactive-mode . emacs)
+                    (eshell-mode . emacs)
+                    (fundamental-mode . emacs)
+                    (git-commit-mode . insert)
+                    (git-rebase-mode . emacs)
+                    (help-mode . emacs)
+                    (paradox-menu-mode . emacs)
+                    (term-mode . emacs)))
+  (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
+(global-set-key (kbd "C-z") 'evil-mode)
+
+; ibuffer
+(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
+
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -103,6 +123,9 @@
 ; ; (require 'yasnippet)
 ; ; (yas-global-mode 1)
 
+; (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+; (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 ; (projectile-global-mode)
 
@@ -112,8 +135,8 @@
 ; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
 
 ; ; haskell
-; ; (autoload 'ghc-init "ghc" nil t)
-; ; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+; (autoload 'ghc-init "ghc" nil t)
+; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 ; (eval-after-load "haskell-mode"
 ;   '(progn
 ;      (define-key haskell-mode-map (kbd "C-x C-d") nil)
