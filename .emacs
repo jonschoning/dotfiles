@@ -91,6 +91,9 @@
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
 (global-set-key (kbd "C-z") 'evil-mode)
 
+(setq haskell-interactive-prompt ">>> ")
+(add-to-list 'company-backends 'company-ghc)
+
 ; ibuffer
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
 
