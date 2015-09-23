@@ -51,8 +51,10 @@
 
 ; packages begin /********************************************************************************/ 
 (require 'package)
+;; (add-to-list 'package-archives
+;;   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (require 'evil)    
@@ -92,7 +94,7 @@
 (global-set-key (kbd "C-z") 'evil-mode)
 
 (setq haskell-interactive-prompt ">>> ")
-(add-to-list 'company-backends 'company-ghc)
+; (add-to-list 'company-backends 'company-ghc)
 
 ; ibuffer
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
@@ -174,3 +176,15 @@
 ;; (global-set-key (kbd "C-c t") 'iy-go-up-to-char)
 ;; (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
 
+;; specify the path to the plugin directory
+(add-to-list 'load-path "~/.emacs.d/lisp/psc-ide-emacs/")
+
+;; specify path to the 'psc-ide' executable
+(customize-set-variable 'psc-ide-executable "/home/jon/.local/bin/psc-ide")
+
+(require 'psc-ide)
+
+ (add-hook 'purescript-mode-hook
+  (lambda ()
+    (psc-ide-mode)
+    (company-mode)))
