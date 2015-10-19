@@ -18,7 +18,8 @@
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (provide 'init-themes)
-(load-theme 'badwolf t)
+; (load-theme 'badwolf t)
+(load-theme 'leuven t)
 
 (defun font-size (n)
    "Prompt the user for font-size n, and apply to set-face-attribute :height"
@@ -35,9 +36,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(blink-cursor-mode nil)
  '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
  '(haskell-process-show-debug-tips nil)
+ '(psc-ide-executable "/home/jon/.local/bin/psc-ide")
  '(tool-bar-mode nil))
 
 
@@ -84,10 +93,17 @@
                     (cider-repl-mode . emacs)
                     (comint-mode . emacs)
                     (haskell-interactive-mode . emacs)
+                    (idris-repl-mode . emacs)
+                    (idris-info-mode . emacs)
+                    (idris-hole-list-mode . emacs)
+                    (idris-prover-script-mode . emacs)
+                    (idris-tree-info-mode . emacs)
                     (eshell-mode . emacs)
                     (fundamental-mode . emacs)
                     (git-commit-mode . insert)
                     (git-rebase-mode . emacs)
+                    (circe-server-mode . emacs)
+                    (circe-channel-mode . emacs)
                     (help-mode . emacs)
                     (term-mode . emacs)))
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
@@ -184,7 +200,20 @@
 
 (require 'psc-ide)
 
+ ;; (add-hook 'idris-mode-hook
+ ;;  (lambda ()
+ ;;    (load-theme 'leuven t)
+ ;;    ))
+
  (add-hook 'purescript-mode-hook
   (lambda ()
     (psc-ide-mode)
     (company-mode)))
+
+;; circe
+(setq circe-reduce-lurker-spam t)
+(setq circe-network-options
+      `(("Freenode"
+         :nick "_platz"
+         :host "irc.freenode.net"
+         :port (6667 . 6697))))
