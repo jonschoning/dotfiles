@@ -46,7 +46,6 @@
    (quote
     ("ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
  '(haskell-process-show-debug-tips nil)
- '(psc-ide-executable "/home/jon/.local/bin/psc-ide")
  '(tool-bar-mode nil))
 
 
@@ -56,7 +55,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal)))))
+ '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal))))
+ '(cursor ((t (:background "#ff0099")))))
 
 ; packages begin /********************************************************************************/ 
 (require 'package)
@@ -193,12 +193,12 @@
 ;; (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
 
 ;; specify the path to the plugin directory
-(add-to-list 'load-path "~/.emacs.d/lisp/psc-ide-emacs/")
+; (add-to-list 'load-path "~/.emacs.d/lisp/psc-ide-emacs/")
 
 ;; specify path to the 'psc-ide' executable
-(customize-set-variable 'psc-ide-executable "/home/jon/.local/bin/psc-ide")
+; (customize-set-variable 'psc-ide-executable "/home/jon/.local/bin/psc-ide")
 
-(require 'psc-ide)
+; (require 'psc-ide)
 
  ;; (add-hook 'idris-mode-hook
  ;;  (lambda ()
