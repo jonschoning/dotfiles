@@ -107,7 +107,7 @@ bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exit
+bindsym $mod+Shift+Escape exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -209,6 +209,8 @@ for_window [class="crx_miieomcelenidlleokajkghmifldohpo"] border normal
 for_window [class="crx_miieomcelenidlleokajkghmifldohpo"] floating enable
 for_window [title="English Country Tune"] border normal
 for_window [title="English Country Tune"] floating enable
+for_window [title="ImageMagick"] floating enable
+for_window [title="ImageMagick"] border normal
 
 for_window [window_role="popup"] no_focus
 
@@ -224,6 +226,8 @@ for_window [window_type="menu"] floating enable
 exec xrandr-on
 
 exec --no-startup-id xset m 6/3 0
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
 
 exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
 exec --no-startup-id sudo wmname LG3D

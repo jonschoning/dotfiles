@@ -10,10 +10,13 @@
 (global-set-key "\M- " 'hippie-expand)
 ; (setq debug-on-error t)
 
+
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+(setq browse-url-browser-function 'browse-url-generic
+    browse-url-generic-program "google-chrome")
 
 ; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -114,6 +117,10 @@
 
 ; ibuffer
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
+
+;
+(add-to-list 'load-path "~/.emacs.d/vendor/elm-mode")
+(require 'elm-mode)
 
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
