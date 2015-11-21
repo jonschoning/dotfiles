@@ -1,0 +1,1 @@
+pandoc -V geometry:margin=1in -o out.pdf -i $1

@@ -1,0 +1,2 @@
+#!/bin/sh
+cat $1 | hindent --style gibiansky | sponge $1

@@ -1,0 +1,2 @@
+cd ~/fs/video/
+youtube-dl -f 18 $1 && notify-send "DONE: $1"

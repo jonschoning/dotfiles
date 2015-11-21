@@ -1,2 +1,2 @@
-surf `readlink -e ~/.cabal/share/doc/index.html` 2> /dev/null &
+surf `readlink -e ~/.cabal/share/doc/x86_64-linux-ghc-7.10.1/frames.html` 2> /dev/null &
 

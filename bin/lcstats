@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Dependencies
+# gem install lolcat
+# brew install toilet
+# npm install -g json
+
+# Usage livecoding [ username ]
+
+function rnum {
+  echo $((RANDOM % $1))
+}
+COWS=("bong" "unipony" "sodomized" "head-in" "vader" "elephant" "tux")
+
+USER=$1
+URL=$(echo "livecoding.tv/$USER")
+STATS=$(echo "https://www.livecoding.tv/livestreams/$USER/stats.json")
+VIEWS=-1
+
+while :; do
+  json=$(curl -s $STATS)
+
+  liveviews=$(echo "$json" | json views_live)
+  if [[ $liveviews != $VIEWS ]]; then
+    clear
+    echo "Live Viewers: $liveviews" | toilet -f future | lolcat
+
+    COW=${COWS[$(rnum ${#COWS[@]})]}
+    echo "$1" | cowsay -f $COW | lolcat
+
+    VIEWS=$liveviews
+  fi
+  sleep 0.5
+done

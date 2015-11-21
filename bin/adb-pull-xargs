@@ -1,0 +1,1 @@
+adb shell ls "/sdcard/gps*.trace" | tr '\r' ' ' | xargs -n1 adb pull

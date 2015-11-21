@@ -1,2 +1,2 @@
-surf `readlink -e /opt/ghc/7.8.4/share/doc/ghc/html/index.html` 2> /dev/null &
+surf `readlink -e /opt/ghc/7.10.1/share/doc/ghc/html/index.html` 2> /dev/null &
 

@@ -1,0 +1,2 @@
+#!/bin/bash
+for d in *; do (cd "$d" && lolfuture "$d" && echo -e "\e[92m*************** $d BEGIN ***************\e[0m" && $1 ; echo -e "\e[32m*************** $d END ***************\n\n\e[0m"); done

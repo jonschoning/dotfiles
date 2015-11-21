@@ -1,0 +1,1 @@
+toilet -f future --metal "$1" | lolcat
