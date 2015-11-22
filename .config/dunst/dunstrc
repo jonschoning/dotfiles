@@ -1,5 +1,6 @@
 [global]
-    font = "Gotham Rounded 11"
+#   font = "Gotham Rounded 11"
+    font = "DistrictThin 12"
     allow_markup = yes
     format = "<b>%s %p</b>\n%b"
     sort = yes
@@ -9,7 +10,7 @@
     alignment = center
     show_age_threshold = 60
     sticky_history = yes
-    follow = mouse
+    follow = keyboard
     word_wrap = yes
     separator_height = 2
     padding = 2
@@ -28,13 +29,13 @@
 #     context = ctrl+shift+period
 
 [urgency_low]
-    background = "#1c1b1a"
-    foreground = "#97919b"
+    background = "#341B1F"
+    foreground = "#6EFEB9"
     timeout = 3
 
 [urgency_normal]
-    background = "#1c1b1a"
-    foreground = "#ffba8c"
+    background = "#341B1F"
+    foreground = "#6EFEB9"
     timeout = 8
 
 [urgency_critical]
