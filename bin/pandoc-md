@@ -1,0 +1,1 @@
+pandoc --from markdown_github -t html5 --mathjax --highlight-style pygments --standalone -c /home/jon/bin/GitHub2.css $1 -o $1.html
