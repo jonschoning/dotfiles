@@ -1,0 +1,1 @@
+surf https\:\/\/www.google.com\/\?gws_rd=ssl#q=$(echo $@ | /opt/libreoffice4.4/program/uri-encode)
