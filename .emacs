@@ -48,6 +48,7 @@
  '(custom-safe-themes
    (quote
     ("ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
+ '(haskell-interactive-popup-errors nil)
  '(haskell-process-show-debug-tips nil)
  '(tool-bar-mode nil))
 
@@ -58,15 +59,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :foundry "bitstream" :slant normal :weight normal :height 90 :width normal))))
+ '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 90 :width normal))))
  '(cursor ((t (:background "#ff0099")))))
 
 ; packages begin /********************************************************************************/ 
 (require 'package)
-;; (add-to-list 'package-archives
-;;   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (require 'evil)    
@@ -103,6 +104,7 @@
                     (idris-tree-info-mode . emacs)
                     (eshell-mode . emacs)
                     (fundamental-mode . emacs)
+                    (error-mode . emacs)
                     (git-commit-mode . insert)
                     (git-rebase-mode . emacs)
                     (circe-server-mode . emacs)
@@ -121,6 +123,13 @@
 ;
 (add-to-list 'load-path "~/.emacs.d/vendor/elm-mode")
 (require 'elm-mode)
+
+(add-to-list 'load-path "~/.emacs.d/vendor/rust-mode")
+(require 'rust-mode)
+
+;mu4e
+; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+; (require 'mu4e)
 
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
