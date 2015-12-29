@@ -7,10 +7,10 @@
 #focus_follows_mouse no
 
 #window                   border    bg        text
-client.focused            #242321   #242321   #FF0099 #b88853
+client.focused            #242321   #341B1F   #6EFEB9 #b88853
 client.focused_inactive   #000000   #000000   #d9cec3 #000000
 client.unfocused          #000000   #000000   #d9cec3 #000000
-client.urgent             #FF0099   #000000   #d9cec3 #FF0099
+client.urgent             #6EFEB9   #000000   #d9cec3 #6EFEB9
 
 #
 # i3 config file (v4)
@@ -22,20 +22,22 @@ set $alt Mod1
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font xft:Bitstream Vera Sans Mono 9
-# font xft:Gotham Rounded Bold 8
+# font xft:Gotham Rounded Bold 9
 font xft:CorporateS Bold 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+# bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+Q kill
+bindsym $mod+Escape kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb black -nf gray -sb black -sf white
+bindsym $mod+d exec dmenu_run -nf '#FFF' -sf '#FF0' -nb '#242321' -sb '#242321' -fn 'Sweden Sans-11'
 
 # change focus
 bindsym $mod+h focus left
@@ -139,7 +141,7 @@ bar {
         focused_workspace  #000000 #000000 #ffffff
         active_workspace   #000000 #000000 #ffffff
         inactive_workspace #000000 #000000 #888888
-        urgent_workspace   #000000 #000000 #FF0099
+        urgent_workspace   #000000 #000000 #6EFEB9
     }
 }
 
@@ -159,8 +161,8 @@ bindsym $mod+minus scratchpad show
 #
 for_window [class="XnView"] floating enable
 for_window [class="XnView"] border normal
-for_window [class="Vlc"] floating enable
-for_window [class="Vlc"] border normal
+for_window [class="vlc"] floating enable
+for_window [class="vlc"] border normal
 for_window [class="Remmina"] floating enable
 for_window [class="Remmina"] border normal
 for_window [class="Audacity"] floating enable
@@ -217,19 +219,28 @@ for_window [window_role="popup"] no_focus
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
+for_window [class="Xscorch"] floating enable
+for_window [class="Xscorch"] border normal
+for_window [class="feh"] floating enable
+for_window [class="feh"] border normal
 
 # for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
 # for_window [class="jetbrains-pycharm"] floating enable
 # for_window [class="jetbrains-pycharm"] border normal
 
 # autoruns
+exec --no-startup-id xrdb -merge ~/.Xresources
+
 exec xrandr-on
+exec compton
 
 exec --no-startup-id xset m 6/3 0
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 
-exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+# exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+exec --no-startup-id xautolock -time 90 -locker "xscreensaver-command -lock" -notify 60 -notifier "notify-send -t 60000 Activating screensaver..."
+
 exec --no-startup-id sudo wmname LG3D
 # exec --no-startup-id wicd-gtk -t
 exec --no-startup-id nm-applet
@@ -262,10 +273,14 @@ bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
 bindsym $mod+u border none
 
+
 # exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/jon/.i3/workspace-2.json'"
 # exec --no-startup-id thunderbird
-exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1a.json'"
+exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1b.json'"
 exec --no-startup-id google-chrome
-exec --no-startup-id xfce4-terminal
-exec --no-startup-id xfce4-terminal
-exec --no-startup-id xfce4-terminal
+exec --no-startup-id urxvt
+exec --no-startup-id urxvt
+exec --no-startup-id urxvt
+exec --no-startup-id xscreensaver -no-splash -no-capture-stderr -log ~/tmp/xscr.log 
+
+exec_always feh --bg-scale /home/jon/fs/pic/mountains-dark.jpg
