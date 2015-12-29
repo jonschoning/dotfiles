@@ -42,14 +42,9 @@ Bundle 'tpope/vim-leiningen'
 Bundle 'mxw/vim-jsx'
 Bundle 'mattn/emmet-vim'
 
-Bundle 'morhetz/gruvbox'
 Bundle 'endel/vim-github-colorscheme'
 
-" Bundle 'mikewest/vimroom'
-" Bundle 'bilalq/lite-dfm'
 Bundle 'PProvost/vim-ps1'
-" Bundle 'mattn/zencoding-vim'
-" Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Shougo/unite.vim'
@@ -59,34 +54,31 @@ Bundle 'Shougo/neocomplete.vim'
 Bundle 'eagletmt/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'lukerandall/haskellmode-vim'
-" Bundle 'travitch/hasksyn'
 Bundle 'Twinside/vim-haskellFold'
-" Bundle 'Twinside/vim-haskellConceal'
 " Bundle 'bitc/vim-hdevtools'
 
 " Bundle 'raichoo/haskell-vim'
 Bundle 'raichoo/purescript-vim'
 Bundle 'idris-hackers/idris-vim'
+Bundle 'derekelkins/agda-vim'
 
 Bundle 'lambdatoast/elm.vim'
 Bundle 'OmniSharp/omnisharp-vim'
 Bundle 'tpope/vim-dispatch'
-" Bundle 'vim-scripts/YankRing.vim'
+"
+Bundle 'moll/vim-node'
+Bundle 'jelera/vim-javascript-syntax'
 
 " vim.org
 Bundle 'Gist.vim'
 Bundle 'WebAPI.vim'
 Bundle 'matchit.zip'
-Bundle 'hexHighlight.vim'
-Bundle 'pig.vim'
 Bundle 'elubow/cql-vim'
 Bundle 'majutsushi/tagbar'
 " Bundle 'taglist.vim'
 
 Bundle 'vim-scripts/clipbrd'
 Bundle 'vim-scripts/genutils'
-Bundle 'vim-scripts/autoclose--alves'
-Bundle 'multvals.vim'
 Bundle 'csv.vim'
 
 Bundle 'joom/latex-unicoder.vim'
@@ -95,16 +87,12 @@ Bundle 'jcfaria/Vim-R-plugin'
 
 Bundle "fatih/vim-go"
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-" Bundle 'kongo2002/fsharp-vim'
 Bundle 'OrangeT/vim-csharp'
-Bundle 'ajh17/Spacegray.vim'
-Bundle 'junegunn/seoul256.vim'
-Bundle 'twerth/ir_black'
-Bundle 'zeis/vim-kolor'
-" Bundle 'fsharpbinding-vim'
-"
 
-Plugin 'amoffat/snake'
+Plugin 'mileszs/ack.vim'
+Plugin 'FStarLang/VimFStar'
+
+Plugin 'KabbAmine/zeavim.vim'
 
 filetype plugin indent on
 " Brief help
@@ -225,9 +213,9 @@ nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F9> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
 " nnoremap <silent> <F10> :TlistToggle<CR>
-nnoremap <silent> <F10> :TagbarToggle<CR>
+" nnoremap <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F11> :RainbowParenthesesToggle<CR>
-nnoremap <silent> <F12> g<C-]>
+" nnoremap <silent> <F12> g<C-]>
 
 " save with ctrl+s
 nnoremap <C-S> :w<CR>
@@ -374,64 +362,77 @@ nnoremap gb :OpenURL <cfile><CR>
 nnoremap gG :OpenURL http://www.duckduckgoog.com/?q=<cword><CR>
 
 if has("autocmd")
-  au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
-  au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
-  au VimEnter * set vb t_vb=         " Stop beeping and flashing!
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif     " Jump to last known location in file
+  augroup a1
+    au!
+    au BufEnter * silent! lcd %:p:h    " make working directory always the same as the file you are editing
+    au BufWritePost .vimrc so ~/.vimrc " automatically reload vimrc when it's saved
+    au VimEnter * set vb t_vb=         " Stop beeping and flashing!
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif     " Jump to last known location in file
 
-  " resize splits when the window is resized
-  au VimResized * :wincmd =
+    " resize splits when the window is resized
+    au VimResized * :wincmd =
 
-  au BufNewFile,BufRead *.md setlocal filetype=markdown
-  " au FileType markdown setlocal ai comments=n:> spell
+    au BufNewFile,BufRead *.md setlocal filetype=markdown
+    " au FileType markdown setlocal ai comments=n:> spell
 
-  au BufNewFile,BufRead *.cshtml setlocal filetype=html
-  au BufNewFile,BufRead *.build set ft=xml
-  au BufNewFile,BufRead *.targets set ft=xml
-  au BufNewFile,BufRead *.xaml set ft=xml
-  au BufNewFile,BufRead *.vssettings set ft=xml
-  au BufNewFile,BufRead *.json setlocal ft=javascript
+    au BufNewFile,BufRead *.cshtml setlocal filetype=html
+    au BufNewFile,BufRead *.build set ft=xml
+    au BufNewFile,BufRead *.targets set ft=xml
+    au BufNewFile,BufRead *.xaml set ft=xml
+    au BufNewFile,BufRead *.vssettings set ft=xml
+    au BufNewFile,BufRead *.json setlocal ft=javascript
 
-  au FileType cs set commentstring=//%s   " use single-line comments for .cs
-  au FileType cs set errorformat=\ %#%f(%l\\\,%c):\ error\ CS%n:\ %m " Quickfix mode: command line msbuild error format
+    au FileType cs set commentstring=//%s   " use single-line comments for .cs
+    au FileType cs set errorformat=\ %#%f(%l\\\,%c):\ error\ CS%n:\ %m " Quickfix mode: command line msbuild error format
 
-  " check for changes on disk and prompt you to reload | fires after you move the cursor and then let it sit still for updatetime | milliseconds. (Default 4 seconds.)
-  au CursorHold <buffer> checktime
-  au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
+    " check for changes on disk and prompt you to reload | fires after you move the cursor and then let it sit still for updatetime | milliseconds. (Default 4 seconds.)
+    au CursorHold <buffer> checktime
+    au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
 
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-  au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
-  au BufNewFile,BufRead *.cql set filetype=cql syntax=cql 
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+    au BufNewFile,BufRead *.pig set filetype=pig syntax=pig 
+    au BufNewFile,BufRead *.cql set filetype=cql syntax=cql 
 
-  " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
+    " au FileType haskell nnoremap <buffer> <F10> :TagbarToggle<CR>
 
-  " au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
-  " au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
-  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
+    " au FileType haskell nnoremap <buffer> <F12> :HdevtoolsType<CR>
+    " au FileType haskell nnoremap <buffer> <silent> <S-F12> :HdevtoolsClear<CR>
+    " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
 
-  au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
-  au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
-  " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
+    au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
+    au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
+    " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
 
-  au FileType haskell ia <buffer> un undefined
-  au FileType haskell set formatprg=xargs\ -0\ pointfree
-  au FileType haskell setlocal omnifunc=necoghc#omnifunc
-  au FileType haskell NeoCompleteEnable
-	au FileType haskell inoremap <expr><Tab>  neocomplete#start_manual_complete()
-  au FileType haskell compiler ghc
-  " au FileType haskell set formatprg=pointful
+    au FileType haskell ia <buffer> un undefined
+    au FileType haskell set formatprg=hfmt
+    au FileType haskell setlocal omnifunc=necoghc#omnifunc
+    au FileType haskell NeoCompleteEnable
+	  au FileType haskell inoremap <expr><Tab>  neocomplete#start_manual_complete()
+    au FileType haskell compiler ghc
+    au FileType haskell vnoremap <leader>pf :!pointfree --stdin<CR>
+    " vnoremap <leader>pl :!pointful<CR>
 
-  " Highlighting the current line & column in VIM
-  " au WinLeave * set nocursorline nocursorcolumn
-  " au WinEnter * set cursorline cursorcolumn
-  " set cursorline cursorcolumn
+    " au FileType haskell set formatprg=pointful
 
-  "use docx2txt.pl to allow VIm to view the text content of a .docx file directly.
-  autocmd BufReadPre *.docx set ro
-  autocmd BufReadPost *.docx %!docx2txt.pl 
+    " Highlighting the current line & column in VIM
+    " au WinLeave * set nocursorline nocursorcolumn
+    " au WinEnter * set cursorline cursorcolumn
+    " set cursorline cursorcolumn
+
+    "use docx2txt.pl to allow VIm to view the text content of a .docx file directly.
+    au BufReadPre *.docx set ro
+    au BufReadPost *.docx %!docx2txt.pl 
+
+
+    au BufReadPost *.css set iskeyword-=-
+    au BufReadPost *.ascx set iskeyword-=-
+    au BufReadPost *.cshtml set iskeyword-=-
+    au BufReadPost *.html set iskeyword-=-
+    au FileType html set formatprg=tidy
+  augroup end
 endif
 
 
@@ -481,42 +482,62 @@ map <silent> <Leader>E :Errors<CR>
 " map <Leader>S :SyntasticToggleMode<CR>
 " let g:syntastic_haskell_checkers = ["ghc_mod","hlint"]
 let g:syntastic_haskell_checkers = ["hlint"]
-let g:haddock_browser="surf"
-nnoremap <leader>pf :set formatprg=xargs\ -0\ pointfree<CR>
-nnoremap <leader>pl :set formatprg=xargs\ -0\ pointful<CR>
 
-if executable('lushtags')
-    let g:tagbar_type_haskell = {
-        \ 'ctagsbin' : 'lushtags',
-        \ 'ctagsargs' : '--ignore-parse-error --',
-        \ 'kinds' : [
-            \ 'm:module:0',
-            \ 'e:exports:1',
-            \ 'i:imports:1',
-            \ 't:declarations:0',
-            \ 'd:declarations:1',
-            \ 'n:declarations:1',
-            \ 'f:functions:0',
-            \ 'c:constructors:0'
-        \ ],
-        \ 'sro' : '.',
-        \ 'kind2scope' : {
-            \ 'd' : 'data',
-            \ 'n' : 'newtype',
-            \ 'c' : 'constructor',
-            \ 't' : 'type'
-        \ },
-        \ 'scope2kind' : {
-            \ 'data' : 'd',
-            \ 'newtype' : 'n',
-            \ 'constructor' : 'c',
-            \ 'type' : 't'
-        \ }
-    \ }
-endif
+let g:haddock_browser="surf"
+let g:haddock_docdir="/opt/ghc/7.10.3/share/doc/ghc/html"
+
+" if executable('lushtags')
+"     let g:tagbar_type_haskell = {
+"         \ 'ctagsbin' : 'lushtags',
+"         \ 'ctagsargs' : '--ignore-parse-error --',
+"         \ 'kinds' : [
+"             \ 'm:module:0',
+"             \ 'e:exports:1',
+"             \ 'i:imports:1',
+"             \ 't:declarations:0',
+"             \ 'd:declarations:1',
+"             \ 'n:declarations:1',
+"             \ 'f:functions:0',
+"             \ 'c:constructors:0'
+"         \ ],
+"         \ 'sro' : '.',
+"         \ 'kind2scope' : {
+"             \ 'd' : 'data',
+"             \ 'n' : 'newtype',
+"             \ 'c' : 'constructor',
+"             \ 't' : 'type'
+"         \ },
+"         \ 'scope2kind' : {
+"             \ 'data' : 'd',
+"             \ 'newtype' : 'n',
+"             \ 'constructor' : 'c',
+"             \ 'type' : 't'
+"         \ }
+"     \ }
+" endif
 
 " let g:ghcmod_ghc_options = ['-fdefer-type-errors']
 let g:unicoder_cancel_normal = 1
 let g:unicoder_cancel_insert = 1
 let g:unicoder_cancel_visual = 1
 nnoremap <leader>x :call unicoder#start(0)<CR>
+
+
+" Compatible with ranger 1.4.2 through 1.6.*
+"
+" Add ranger as a file chooser in vim
+"
+" If you add this function and the key binding to the .vimrc, ranger can be
+" started using the keybinding ",r".  Once you select a file by pressing
+" enter, ranger will quit again and vim will open the selected file.
+
+fun! RangerChooser()
+    exec "silent !ranger --choosefile=/tmp/chosenfile " . expand("%:p:h")
+    if filereadable('/tmp/chosenfile')
+        exec 'edit ' . system('cat /tmp/chosenfile')
+        call system('rm /tmp/chosenfile')
+    endif
+    redraw!
+endfun
+map ,r :call RangerChooser()<CR>
+
