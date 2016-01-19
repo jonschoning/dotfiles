@@ -5,4 +5,4 @@
      library(lattice)
      library(reshape2)
  }
-options(repos=structure(c(CRAN="http://ftp.iitm.ac.in/cran/")))
+options(repos=structure(c(CRAN="http://ftp.ussg.iu.edu/CRAN/")))
