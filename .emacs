@@ -4,12 +4,25 @@
  (put 'downcase-region 'disabled nil)
 (scroll-bar-mode 0)
 (menu-bar-mode 0)
+(tool-bar-mode 0)
 (set-cursor-color "#0a9dff")
 (setq default-directory "~/")
 (set-default 'truncate-lines t)
 (global-set-key "\M- " 'hippie-expand)
+(global-set-key "\C-cd" 'zeal-at-point)
 ; (setq debug-on-error t)
 
+;; Always ALWAYS use UTF-8
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(load-library "iso-transl")
+
+;; Automatically save buffers before compiling
+(setq compilation-ask-about-save nil)
+
+;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -23,15 +36,6 @@
 (provide 'init-themes)
 ; (load-theme 'badwolf t)
 (load-theme 'leuven t)
-
-(defun font-size (n)
-   "Prompt the user for font-size n, and apply to set-face-attribute :height"
-  (interactive "nfont-size: ")
-  (set-face-attribute 'default nil :height (* 10 n)))
-
-;;; ido
-(require 'ido)
-(ido-mode t)
 
 ; custom vars
 (custom-set-variables
@@ -47,7 +51,7 @@
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
+    ("01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
  '(haskell-interactive-popup-errors nil)
  '(haskell-process-show-debug-tips nil)
  '(tool-bar-mode nil))
@@ -59,8 +63,23 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 90 :width normal))))
+ '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 101 :width normal))))
  '(cursor ((t (:background "#ff0099")))))
+
+(defun font-size (n)
+   "Prompt the user for font-size n, and apply to set-face-attribute :height"
+  (interactive "nfont-size: ")
+  (set-face-attribute 'default nil :height (* 10 n)))
+
+(defun increase-font-size ()
+  (interactive)
+  (set-face-attribute 'default nil :height (+ 10 (face-attribute 'default :height))))
+(define-key global-map [?\C-x ?\C-=] 'increase-font-size)
+
+(defun decrease-font-size ()
+  (interactive)
+  (set-face-attribute 'default nil :height (+ (- 10) (face-attribute 'default :height))))
+(define-key global-map [?\C-x ?\C--] 'decrease-font-size)
 
 ; packages begin /********************************************************************************/ 
 (require 'package)
@@ -78,6 +97,27 @@
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 (evil-commentary-mode)
+(require 'magit)
+(require 'evil-magit)
+(load "ess-site")
+(ess-toggle-underscore nil)
+(pdf-tools-install)
+
+(defun package-require (pkg)
+  "Install a package only if it's not already installed."
+  (when (not (package-installed-p pkg))
+    (package-install pkg)))
+
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'sgml-mode-hook 'auto-complete-mode)
+(add-hook 'html-mode-hook 'emmet-mode)
+(add-hook 'html-mode-hook 'auto-complete-mode)
+(add-hook 'html-mode-hook 'linum-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+(add-hook 'css-mode-hook  'auto-complete-mode)
+(add-hook 'css-mode-hook  'ac-emmet-css-setup)
+(add-hook 'css-mode-hook  'linum-mode)
 
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
@@ -110,6 +150,7 @@
                     (circe-server-mode . emacs)
                     (circe-channel-mode . emacs)
                     (help-mode . emacs)
+                    (pdf-view-mode . emacs)
                     (term-mode . emacs)))
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
 (global-set-key (kbd "C-z") 'evil-mode)
@@ -120,16 +161,35 @@
 ; ibuffer
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
 
-;
-(add-to-list 'load-path "~/.emacs.d/vendor/elm-mode")
-(require 'elm-mode)
+(setq dotfiles-dir (file-name-directory
+                    (or (buffer-file-name) load-file-name)))
+(add-to-list 'load-path (concat dotfiles-dir ".emacs.d/init"))
 
-(add-to-list 'load-path "~/.emacs.d/vendor/rust-mode")
+;; Add every subdirectory of ~/.emacs.d/vendor to the load path
+(dolist
+    (project (directory-files (concat dotfiles-dir ".emacs.d/vendor") t "\\w+"))
+  (when (file-directory-p project)
+    (add-to-list 'load-path project)))
+(require 'elm-mode)
 (require 'rust-mode)
 
-;mu4e
-; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-; (require 'mu4e)
+(setq js-pkg-full
+    '(js-terminal
+      js-dired
+      js-nav
+      js-ido
+      js-git
+      js-mail
+       ))
+;; Now load other things
+(dolist (file js-pkg-full)
+  (require file))
+
+;; Macro for X specific code
+(defmacro Xlaunch (&rest x)
+  (list 'if (eq window-system 'x) (cons 'progn x)))
+(Xlaunch (require 'js-x11))
+
 
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
@@ -167,18 +227,23 @@
 (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 (setq haskell-process-show-debug-tips nil)
 
-; ; (require 'yasnippet)
-; ; (yas-global-mode 1)
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(add-hook 'haskell-mode-hook (lambda () 
+   (local-set-key (kbd "<f12>") 'ghc-show-type)
+   (local-set-key (kbd "<S-f12>") 'ghc-show-info)
+   (local-set-key (kbd "<tab>") 'ghc-complete)
+   (setq zeal-at-point-docset "haskell")
+   ))
 
-; (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
-; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-
-; (projectile-global-mode)
-
-; ; arduino
-; (add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
-; (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
+;; circe
+(setq circe-reduce-lurker-spam t)
+(setq circe-network-options
+      `(("Freenode"
+         :nick "_platz"
+         :host "irc.freenode.net"
+         :port (6667 . 6697))))
 
 ; ; haskell
 ; (autoload 'ghc-init "ghc" nil t)
@@ -210,26 +275,25 @@
 
 ;; specify the path to the plugin directory
 ; (add-to-list 'load-path "~/.emacs.d/lisp/psc-ide-emacs/")
-
 ;; specify path to the 'psc-ide' executable
 ; (customize-set-variable 'psc-ide-executable "/home/jon/.local/bin/psc-ide")
-
 ; (require 'psc-ide)
+; (add-hook 'purescript-mode-hook
+;  (lambda ()
+;    (psc-ide-mode)
+;    (company-mode)))
 
- ;; (add-hook 'idris-mode-hook
- ;;  (lambda ()
- ;;    (load-theme 'leuven t)
- ;;    ))
 
- (add-hook 'purescript-mode-hook
-  (lambda ()
-    (psc-ide-mode)
-    (company-mode)))
 
-;; circe
-(setq circe-reduce-lurker-spam t)
-(setq circe-network-options
-      `(("Freenode"
-         :nick "_platz"
-         :host "irc.freenode.net"
-         :port (6667 . 6697))))
+; ; (require 'yasnippet)
+; ; (yas-global-mode 1)
+
+; (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
+; (projectile-global-mode)
+
+; ; arduino
+; (add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
+; (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
+; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
