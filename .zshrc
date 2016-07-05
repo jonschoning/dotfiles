@@ -37,25 +37,42 @@ DISABLE_AUTO_TITLE="false"
 source $ZSH/oh-my-zsh.sh
 #source /usr/local/share/chruby/chruby.sh
 
-GHC_VERSION="7.10.1"
-# GHC_VERSION="7.8.4"
+GHC_VERSION="8.0.1"
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 # PATH=$HOME/.cabal/bin:$PATH # Add Cabal to PATH
-PATH=$PATH:~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/$GHC_VERSION/bin:/opt/happy/1.19.4/bin:/opt/alex/3.1.3/bin
+PATH=$HOME/.local/bin:$PATH: # STACKAGE BIN DIR
+PATH=$PATH:~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/$GHC_VERSION/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.4/bin
 PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
 PATH=$HOME/npm/bin:$PATH # Add npm to path
+PATH=:$PATH # Add npm to path
 PATH=$PATH:/usr/local/heroku/bin  ### Added by the Heroku Toolbelt
 PATH=$PATH:/opt/libreoffice4.4/program
 PATH=$PATH:/usr/local/go/bin
-PATH=$PATH:~/fs/hs/elm/.cabal-sandbox/bin/
+PATH=$PATH:~/opt/fstar/bin/
+PATH=$PATH:~/opt/rebar3/
 
-export SCALA_HOME=/home/jon/opt/scala-2.11.5
+PATH=$PATH:/home/jon/opt/elm/Elm-Platform/0.17/.cabal-sandbox/bin
+export ELM_HOME=/home/jon/opt/elm/Elm-Platform/0.17/.cabal-sandbox/share
+                  
+export SCALA_HOME=/home/jon/opt/scala-2.11.7
 PATH=$PATH:$SCALA_HOME/bin
 
 export GOPATH=/home/jon/opt/go
 PATH=$PATH:$GOPATH/bin
+
+source /home/jon/.nvm/nvm.sh
+# source /home/jon/fs/git/torch/install/bin/torch-activate
+#
+
+STOCKFIGHTER_API_KEY=$(</home/jon/.stockfighter)
+export STOCKFIGHTER_API_KEY=$STOCKFIGHTER_API_KEY
+
+export XDG_CONFIG_HOME=/home/jon/.config
+# Cuda 7.5
+PATH=$PATH:/usr/local/cuda-7.5/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.5/lib64
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -66,15 +83,16 @@ if [ "$COLORTERM" = "xfce4-terminal" ]; then
     export TERM=xterm-256color
 fi
 
-EDITOR='vi'
+EDITOR='nvim'
 export EDITOR
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 export _JAVA_AWT_WM_NONREPARENTING=1
 # export AWT_TOOLKIT=MToolkit
 
 alias xclip="xclip -selection c"
 alias h="history"
-alias v="vi"
+alias v="nvim"
+alias nv="nvim"
 alias rdesktop-ex="rdesktop ADDRESS -d DOMAIN -u USER -p - "
 alias 7zap='7za a -tzip -p -mem=AES256'
 alias 7zae='7za e'
@@ -85,17 +103,21 @@ alias paket="mono ~/opt/paket/paket.exe"
 # networking
 alias nslt="netstat -tlnp"
 alias lsoft="lsof -nPi tcp"
-alias iptL="sudo iptables -L -v -n"
+alias iptL="sudo iptables -nvL"
 alias iptF="sudo iptables -F"
 alias iptNL="sudo iptables -t nat -L -v -n"
 alias iptNF="sudo iptables -t nat -F"
 
-alias lock="i3lock -c 000000"
+# alias lock="i3lock -c 000000"
+alias lock="gnome-screensaver-command -l"
+alias xlock="xscreensaver-command -lock"
+
 alias tmux="TERM=screen-256color-bce tmux"
-alias -g gp='| grep -ie'
-alias -g gpv='| grep -iev'
+alias -g gp='|& grep -ie'
+alias -g gpv='|& grep -iev'
 
 alias cl='git clone'
+alias cl1='git clone --depth=1'
 alias gaa='git add -A'
 alias gb='git b'
 alias gcb='git checkout -b'
@@ -107,6 +129,7 @@ alias gs='git status -s'
 
 alias gn='git-number --column -s'
 alias ga='git-number add'
+alias clojure='java -cp ~/opt/clojure-1.8.0/clojure-1.8.0.jar clojure.main'
 
 grl () {git rev-list --ancestry-path --first-parent $@..HEAD}
 
@@ -119,15 +142,20 @@ alias -s html=surf
 alias ch='google-chrome'
 alias tl='t stream timeline'
 alias ev='evince'
-alias sa='sudo apt-get'
+alias sa='sudo apt-get -o Acquire::ForceIPv4=true '
 alias gi='ghci'
 alias rg='runghc'
+alias ccat='pygmentize -O bg=dark'
+alias gimp='gimp -c'
+alias R='R -q --no-save'
+alias git=hub
 
 export BROWSER=google-chrome
 export SSLKEYLOGFILE=~/.sslkey.log
 
 g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
 xnview () { command setsid xnview $@ 2>&1 >/dev/null }
+dark () { GTK_THEME=Adwaita:dark $@ }
 # sumatrapdf () { command wine /opt/sumatra-pdf/SumatraPDF.exe $@  2> /dev/null & }
 # psg() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
 # fname() { find . -iname "*$@*"; }
@@ -173,11 +201,15 @@ function _marks {
 }
 
 function s {
-    (surf `readlink -e $1` 2> /dev/null &)
+    (setsid surf `readlink -e $1` 1>/dev/null 2>/dev/null)
 }
 function si {
-    (surf `readlink -e index.html` 2> /dev/null &)
+    (setsid surf `readlink -e index.html` 1>/dev/null 2>/dev/null)
 }
+# function aria2c0 {(
+#     aria2c --seed-time=0 --max-overall-upload-limit=10K "$1";
+#     notify-send -a aria2c "aria2c: Completed" "$1"
+# )}
 
 # function cabal_sandbox_info() {
 #     cabal_files=(*.cabal(N))
@@ -210,6 +242,10 @@ function start_agent {
     . "${SSH_ENV}" > /dev/null
     # /usr/bin/ssh-add;
 }
+function  eg(){
+    MAN_KEEP_FORMATTING=1 man "$@" 2>/dev/null \
+        | sed --quiet --expression='/^E\(\x08.\)X\(\x08.\)\?A\(\x08.\)\?M\(\x08.\)\?P\(\x08.\)\?L\(\x08.\)\?E/{:a;p;n;/^[^ ]/q;ba}'
+}
 # Source SSH settings, if applicable
 if [ -f "${SSH_ENV}" ]; then
     . "${SSH_ENV}" > /dev/null
@@ -218,3 +254,14 @@ if [ -f "${SSH_ENV}" ]; then
         start_agent;
     }
 else start_agent; fi
+
+encodeURIComponent() {
+  node -p "encodeURIComponent('${1//\'/\\\'}')"
+}
+
+# OPAM configuration
+. /home/jon/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+. <(azure --completion)

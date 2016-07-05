@@ -65,6 +65,7 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
@@ -135,6 +136,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     status_command i3status
+    # output LVDS-0
     colors {
         background #000000
         statusline #ffffff
@@ -146,6 +148,8 @@ bar {
 }
 
 # custom
+workspace_layout tabbed
+
 
 # Scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -193,6 +197,8 @@ for_window [class="VirtualBox"] floating enable
 for_window [class="VirtualBox"] border normal
 for_window [class="R_x11"] floating enable
 for_window [class="R_x11"] border normal
+for_window [class="processing-app-Base"] floating enable
+for_window [class="processing-app-Base"] border normal
 for_window [class="obs"] floating enable
 for_window [class="obs"] border normal
 
@@ -204,6 +210,8 @@ for_window [title="Hangouts"] border normal
 
 for_window [class="<interactive>"] floating enable
 for_window [class="<interactive>"] border normal
+for_window [class="com-install4j-runtime-launcher-UnixLauncher"] floating enable
+for_window [class="com-install4j-runtime-launcher-UnixLauncher"] border normal
 for_window [class="Wicd-client.py"] floating enable
 for_window [class="Wicd-client.py"] border 1pixel
 for_window [class="jclient-LoginFrame"] floating enable
@@ -223,6 +231,10 @@ for_window [class="Xscorch"] floating enable
 for_window [class="Xscorch"] border normal
 for_window [class="feh"] floating enable
 for_window [class="feh"] border normal
+for_window [class="Simplescreenrecorder"] floating enable
+for_window [class="Simplescreenrecorder"] border normal
+for_window [class="org-igoweb-cgoban-CGoban"] floating enable
+for_window [class="org-igoweb-cgoban-CGoban"] border normal
 
 # for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
 # for_window [class="jetbrains-pycharm"] floating enable
@@ -232,14 +244,14 @@ for_window [class="feh"] border normal
 exec --no-startup-id xrdb -merge ~/.Xresources
 
 exec xrandr-on
-exec compton
+# exec compton
 
 exec --no-startup-id xset m 6/3 0
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 
 # exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
-exec --no-startup-id xautolock -time 90 -locker "xscreensaver-command -lock" -notify 60 -notifier "notify-send -t 60000 Activating screensaver..."
+# exec --no-startup-id xautolock -time 90 -locker "xscreensaver-command -lock" -notify 60 -notifier "notify-send -t 60000 Activating screensaver..."
 
 exec --no-startup-id sudo wmname LG3D
 # exec --no-startup-id wicd-gtk -t
@@ -276,11 +288,13 @@ bindsym $mod+u border none
 
 # exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/jon/.i3/workspace-2.json'"
 # exec --no-startup-id thunderbird
-exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1b.json'"
-exec --no-startup-id google-chrome
-exec --no-startup-id urxvt
-exec --no-startup-id urxvt
-exec --no-startup-id urxvt
-exec --no-startup-id xscreensaver -no-splash -no-capture-stderr -log ~/tmp/xscr.log 
+# exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1b.json'"
+# exec --no-startup-id google-chrome
+# exec --no-startup-id urxvt
+# exec --no-startup-id urxvt
+# exec --no-startup-id urxvt
+# exec --no-startup-id xscreensaver -no-splash -no-capture-stderr -log ~/tmp/xscr.log 
 
 exec_always feh --bg-scale /home/jon/fs/pic/mountains-dark.jpg
+# exec --no-startup-id bg-klein
+# exec emacs --daemon --with-x-toolkit=lucid

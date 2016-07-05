@@ -1,9 +1,9 @@
-XTerm*background:                      black
-XTerm*foreground:                      white
-XTerm*cursorColor:                     white
-XTerm*scrollBar:                       false
-XTerm*termName:                        xterm-256color
-XTerm*faceName:                        Bitstream Vera Sans Mono:pixelsize=11
+xterm*background:                      black
+xterm*foreground:                      white
+xterm*cursorColor:                     white
+xterm*scrollBar:                       false
+xterm*termName:                        xterm-256color
+xterm*faceName:                        Bitstream Vera Sans Mono:pixelsize=11
 xterm*metaSendsEscape: true
 
 urxvt*background:                      black

@@ -1,25 +1,71 @@
 call plug#begin('~/.config/nvim/plugged')
+
+" AutoComplete
+Plug 'Shougo/deoplete.nvim'
+
+" Text
+Plug 'godlygeek/tabular'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/camelcasemotion'
+
+
+" General
+Plug 'benekastah/neomake'
+autocmd! BufWritePost * Neomake
+Plug 'kassio/neoterm'
+
+" Git
+Plug 'gist.vim'
+Plug 'webapi.vim'
+
 " Pandoc / Markdown
 Plug 'vim-pandoc/vim-pandoc', { 'for': [ 'pandoc', 'markdown' ] }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': [ 'pandoc', 'markdown' ] }
 
-" General
-Plug 'benekastah/neomake'
-Plug 'Raimondi/delimitMate'
-Plug 'Shougo/deoplete.nvim'
-Plug 'kien/rainbow_parentheses.vim'
+" HTML
+Plug 'mattn/emmet-vim'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': [ 'haskell', 'cabal' ] }
+
+" Purescript
+Plug 'parsonsmatt/purescript-vim'
+Plug 'FrigoEU/psc-ide-vim'
+
+" Idris
+Plug 'idris-hackers/idris-vim'
+
+" Plug 'neovimhaskell/nvim-hs'
 Plug 'lukerandall/haskellmode-vim', { 'for': [ 'haskell' ] }  
 Plug 'eagletmt/neco-ghc', { 'for': [ 'haskell' ] } 
-Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
-Plug 'shougo/vimproc.vim'
+" Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
+Plug 'Shougo/vimproc.vim', {'do': 'make -f  make_unix.mak'}
+
+" Pandoc
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Lisp
 Plug 'vim-scripts/paredit.vim', { 'for': [ 'scheme', 'lisp', 'commonlisp' ] }
+
+" R
+Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/nvimcom'
+
+
+" Zeal
+Plug 'KabbAmine/zeavim.vim'
+
 call plug#end()
 
+" function! s:RequireHaskellHost(name)
+"   return rpcstart("/home/jon/.config/nvim/plugged/nvim-hs/nvim-hs-devel.sh", ['-l','/tmp/nvim-log.txt','-v','DEBUG',a:name.name])
+" endfunction
+
+" call remote#host#Register('haskell', "*.l\?hs", function('s:RequireHaskellHost'))
+" let hc=remote#host#Require('haskell')
 
 syntax on filetype plugin indent on
 
@@ -75,7 +121,7 @@ set ssop-=options    " do not store global and local values in a session
 set synmaxcol=500    " Syntax coloring lines that are too long just slows down the world
 set virtualedit=all  " Allow the cursor to go in to invalid places
 set wildmenu         " Make the command-line completion better
-set wildmode=list:longest " Make the command-line completion show a list
+set wildmode=list:longest,full " Make the command-line completion show a list
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=_build                           " Sphinx build dir
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -127,8 +173,8 @@ nnoremap <silent> <C-F2> :setlocal spell spelllang=en_us<CR>
 nnoremap <silent> <C-S-F2> :setlocal nospell<CR>
 nnoremap <silent> <F4> :bd<CR>
 nnoremap <silent> <S-F4> :bd!<CR>
-nnoremap <silent> <F5> :NERDTreeToggle<CR>
-nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
+" nnoremap <silent> <F5> :NERDTreeToggle<CR>
+" nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 nnoremap <silent> <F9> :cwin <bar> cn<CR>
 nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
 " nnoremap <silent> <F10> :TlistToggle<CR>
@@ -243,6 +289,8 @@ nnoremap <leader>; :
 " soft wrapping text
 nmap <silent> <leader>ww :set invwrap<CR>:set wrap?<CR>
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+
 
 if has("statusline") && !&cp
     set laststatus=2
@@ -266,7 +314,7 @@ if has("autocmd")
     au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
 
     au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
-    au FileType haskell nnoremap <buffer> <silent> <S-F12> :GhcModTypeClear<CR>
+    au FileType haskell nnoremap <buffer> <S-F12> :GhcModTypeClear<CR>
     " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
 
     au FileType haskell ia <buffer> un undefined
@@ -277,16 +325,33 @@ if has("autocmd")
     " au FileType haskell compiler ghc
     au FileType haskell vnoremap <leader>pf :!pointfree --stdin<CR>
     " vnoremap <leader>pl :!pointful<CR>
-
-
+    au FileType haskell setlocal completeopt-=menuone
+    au BufEnter *.hs compiler ghc 
   augroup end
 endif
 
 let g:deoplete#enable_at_startup=1
 
 " Haskell
-let g:haddock_browser="surf"
+let g:haddock_browser="google-chrome"
 let g:haddock_docdir="/opt/ghc/7.10.3/share/doc/ghc/html"
-let g:haskell_tabular = 1
+let g:haskell_tabular = 0
+" let g:R_pdfviewer = "mupdf"
 " let g:ghcmod_ghc_options = ['-fdefer-type-errors']
+
+" Neoterm
+let g:neoterm_position = 'vertical'
+let g:neoterm_automap_keys = '<space>rr'
+
+nnoremap <silent> <leader>rf :TREPLSendFile<cr>
+nnoremap <silent> <leader>rs :TREPLSend<cr>
+vnoremap <silent> <leader>rs :TREPLSend<cr>
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> <leader>rh :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> <leader>rl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> <leader>rc :call neoterm#kill()<cr>
 
