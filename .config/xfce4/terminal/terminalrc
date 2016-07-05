@@ -1,0 +1,26 @@
+[Configuration]
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBordersDefault=FALSE
+MiscCursorBlinks=FALSE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscDefaultGeometry=80x24
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=FALSE
+MiscToolbarDefault=FALSE
+MiscConfirmClose=TRUE
+MiscCycleTabs=TRUE
+MiscTabCloseButtons=TRUE
+MiscTabCloseMiddleClick=TRUE
+MiscTabPosition=GTK_POS_TOP
+MiscHighlightUrls=TRUE
+MiscScrollAlternateScreen=TRUE
+FontName=Bitstream Vera Sans Mono 10
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+TitleMode=TERMINAL_TITLE_REPLACE
+ColorCursor=#ffff00009999
+BackgroundDarkness=0.620000
+BackgroundImageFile=/home/jon/fs/pic/mountains.jpg
+BackgroundMode=TERMINAL_BACKGROUND_IMAGE
+
