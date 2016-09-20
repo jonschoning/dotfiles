@@ -32,12 +32,13 @@ DISABLE_AUTO_TITLE="false"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# plugins=(cabal)
+plugins=(colorize colored-man-pages rsync)
 
 source $ZSH/oh-my-zsh.sh
 #source /usr/local/share/chruby/chruby.sh
 
 GHC_VERSION="8.0.1"
+GHCBIN7="/home/jon/.stack/programs/x86_64-linux/ghc-7.10.3/bin"
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
@@ -48,14 +49,17 @@ PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # 
 PATH=$HOME/npm/bin:$PATH # Add npm to path
 PATH=:$PATH # Add npm to path
 PATH=$PATH:/usr/local/heroku/bin  ### Added by the Heroku Toolbelt
-PATH=$PATH:/opt/libreoffice4.4/program
+PATH=$PATH:/opt/libreoffice5.1/program
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:~/opt/fstar/bin/
 PATH=$PATH:~/opt/rebar3/
 
-PATH=$PATH:/home/jon/opt/elm/Elm-Platform/0.17/.cabal-sandbox/bin
-export ELM_HOME=/home/jon/opt/elm/Elm-Platform/0.17/.cabal-sandbox/share
+PATH=$PATH:/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/bin
+export ELM_HOME=/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/share
                   
+PATH=$PATH:/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/bin
+export ELM_HOME=/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/share
+
 export SCALA_HOME=/home/jon/opt/scala-2.11.7
 PATH=$PATH:$SCALA_HOME/bin
 
@@ -143,12 +147,13 @@ alias ch='google-chrome'
 alias tl='t stream timeline'
 alias ev='evince'
 alias sa='sudo apt-get -o Acquire::ForceIPv4=true '
-alias gi='ghci'
-alias rg='runghc'
 alias ccat='pygmentize -O bg=dark'
 alias gimp='gimp -c'
 alias R='R -q --no-save'
 alias git=hub
+alias ixio="curl -F 'f:1=<-' ix.io"
+
+alias ips="ip -o a | cut -d ' ' -f2,7"
 
 export BROWSER=google-chrome
 export SSLKEYLOGFILE=~/.sslkey.log
