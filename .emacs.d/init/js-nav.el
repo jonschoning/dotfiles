@@ -63,7 +63,8 @@
   (interactive)
   (find-file (concat dotfiles-dir ".emacs"))
   )
-(global-set-key (kbd "C-x C-e") 'open-dotemacs-file)
+
+;; (global-set-key (kbd "C-x C-e") 'open-dotemacs-file)
 
 ;; Kill buffer in other window
 (global-set-key (kbd "C-x p")

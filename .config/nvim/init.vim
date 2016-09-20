@@ -14,7 +14,7 @@ Plug 'vim-scripts/camelcasemotion'
 " General
 Plug 'benekastah/neomake'
 autocmd! BufWritePost * Neomake
-Plug 'kassio/neoterm'
+" Plug 'kassio/neoterm'
 
 " Git
 Plug 'gist.vim'
@@ -29,10 +29,14 @@ Plug 'mattn/emmet-vim'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': [ 'haskell', 'cabal' ] }
+" Plug 'parsonsmatt/intero-neovim'
 
 " Purescript
 Plug 'parsonsmatt/purescript-vim'
 Plug 'FrigoEU/psc-ide-vim'
+
+" Typescript
+Plug 'leafgarland/typescript-vim'
 
 " Idris
 Plug 'idris-hackers/idris-vim'
@@ -40,7 +44,7 @@ Plug 'idris-hackers/idris-vim'
 " Plug 'neovimhaskell/nvim-hs'
 Plug 'lukerandall/haskellmode-vim', { 'for': [ 'haskell' ] }  
 Plug 'eagletmt/neco-ghc', { 'for': [ 'haskell' ] } 
-" Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
+Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
 Plug 'Shougo/vimproc.vim', {'do': 'make -f  make_unix.mak'}
 
 " Pandoc
@@ -334,7 +338,7 @@ let g:deoplete#enable_at_startup=1
 
 " Haskell
 let g:haddock_browser="google-chrome"
-let g:haddock_docdir="/opt/ghc/7.10.3/share/doc/ghc/html"
+let g:haddock_docdir="/opt/ghc/8.0.1/share/doc/ghc-8.0.1/html"
 let g:haskell_tabular = 0
 " let g:R_pdfviewer = "mupdf"
 " let g:ghcmod_ghc_options = ['-fdefer-type-errors']
@@ -342,6 +346,8 @@ let g:haskell_tabular = 0
 " Neoterm
 let g:neoterm_position = 'vertical'
 let g:neoterm_automap_keys = '<space>rr'
+" let g:haskellmode_completion_ghc=0
+" let g:haskellmode_completion_haddock=0
 
 nnoremap <silent> <leader>rf :TREPLSendFile<cr>
 nnoremap <silent> <leader>rs :TREPLSend<cr>
@@ -355,3 +361,4 @@ nnoremap <silent> <leader>rl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>rc :call neoterm#kill()<cr>
 
+set tags=tags;/,codex.tags;/
