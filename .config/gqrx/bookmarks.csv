@@ -1,0 +1,52 @@
+# Tag name          ;  color
+Untagged            ; #c0c0c0
+
+# Frequency ; Name                     ; Modulation          ;  Bandwidth; Tags
+     7000000 ; [40M                  ; AM           ; 168000 ; HamBand
+     7300000 ; 40M]                  ; AM           ; 168000 ; HamBand
+    14000000 ; [20M                  ; AM           ; 20000  ; HamBand
+    14350000 ; 20M]                  ; AM           ; 20000  ; HamBand
+    18086000 ; [17M                  ; AM           ; 20000  ; HamBand
+    18186000 ; 17M]                  ; AM           ; 20000  ; HamBand
+    21000000 ; [15M                  ; AM           ; 20000  ; HamBand
+    21450000 ; 15M]                  ; AM           ; 20000  ; HamBand
+    27234000 ; 27.2                  ; WFM (mono)   ; 210000 ; Untagged
+    28000000 ; [10M                  ; Narrow FM    ; 2000   ; HamBand
+    29700000 ; 10M]                  ; Narrow FM    ; 2000   ; HamBand
+    48002300 ; EMT?                  ; AM           ; 20000  ; Untagged
+    50000000 ; [6M                   ; Narrow FM    ; 2000   ; HamBand
+    54000000 ; 6M]                   ; Narrow FM    ; 2000   ; HamBand
+    75000000 ; APPRCH OUTR MRKR BCON ; Narrow FM    ; 20000  ; Flight
+    91492000 ; WBEZ                  ; WFM (stereo) ; 160000 ; BFM
+   120339900 ; TWR                   ; AM           ; 13600  ; Flight
+   144000000 ; [2M                   ; Narrow FM    ; 2000   ; HamBand
+   144390000 ; APRS                  ; Narrow FM    ; 10000  ; Untagged
+   145430000 ; W9DUP-A               ; Narrow FM    ; 10000  ; Untagged
+   148000000 ; 2M]                   ; Narrow FM    ; 2000   ; HamBand
+   152826500 ; POCSAG                ; Narrow FM    ; 20000  ; Untagged
+   153621900 ; 153.6                 ; Narrow FM    ; 20000  ; Untagged
+   153635100 ; ?                     ; Narrow FM    ; 8200   ; Untagged
+   158089600 ; Hosp:POCSAG           ; Narrow FM    ; 30200  ; Untagged
+   162537500 ; Weather               ; Narrow FM    ; 22000  ; Weather
+   222000000 ; [1.25M                ; Narrow FM    ; 2000   ; HamBand
+   224680000 ; W9DUP-B               ; Narrow FM    ; 10000  ; HamRptr
+   225000000 ; 1.25M]                ; Narrow FM    ; 2000   ; HamBand
+   315000000 ; TPMS?                 ; Narrow FM    ; 2000   ; Untagged
+   420000000 ; [70CM                 ; Narrow FM    ; 2000   ; HamBand
+   442550000 ; w9dup-C               ; Narrow FM    ; 10000  ; HamRptr
+   442875000 ; W9YRC/R REPEATER      ; Narrow FM    ; 10000  ; HamRptr
+   433000000 ; TPMS?                 ; Narrow FM    ; 2000   ; Untagged
+   443675000 ; ILRA/CHI-TOWN         ; Narrow FM    ; 10000  ; HamRptr
+   443718900 ; ILRA-1                ; Narrow FM    ; 6600   ; HamRptr
+   444443600 ; W9CCU-Rx              ; Narrow FM    ; 24400  ; HamRptr
+   444763300 ; W9CCU rptr            ; Narrow FM    ; 14400  ; HamRptr
+   450000000 ; 70CM]                 ; Narrow FM    ; 2000   ; HamBand
+   452068400 ; Bprs                  ; Narrow FM    ; 23200  ; Untagged
+   452643000 ; TMP/talk              ; Narrow FM    ; 14600  ; Untagged
+   454293400 ; Hosp:POCSAG           ; Narrow FM    ; 13400  ; Untagged
+   902000000 ; [33CM                 ; Narrow FM    ; 10000  ; HamBand
+   928000000 ; 33CM]                 ; Narrow FM    ; 10000  ; HamBand
+   929547800 ; Unknown               ; Narrow FM    ; 30600  ; Untagged
+   936410800 ; Morse?                ; Narrow FM    ; 30600  ; Untagged
+  1240000000 ; [23CM                 ; Narrow FM    ; 14000  ; HamBand
+  1300000000 ; 23CM]                 ; Narrow FM    ; 14000  ; HamBand
