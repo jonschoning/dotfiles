@@ -4,6 +4,10 @@
 (require 'dired+)
 (set-face-foreground 'diredp-file-name nil)
 (setq-default diredp-hide-details-initially-flag nil)
+(diredp-toggle-find-file-reuse-dir 1) 
+
+;; left-click opens in same buffer insted of other-window
+(define-key dired-mode-map (kbd "<mouse-2>") 'diredp-mouse-find-file)
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)

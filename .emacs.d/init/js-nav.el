@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-a") 'smart-beginning-of-line)
 
 ;; Subword mode (consider CamelCase chunks as words)
-(global-subword-mode 1)
+(global-subword-mode 0)
 
 ;; anzu: display incremental search stats in modeline
 (package-require 'anzu)
