@@ -1,0 +1,10 @@
+set showcontextualhelp 0
+set showglosses 1
+set wordwrap 1
+set showfileinfo 0
+set showbyteoffset 0
+set showsenseflag 0
+set maxhistorylength 10
+set fontname helvetica
+set fontsize 2
+set fontsizelist { 100 120 140 180 240 }
