@@ -10,15 +10,23 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/camelcasemotion'
 
+" Plug 'mhartinon/oceanic-next'
 
 " General
-Plug 'benekastah/neomake'
-autocmd! BufWritePost * Neomake
+"
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+
+" Plug 'benekastah/neomake'
+" autocmd! BufWritePost * Neomake
+"
 " Plug 'kassio/neoterm'
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 " Git
-Plug 'gist.vim'
-Plug 'webapi.vim'
+Plug 'vim-scripts/gist.vim'
+Plug 'vim-scripts/webapi.vim'
 
 " Pandoc / Markdown
 Plug 'vim-pandoc/vim-pandoc', { 'for': [ 'pandoc', 'markdown' ] }
@@ -28,23 +36,41 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': [ 'pandoc', 'markdown' ] }
 Plug 'mattn/emmet-vim'
 
 " Haskell
-Plug 'neovimhaskell/haskell-vim', { 'for': [ 'haskell', 'cabal' ] }
+" Plug 'neovimhaskell/haskell-vim', { 'for': [ 'haskell', 'cabal' ] }
 " Plug 'parsonsmatt/intero-neovim'
 
 " Purescript
 Plug 'parsonsmatt/purescript-vim'
 Plug 'FrigoEU/psc-ide-vim'
 
-" Typescript
+" Elm
+Plug 'ElmCast/elm-vim'
+
+" fsharp
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}"
+
+" Javascript
+Plug 'carlitux/deoplete-ternjs', { 'do': 'yarn add tern' } 
+Plug 'heavenshell/vim-jsdoc'
 Plug 'leafgarland/typescript-vim'
+Plug 'moll/vim-node'
+Plug 'othree/javascript-libraries-syntax.vim' 
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
+
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 " Idris
 Plug 'idris-hackers/idris-vim'
 
 " Plug 'neovimhaskell/nvim-hs'
 Plug 'lukerandall/haskellmode-vim', { 'for': [ 'haskell' ] }  
-Plug 'eagletmt/neco-ghc', { 'for': [ 'haskell' ] } 
-Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
+" Plug 'eagletmt/neco-ghc', { 'for': [ 'haskell' ] } 
+" Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
 Plug 'Shougo/vimproc.vim', {'do': 'make -f  make_unix.mak'}
 
 " Pandoc
@@ -61,6 +87,8 @@ Plug 'jalvesaq/nvimcom'
 
 " Zeal
 Plug 'KabbAmine/zeavim.vim'
+
+Plug 'pprovost/vim-ps1'
 
 call plug#end()
 
@@ -94,7 +122,7 @@ set splitright splitbelow
 set ts=2 sts=2 sw=2 expandtab
 set modelines=0
 set ttyfast
-set noesckeys
+" set noesckeys
 set hls
 set cmdheight=1
 
@@ -142,6 +170,8 @@ set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo " These com
 set foldlevelstart=20
 set linespace=0
 set nojoinspaces
+
+set path+=**
 
 " searching/moving
 nnoremap / /\v
@@ -317,8 +347,8 @@ if has("autocmd")
     au CursorHold <buffer> checktime
     au FileChangedShell * echo "Warning: File changed on disk" " another check for file updates
 
-    au FileType haskell nnoremap <buffer> <F12> :GhcModType<CR>
-    au FileType haskell nnoremap <buffer> <S-F12> :GhcModTypeClear<CR>
+    " au FileType haskell nnoremap <buffer> <F12> :InteroType<CR>
+    " au FileType haskell nnoremap <buffer> <S-F12> :InteroTypeInsert<CR>
     " au FileType haskell nnoremap <buffer> <silent> <C-F12> :HdevtoolsInfo<CR>
 
     au FileType haskell ia <buffer> un undefined
@@ -361,4 +391,20 @@ nnoremap <silent> <leader>rl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> <leader>rc :call neoterm#kill()<cr>
 
+function! DOS()
+  :e ++ff=dos
+endfunction
+function! RMDOS()
+  :g/
+$/s///
+endfunction
+
+"
 set tags=tags;/,codex.tags;/
+
+
+map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+let g:fsharpbinding_debug = 1
