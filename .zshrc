@@ -37,30 +37,31 @@ plugins=(colorize colored-man-pages rsync)
 source $ZSH/oh-my-zsh.sh
 #source /usr/local/share/chruby/chruby.sh
 
-GHC_VERSION="8.0.1"
-GHCBIN7="/home/jon/.stack/programs/x86_64-linux/ghc-7.10.3/bin"
+GHC_VERSION="8.2.1"
 
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 # PATH=$HOME/.cabal/bin:$PATH # Add Cabal to PATH
 PATH=$HOME/.local/bin:$PATH: # STACKAGE BIN DIR
-PATH=$PATH:~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/$GHC_VERSION/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.4/bin
-PATH=$PATH:/opt/android-sdk-linux/platform-tools:/opt/android-sdk-linux/tools # Add Android SDK to path
+PATH=$PATH:~/.cabal/bin:/opt/ghc/bin
+PATH=$PATH:~/opt/android-sdk-linux/platform-tools:~/opt/android-sdk-linux/tools
 PATH=$HOME/npm/bin:$PATH # Add npm to path
-PATH=:$PATH # Add npm to path
+PATH=$PATH:$HOME/node_modules/.bin
 PATH=$PATH:/usr/local/heroku/bin  ### Added by the Heroku Toolbelt
-PATH=$PATH:/opt/libreoffice5.1/program
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:~/opt/fstar/bin/
 PATH=$PATH:~/opt/rebar3/
+PATH=$PATH:~/.cargo/bin/
+PATH=$PATH:~/opt/purescript
+PATH=$PATH:~/fs/cs/packages/NUnit.ConsoleRunner.3.6.1/tools
 
-PATH=$PATH:/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/bin
-export ELM_HOME=/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/share
+PATH=$PATH:/home/jon/opt/elm/Elm-Platform/0.18/.cabal-sandbox/bin
+export ELM_HOME=/home/jon/opt/elm/Elm-Platform/0.18/.cabal-sandbox/share
                   
-PATH=$PATH:/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/bin
-export ELM_HOME=/home/jon/opt/elm/Elm-Platform/master/.cabal-sandbox/share
+PATH=$PATH:/home/jon/opt/elm/Elm-Platform/0.18/.cabal-sandbox/bin
+export ELM_HOME=/home/jon/opt/elm/Elm-Platform/0.18/.cabal-sandbox/share
 
-export SCALA_HOME=/home/jon/opt/scala-2.11.7
+export SCALA_HOME=/home/jon/opt/scala-2.12.0
 PATH=$PATH:$SCALA_HOME/bin
 
 export GOPATH=/home/jon/opt/go
@@ -87,9 +88,17 @@ if [ "$COLORTERM" = "xfce4-terminal" ]; then
     export TERM=xterm-256color
 fi
 
+
+
+source  ~/fs/git/zsh-git-prompt/zshrc.sh
+export GIT_PROMPT_EXECUTABLE="haskell"
+
 EDITOR='nvim'
 export EDITOR
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+
 export _JAVA_AWT_WM_NONREPARENTING=1
 # export AWT_TOOLKIT=MToolkit
 
@@ -101,7 +110,7 @@ alias rdesktop-ex="rdesktop ADDRESS -d DOMAIN -u USER -p - "
 alias 7zap='7za a -tzip -p -mem=AES256'
 alias 7zae='7za e'
 alias fc-list-family="fc-list -f \"%{family}\n\" | sort | uniq"
-alias nuget="mono ~/opt/nuget/NuGet.exe"
+alias nuget="~/opt/nuget/NuGet.exe"
 alias paket="mono ~/opt/paket/paket.exe"
 
 # networking
@@ -148,14 +157,13 @@ alias tl='t stream timeline'
 alias ev='evince'
 alias sa='sudo apt-get -o Acquire::ForceIPv4=true '
 alias ccat='pygmentize -O bg=dark'
-alias gimp='gimp -c'
+alias gimp='gimp -cd'
 alias R='R -q --no-save'
 alias git=hub
 alias ixio="curl -F 'f:1=<-' ix.io"
-
 alias ips="ip -o a | cut -d ' ' -f2,7"
 
-export BROWSER=google-chrome
+# export BROWSER=google-chrome
 export SSLKEYLOGFILE=~/.sslkey.log
 
 g () { command gvim --remote-silent $@ 2> /dev/null || command gvim $@; }
@@ -269,4 +277,8 @@ encodeURIComponent() {
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-. <(azure --completion)
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+
+export XDG_CURRENT_DESKTOP=GNOME
