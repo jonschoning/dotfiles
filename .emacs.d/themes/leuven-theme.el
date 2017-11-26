@@ -94,7 +94,7 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    `(cursor ((,class (:background "#0FB300"))))
 
    ;; Highlighting faces
-   `(fringe ((,class (:foreground "#9B9B9B" :background "#EDEDED"))))
+   `(fringe ((,class (:foreground "#9B9B9B" :background "#FFFFFF"))))
    `(highlight ((,class ,volatile-highlight)))
    `(region ((,class ,region)))
    `(secondary-selection ((,class ,match))) ; used by Org-mode for highlighting matched entries and keywords
@@ -122,6 +122,11 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    `(error ((,class (:foreground "red"))))
    `(warning ((,class (:weight bold :foreground "orange"))))
    `(success ((,class (:foreground "green"))))
+
+   `(ido-subdir ((,class (:foreground ,"purple"))))
+   `(ido-first-match ((,class (:foreground ,"orange"))))
+   `(ido-only-match ((,class (:foreground ,"green"))))
+   `(ido-indicator ((,class (:foreground ,"red" :background ,"gold"))))
 
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground "#006FE0"))))
@@ -460,7 +465,7 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    `(info-xref ((,class (:underline t :foreground "#006DAF")))) ; unvisited cross-references
    `(info-xref-visited ((,class (:underline t :foreground "magenta4")))) ; previously visited cross-references
    `(light-symbol-face ((,class (:background "#FFFFA0"))))
-   `(linum ((,class (:foreground "#9A9A9A" :background "#EDEDED"))))
+   `(linum ((,class (:foreground "#BBBBBB" :background "#FFFFFF"))))
    `(log-view-file ((,class (:foreground "#0000CC" :background "#EAF2F5"))))
    `(lui-button-face ((,class ,link)))
    `(lui-highlight-face ((,class (:box '(:line-width 1 :color "#CC0000") :foreground "#CC0000" :background "#FFFF88")))) ; my nickname

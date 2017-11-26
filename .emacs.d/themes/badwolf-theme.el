@@ -37,14 +37,21 @@
    `(region ((t (:foreground nil :background ,bwc-mediumgravel ))))
    `(fringe ((t (:background ,bwc-blackestgravel))))
 
-   `(minibuffer-prompt ((t (:foreground ,bwc-lime))))
+   `(minibuffer-prompt ((t (:foreground ,bwc-lime :background ,bwc-blackestgravel))))
+   
+   `(ido-first-match ((t (:foreground ,bwc-lime :weight bold))))
+   `(ido-only-match ((t (:foreground ,bwc-lime :weight bold))))
+   `(ido-subdir ((t (:foreground ,bwc-toffee))))
+   `(ido-indicator ((t (:foreground ,bwc-lime :background ,bwc-blackestgravel))))
+
+
    `(link ((t (:foreground ,bwc-lightgravel :underline t))))
    `(link-visited ((t (:inherit link :foreground ,bwc-orange))))
 
    `(highlight ((t (:foreground ,bwc-coal :background ,bwc-dalespale))))
    `(hl-line ((t (:inherit nil :background ,bwc-darkgravel))))
 
-   `(linum ((t (:foreground ,bwc-mediumgravel))))
+   `(linum ((t (:foreground ,bwc-mediumgravel, :background ,bwc-blackestgravel))))
 
    `(isearch ((t (:foreground ,bwc-coal :background ,bwc-dalespale :weight bold))))
    `(lazy-highlight ((t (:foreground ,bwc-coal :background, bwc-dalespale :weight bold))))
