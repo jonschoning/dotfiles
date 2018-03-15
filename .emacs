@@ -19,6 +19,8 @@
 
 (electric-indent-mode -1)
 
+(global-linum-mode t)
+
 ;(require 'ensime)
 ;(define-key ensime-mode-map (kbd "M-.") 'ensime-inspect-type-at-point)
 ;(add-hook 'prog-mode-hook (lambda () (subword-mode 0)))
@@ -120,6 +122,10 @@
 ; (load-theme 'eink t)
 ; (load-theme 'seoul256 t)
 
+(defun new-buffer ()
+  (interactive)
+  (switch-to-buffer (make-temp-name "buffer")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -137,26 +143,35 @@
     ("28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "15348febfa2266c4def59a08ef2846f6032c0797f001d7b9148f30ace0d08bcf" "718fb4e505b6134cc0eafb7dad709be5ec1ba7a7e8102617d87d3109f56d9615" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "31992d4488dba5b28ddb0c16914bf5726dc41588c2b1c1a2fd16516ea92c1d8e" "323f4767d2b73d6806adfb7ef47e0566e3d1c33b40a70bf53f592d0c5b906102" "5900bec889f57284356b8216a68580bfa6ece73a6767dfd60196e56d050619bc" "2e973a84accb627f603f309fc13938daa227055d2a6528c80a9b7a9e2dd8da6b" "4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "6f11ad991da959fa8de046f7f8271b22d3a97ee7b6eca62c81d5a917790a45d9" "611e38c2deae6dcda8c5ac9dd903a356c5de5b62477469133c89b2785eb7a14d" "77ab33a45a8d39566f24cd6a9b28c78eec89882004ed194587e210399813d009" "b81bfd85aed18e4341dbf4d461ed42d75ec78820a60ce86730fc17fc949389b2" "365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "b378249b7f647796b186c70f61eaaee7aa1bd123681d5ca8c44d3ca8875e1b70" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" "dacce23bc9bace2248ebbd89756fd74f213c754b7b022fa3f090e220faf1a813" "086970da368bb95e42fd4ddac3149e84ce5f165e90dfc6ce6baceae30cf581ef" "c9321e2db48a21fc656a907e97ee85d8cd86967855bf0bed3998bcf9195c758b" "07365f2fe1687187a1c0a8f0298fb2b1792573c3fb8dda51a0c46912975d194a" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" "63dd8ce36f352b92dbf4f80e912ac68216c1d7cf6ae98195e287fd7c7f7cb189" "23ccf46b0d05ae80ee0661b91a083427a6c61e7a260227d37e36833d862ccffc" "9346200d23f505b244336e46b4aa3352d00f9bb065b87550e752f04ba14c7c92" "32ffeb13f3c152300d14757b431967e63da005f54712dad6a2f8b8b33fb94bac" "5fbd4efeb58d6a446e3e370226b37dad5c9645bbe5ea11cc83ea2e22e073bf1c" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "6254372d3ffe543979f21c4a4179cd819b808e5dd0f1787e2a2a647f5759c1d1" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "0eea76fe89061a7f6da195f4a976c0b91150de987b942fac2dd10992aea33833" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "7dbb593ad0fb90230b196ffbd6a503c3e9086925cc68f212e625a017b8c824a7" "9492d427a99f6e99c66d31a804e38a6ff995dec7c5940e5dd37f242d39fd41f0" "12ea40aa3720b54d31fd32b9406fb92dad6a5306f8310071b63b01217fb2cafc" "7ceb8967b229c1ba102378d3e2c5fef20ec96a41f615b454e0dc0bfa1d326ea6" "20e359ef1818a838aff271a72f0f689f5551a27704bf1c9469a5c2657b417e6c" "ff52e9e329c5a66eae3570e3f17288d0a9f96403ce1ac7cbca5a193ebc500936" "01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
  '(haskell-interactive-popup-errors nil)
  '(haskell-process-show-debug-tips nil)
+ '(line-number-mode nil)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
     (dante kaolin-theme afternoon-theme flatui-dark-theme flatui-theme material-theme doom-themes mustache-mode mustache lsp-rust lsp-mode ox-gfm racket-mode flycheck-haskell zenburn-theme zeal-at-point yaml-mode w3m use-package tuareg tle tao-theme strace-mode smex scala-mode2 rustfmt rjsx-mode rinari restart-emacs react-snippets rainbow-delimiters psci psc-ide powershell persp-mode-projectile-bridge pdf-tools oceanic-theme multi-term mu4e-maildirs-extension mu4e-alert markdown-mode key-chord jsx-mode jist iy-go-to-char ir-black-theme intero idris-mode ido-vertical-mode ido-ubiquitous ido-grid-mode hydra hindent haskell-emacs go-mode go gh fstar-mode fsharp-mode format-sql flymd flymake-rust flycheck-stack flycheck-rust flycheck-purescript flycheck-ocaml flycheck-elm evil-surround evil-paredit evil-org evil-matchit evil-magit evil-leader evil-commentary ess-view ess-R-object-popup ess-R-data-view ensime elm-mode elixir-mode eink-theme ein ediprolog docker discover-my-major dired+ deferred darktooth-theme company-ghci company-ghc circe cargo blackboard-theme badwolf-theme atom-one-dark-theme aria2 anzu ahk-mode ack-menu ack ac-emmet ac-cider)))
  '(safe-local-variable-values
    (quote
-    ((intero-targets "grotesque:lib")
+    ((haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4)
+     (intero-targets "grotesque:lib")
      (ruby-compilation-executable . "ruby")
      (ruby-compilation-executable . "ruby1.8")
      (ruby-compilation-executable . "ruby1.9")
      (ruby-compilation-executable . "rbx")
      (ruby-compilation-executable . "jruby"))))
  '(tool-bar-mode nil))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 101 :width normal))))
+ '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 100 :width normal))))
  '(cursor ((t (:background "#ff0099")))))
+
+;; (custom-set-faces '(default ((t (:family "Iosevka" :height 110)))))
+;; (custom-set-faces '(default ((t (:family "Monoid" :height 110)))))
+
+;; '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 100 :width normal))))
 
 (require 'evil)    
 (evil-mode 1)  
@@ -224,6 +239,10 @@
                     (term-mode . emacs)))
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
 (global-set-key (kbd "C-z") 'evil-mode)
+
+(setq auto-mode-alist (cons '("\.xaml$" . nxml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\.hamlet$" . html-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\.julius$" . javascript-mode) auto-mode-alist))
 
 ; (company-quickhelp-mode 1) 
 ;(add-to-list 'company-backends 'company-ghc)

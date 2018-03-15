@@ -36,11 +36,21 @@
 	sl = stash list
 	aa = add -A
 	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
+	pushf = push --force-with-lease
 [push]
 	default = current
-[mergetool]
-    prompt = false
-    keepBackup = false
+[merge]
+  tool = meld_all
+# tool = nvimdiff
+  prompt = false
+[mergetool "meld_merged"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+[mergetool "meld_base"]
+    cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+[mergetool "meld_all"]
+    cmd = meld --diff "$LOCAL" "$MERGED" "$REMOTE" --diff "$BASE $LOCAL" --diff "$BASE $REMOTE" --output "$MERGED"
+[mergetool "nvimdiff"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd l' -c 'wincmd l' -c '$wincmd l' -c 'wincmd J' 
 [github]
 	user = jonschoning
 [gui]
@@ -52,3 +62,5 @@
 	browser = surf
 [browser "surf"]
 	cmd = surf
+[pull]
+  ff = only
