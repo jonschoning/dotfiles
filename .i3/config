@@ -229,12 +229,30 @@ for_window [window_type="menu"] floating enable
 
 for_window [class="Xscorch"] floating enable
 for_window [class="Xscorch"] border normal
-for_window [class="feh"] floating enable
-for_window [class="feh"] border normal
+for_window [class="skypeforlinux"] floating enable
+for_window [class="skypeforlinux"] border normal
 for_window [class="Simplescreenrecorder"] floating enable
 for_window [class="Simplescreenrecorder"] border normal
 for_window [class="org-igoweb-cgoban-CGoban"] floating enable
 for_window [class="org-igoweb-cgoban-CGoban"] border normal
+
+for_window [class="pavucontrol"] floating enable
+for_window [class="pavucontrol"] border normal
+
+for_window [class="zoom"] floating enable
+for_window [class="zoom"] border normal
+
+for_window [title="diagram"] floating enable
+for_window [title="diagram"] border normal
+
+for_window [class="gnome-clocks"] floating enable
+
+
+for_window [class="LimeSuiteGUI"] floating enable
+for_window [class="LimeSuiteGUI"] border normal
+
+for_window [class="system-config-printer.py"] floating enable
+for_window [class="system-config-printer.py"] border normal
 
 # for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
 # for_window [class="jetbrains-pycharm"] floating enable
@@ -246,7 +264,8 @@ exec --no-startup-id xrdb -merge ~/.Xresources
 exec xrandr-on
 # exec compton
 
-exec --no-startup-id xset m 6/3 0
+# exec --no-startup-id xset m 7/3 0
+exec --no-startup-id xinput --set-float-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Constant Deceleration' 0.5
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 
@@ -259,6 +278,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id pidgin
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id blueman-applet
+exec --no-startup-id system-config-printer-applet
 
 # exec --no-startup-id sudo xfce4-power-manager
 # exec --no-startup-id xmodmap .xmodmap.laptop
@@ -294,6 +314,10 @@ bindsym $mod+u border none
 # exec --no-startup-id urxvt
 # exec --no-startup-id urxvt
 # exec --no-startup-id xscreensaver -no-splash -no-capture-stderr -log ~/tmp/xscr.log 
+
+exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/jon/.i3/workspace-9.json'"
+exec --no-startup-id emacs
+exec --no-startup-id "i3-msg 'workspace 1'
 
 exec_always feh --bg-scale /home/jon/fs/pic/mountains-dark.jpg
 # exec --no-startup-id bg-klein

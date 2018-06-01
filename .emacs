@@ -13,11 +13,13 @@
 (global-set-key "\C-cd" 'zeal-at-point)
 (global-set-key (kbd "M-]") 'next-buffer)
 (global-set-key (kbd "M-[") 'previous-buffer)
+(global-set-key (kbd "C-x C-e") 'eval-region)
 ; (setq debug-on-error t)
 (setq ensime-startup-snapshot-notification nil) 
 (server-start)
 
-(electric-indent-mode -1)
+(electric-indent-mode +1)
+(setq js-indent-level 2)
 
 (global-linum-mode t)
 
@@ -112,10 +114,11 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (provide 'init-themes)
 
-(load-theme 'doom-tomorrow-night t)
-;(load-theme 'doom-one-light t)
-;(load-theme 'badwolf t)
 ;(load-theme 'leuven t)
+;(load-theme 'doom-tomorrow-night t)
+;(load-theme 'doom-one-light t)
+(load-theme 'doom-peacock t)
+;(load-theme 'badwolf t)
 ;(load-theme 'eink t)
 
 ; (load-theme 'ir-black t)
@@ -137,17 +140,16 @@
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(blink-cursor-mode nil)
  '(column-number-mode t)
- '(custom-enabled-themes (quote (doom-tomorrow-night)))
  '(custom-safe-themes
    (quote
-    ("28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "15348febfa2266c4def59a08ef2846f6032c0797f001d7b9148f30ace0d08bcf" "718fb4e505b6134cc0eafb7dad709be5ec1ba7a7e8102617d87d3109f56d9615" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "31992d4488dba5b28ddb0c16914bf5726dc41588c2b1c1a2fd16516ea92c1d8e" "323f4767d2b73d6806adfb7ef47e0566e3d1c33b40a70bf53f592d0c5b906102" "5900bec889f57284356b8216a68580bfa6ece73a6767dfd60196e56d050619bc" "2e973a84accb627f603f309fc13938daa227055d2a6528c80a9b7a9e2dd8da6b" "4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "6f11ad991da959fa8de046f7f8271b22d3a97ee7b6eca62c81d5a917790a45d9" "611e38c2deae6dcda8c5ac9dd903a356c5de5b62477469133c89b2785eb7a14d" "77ab33a45a8d39566f24cd6a9b28c78eec89882004ed194587e210399813d009" "b81bfd85aed18e4341dbf4d461ed42d75ec78820a60ce86730fc17fc949389b2" "365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "b378249b7f647796b186c70f61eaaee7aa1bd123681d5ca8c44d3ca8875e1b70" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" "dacce23bc9bace2248ebbd89756fd74f213c754b7b022fa3f090e220faf1a813" "086970da368bb95e42fd4ddac3149e84ce5f165e90dfc6ce6baceae30cf581ef" "c9321e2db48a21fc656a907e97ee85d8cd86967855bf0bed3998bcf9195c758b" "07365f2fe1687187a1c0a8f0298fb2b1792573c3fb8dda51a0c46912975d194a" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" "63dd8ce36f352b92dbf4f80e912ac68216c1d7cf6ae98195e287fd7c7f7cb189" "23ccf46b0d05ae80ee0661b91a083427a6c61e7a260227d37e36833d862ccffc" "9346200d23f505b244336e46b4aa3352d00f9bb065b87550e752f04ba14c7c92" "32ffeb13f3c152300d14757b431967e63da005f54712dad6a2f8b8b33fb94bac" "5fbd4efeb58d6a446e3e370226b37dad5c9645bbe5ea11cc83ea2e22e073bf1c" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "6254372d3ffe543979f21c4a4179cd819b808e5dd0f1787e2a2a647f5759c1d1" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "0eea76fe89061a7f6da195f4a976c0b91150de987b942fac2dd10992aea33833" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "7dbb593ad0fb90230b196ffbd6a503c3e9086925cc68f212e625a017b8c824a7" "9492d427a99f6e99c66d31a804e38a6ff995dec7c5940e5dd37f242d39fd41f0" "12ea40aa3720b54d31fd32b9406fb92dad6a5306f8310071b63b01217fb2cafc" "7ceb8967b229c1ba102378d3e2c5fef20ec96a41f615b454e0dc0bfa1d326ea6" "20e359ef1818a838aff271a72f0f689f5551a27704bf1c9469a5c2657b417e6c" "ff52e9e329c5a66eae3570e3f17288d0a9f96403ce1ac7cbca5a193ebc500936" "01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
+    ("891debfe489c769383717cc7d0020244a8d62ce6f076b2c42dd1465b7c94204d" "d1aec5dbeb0267f20d73d4e670e94d007dba09d2193ee39df2023fe61b4fe765" "4e21fb654406f11ab2a628c47c1cbe53bab645d32f2c807ee2295436f09103c6" "0598de4cc260b7201120b02d580b8e03bd46e5d5350ed4523b297596a25f7403" "013c62a1fcee7c8988c831027b1c38ae215f99722911b69e570f21fc19cb662e" "242ed4611e9e78142f160e9a54d7e108750e973064cee4505bfcfc22cc7c61b1" "1e469285a9eee5bb7099711440ab27b571d02aa860c009086ef2d341b4c5d535" "bbea3143fe920d2738e73a042d1edcc0e0c1e9726a757dc0b51ca8d5ee825255" "5715d3b4b071d33af95e9ded99a450aad674e308abb06442a094652a33507cd2" "bd23e5e571f9b951eb79941ba3927fb493c26463654add2a53f4fb0de72ef08b" "c5d320f0b5b354b2be511882fc90def1d32ac5d38cccc8c68eab60a62d1621f2" "b550fc3d6f0407185ace746913449f6ed5ddc4a9f0cf3be218af4fb3127c7877" "2a1b4531f353ec68f2afd51b396375ac2547c078d035f51242ba907ad8ca19da" "7666b079fc1493b74c1f0c5e6857f3cf0389696f2d9b8791c892c696ab4a9b64" "53d1bb57dadafbdebb5fbd1a57c2d53d2b4db617f3e0e05849e78a4f78df3a1b" "2af26301bded15f5f9111d3a161b6bfb3f4b93ec34ffa95e42815396da9cb560" "a142def5bab9c1d1964eb2bf7506e790fa09df44aa9f3e41abd198f00cd6577e" "b5ecb5523d1a1e119dfed036e7921b4ba00ef95ac408b51d0cd1ca74870aeb14" "a866134130e4393c0cad0b4f1a5b0dd580584d9cf921617eee3fd54b6f09ac37" "77c3f5f5acaa5a276ca709ff82cce9b303f49d383415f740ba8bcc76570718b9" "2e1d19424153d41462ad31144549efa41f55dacda9b76571f73904612b15fd0a" "0fd8c1b09c6c9e7116054f3fe5929775d9e9d5e49b9d1bf62dfdd5283416168e" "d69687a9877c252d9ffcc782d2e8c4dcb0f25146b2e445a4f240364b02478eda" "4d78e7a72470d6449c8a2a182291cecdf4c25d9fae7ec2a0f58110eeb8843683" "b75efc241b1403ced915204d4c719a3ed1fd378b7b3474804b1732225cc58f5c" "6ab09722e4b3d3b89e2371de0f9e99a4fca6029ac0509f60bfe3365cbffa2af1" "92ca1b3391ef563397582f88f3716bafe31d70a41f7a640eb66c605d7261d23a" "c899003423a6afbd53d30ca6054e9bc42f46e577298783232c6bed78d7c3d6d4" "7c508c2a6d6e1ff2101d5169efa84be5f891b0f385809fc5f0b5a7bd41310c52" "69fa97c316db8e8ac7360043f7deee10f597bcc1aa7ff95266d9454b15c8e7da" "58951e5509952e973cf8df32d1a076c22f286fb5f26ca547b3394b9b40353dce" "033616c0ffe70de88f4435464693e874ca0d6a742fe09ad75873f77a31c71c81" "acf1148622c01619ee8e57b70105c2420b90acecafc0e61bf02674800ce75886" "69a3632b1ca1eca6ce0fca92c02f4b3bbb9568915537eb524bf73974c2a4a224" "a9bdec8c3d52b81cb8d4bec436edd0e08859ceecae5ac2c3b0733931fdf55953" "3f9b6fcf8305290613c116e23d89007abdc8081f8677b5c53164ce54745e3ff3" "67a11bdd00035792c172aac88bffb4cd4c34cc796d01e60116ee0adad72f02eb" "cdff6242d45398379bf13d96e6b718e4c904ee06b0bc2b4eb8f83d598e34069a" "4a7abcca7cfa2ccdf4d7804f1162dd0353ce766b1277e8ee2ac7ee27bfbb408f" "ea95e5a0f64d562021bbde3f842ee7a4f397c2df46e77196b1d9cbe4a862eb10" "35a780415de03420cf8efe6afac9e9b276230a4299edac121d63c8a8ecd75041" "62f4e35def28071b729614e089a0310a80671f3413da26873f0e04d1904c58dd" "95ebf5a8991b5edba715193bda8af65d6503e5628d5d8621c0c2cdcecdcb6af4" "ef335dbcfd579d72ce9bf8a1c8e24771735968c782ffc0a9e3e939dde97ad628" "9db3bfc6fb456ea9a940c7462bab8dc0f1deea4bb2ab1ea848ed320900153fe0" "d4d0f3ee4a65a29a1090fe9af3cbbf8441efab3c3108d50c8ee93e5c981b41a5" "4c1d8746a992ce9a41579b8174c2c004ec757b34a68ad58b1e2b40b6f5299208" "b00618cf6d43d963a093e4cff9133274d0a0778b04f7e3f6ffb8c3fc60de9098" "fd5c8d7f3932af3460fba411cd48ab3cebfbeeb2b2dcb81ddffe6ae31f8bbd76" "bcab096c14baa42dd4753cc3a804e93630e057fc07e8dacbfd25f5888dd60fd6" "549fdc2ac43aec1715e9beb14f35ec3b18de110a083fc8fe7041e55de064b28d" "c06f299f5edfa80bb1873ef295ca861a042c7969ce259c0cefd8c56d256afdc7" "2ac583b4c3755f78e8ccaa7cdac0230e10238d8270d55a2cd9bc54d59a91ef89" "4f56746c3787612df970455d2beeef001c10124982f2fafe197dcaf6866c08f1" "60668f4b17b8b8780d50976c0788abed190353d21d3371b8f244dd44c103b0ea" "d2c61aa11872e2977a07969f92630a49e30975220a079cd39bec361b773b4eb3" "31e64af34ba56d5a3e85e4bebefe2fb8d9d431d4244c6e6d95369a643786a40e" "4b207752aa69c0b182c6c3b8e810bbf3afa429ff06f274c8ca52f8df7623eb60" "759416a7a5f5cb6b8cb26e6db2cf70026aa2324083a888015ee2cad0320f7f19" "28ec8ccf6190f6a73812df9bc91df54ce1d6132f18b4c8fcc85d45298569eb53" "15348febfa2266c4def59a08ef2846f6032c0797f001d7b9148f30ace0d08bcf" "718fb4e505b6134cc0eafb7dad709be5ec1ba7a7e8102617d87d3109f56d9615" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "31992d4488dba5b28ddb0c16914bf5726dc41588c2b1c1a2fd16516ea92c1d8e" "323f4767d2b73d6806adfb7ef47e0566e3d1c33b40a70bf53f592d0c5b906102" "5900bec889f57284356b8216a68580bfa6ece73a6767dfd60196e56d050619bc" "2e973a84accb627f603f309fc13938daa227055d2a6528c80a9b7a9e2dd8da6b" "4182c491b5cc235ba5f27d3c1804fc9f11f51bf56fb6d961f94788be034179ad" "6f11ad991da959fa8de046f7f8271b22d3a97ee7b6eca62c81d5a917790a45d9" "611e38c2deae6dcda8c5ac9dd903a356c5de5b62477469133c89b2785eb7a14d" "77ab33a45a8d39566f24cd6a9b28c78eec89882004ed194587e210399813d009" "b81bfd85aed18e4341dbf4d461ed42d75ec78820a60ce86730fc17fc949389b2" "365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "b378249b7f647796b186c70f61eaaee7aa1bd123681d5ca8c44d3ca8875e1b70" "2f0a552a9d14fe8ddaaacdb7b82a0eee1ea1f7f5d0850789915e5b04a1b9669f" "a4c9e536d86666d4494ef7f43c84807162d9bd29b0dfd39bdf2c3d845dcc7b2e" "dacce23bc9bace2248ebbd89756fd74f213c754b7b022fa3f090e220faf1a813" "086970da368bb95e42fd4ddac3149e84ce5f165e90dfc6ce6baceae30cf581ef" "c9321e2db48a21fc656a907e97ee85d8cd86967855bf0bed3998bcf9195c758b" "07365f2fe1687187a1c0a8f0298fb2b1792573c3fb8dda51a0c46912975d194a" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" "63dd8ce36f352b92dbf4f80e912ac68216c1d7cf6ae98195e287fd7c7f7cb189" "23ccf46b0d05ae80ee0661b91a083427a6c61e7a260227d37e36833d862ccffc" "9346200d23f505b244336e46b4aa3352d00f9bb065b87550e752f04ba14c7c92" "32ffeb13f3c152300d14757b431967e63da005f54712dad6a2f8b8b33fb94bac" "5fbd4efeb58d6a446e3e370226b37dad5c9645bbe5ea11cc83ea2e22e073bf1c" "d5b121d69e48e0f2a84c8e4580f0ba230423391a78fcb4001ccb35d02494d79e" "6254372d3ffe543979f21c4a4179cd819b808e5dd0f1787e2a2a647f5759c1d1" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "0eea76fe89061a7f6da195f4a976c0b91150de987b942fac2dd10992aea33833" "4486ade2acbf630e78658cd6235a5c6801090c2694469a2a2b4b0e12227a64b9" "7dbb593ad0fb90230b196ffbd6a503c3e9086925cc68f212e625a017b8c824a7" "9492d427a99f6e99c66d31a804e38a6ff995dec7c5940e5dd37f242d39fd41f0" "12ea40aa3720b54d31fd32b9406fb92dad6a5306f8310071b63b01217fb2cafc" "7ceb8967b229c1ba102378d3e2c5fef20ec96a41f615b454e0dc0bfa1d326ea6" "20e359ef1818a838aff271a72f0f689f5551a27704bf1c9469a5c2657b417e6c" "ff52e9e329c5a66eae3570e3f17288d0a9f96403ce1ac7cbca5a193ebc500936" "01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "ce9e8c85e61d04230761cc2b6e359ded9371fc421ee9cecaf44c79288729b326" "470321d339d4c9c52ce4c57c10291025c53b759cb877f20409ae6d08b6fd269b" default)))
  '(haskell-interactive-popup-errors nil)
  '(haskell-process-show-debug-tips nil)
  '(line-number-mode nil)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
-    (dante kaolin-theme afternoon-theme flatui-dark-theme flatui-theme material-theme doom-themes mustache-mode mustache lsp-rust lsp-mode ox-gfm racket-mode flycheck-haskell zenburn-theme zeal-at-point yaml-mode w3m use-package tuareg tle tao-theme strace-mode smex scala-mode2 rustfmt rjsx-mode rinari restart-emacs react-snippets rainbow-delimiters psci psc-ide powershell persp-mode-projectile-bridge pdf-tools oceanic-theme multi-term mu4e-maildirs-extension mu4e-alert markdown-mode key-chord jsx-mode jist iy-go-to-char ir-black-theme intero idris-mode ido-vertical-mode ido-ubiquitous ido-grid-mode hydra hindent haskell-emacs go-mode go gh fstar-mode fsharp-mode format-sql flymd flymake-rust flycheck-stack flycheck-rust flycheck-purescript flycheck-ocaml flycheck-elm evil-surround evil-paredit evil-org evil-matchit evil-magit evil-leader evil-commentary ess-view ess-R-object-popup ess-R-data-view ensime elm-mode elixir-mode eink-theme ein ediprolog docker discover-my-major dired+ deferred darktooth-theme company-ghci company-ghc circe cargo blackboard-theme badwolf-theme atom-one-dark-theme aria2 anzu ahk-mode ack-menu ack ac-emmet ac-cider)))
+    (inkpot-theme js-format nodejs-repl typescript-mode gotham-theme rust-mode dante kaolin-theme afternoon-theme flatui-dark-theme flatui-theme material-theme doom-themes mustache-mode mustache lsp-rust lsp-mode ox-gfm racket-mode flycheck-haskell zenburn-theme zeal-at-point yaml-mode w3m use-package tuareg tle tao-theme strace-mode smex scala-mode2 rustfmt rjsx-mode rinari restart-emacs react-snippets rainbow-delimiters psci psc-ide powershell persp-mode-projectile-bridge pdf-tools oceanic-theme multi-term mu4e-maildirs-extension mu4e-alert markdown-mode key-chord jsx-mode jist iy-go-to-char ir-black-theme intero idris-mode ido-vertical-mode ido-ubiquitous ido-grid-mode hydra hindent haskell-emacs go-mode go gh fstar-mode fsharp-mode format-sql flymd flymake-rust flycheck-stack flycheck-rust flycheck-purescript flycheck-ocaml flycheck-elm evil-surround evil-paredit evil-org evil-matchit evil-magit evil-leader evil-commentary ess-view ess-R-object-popup ess-R-data-view ensime elm-mode elixir-mode eink-theme ein ediprolog docker discover-my-major dired+ deferred darktooth-theme company-ghci company-ghc circe cargo blackboard-theme badwolf-theme atom-one-dark-theme aria2 anzu ahk-mode ack-menu ack ac-emmet ac-cider)))
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
@@ -183,6 +185,9 @@
 (evil-commentary-mode)
 (require 'magit)
 (require 'evil-magit)
+
+(electric-pair-mode)
+
 ; (load "ess-site")
 ; (require 'ess-view)
 ; (ess-toggle-underscore nil)
@@ -451,3 +456,42 @@
                string)))
   (shell-command-on-region start end command t t)
   )
+
+(defun indent-buffer ()
+  "Indent current buffer according to major mode."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun my-correct-symbol-bounds (pretty-alist)
+  "Prepend a TAB character to each symbol in this alist,
+this way compose-region called by prettify-symbols-mode
+will use the correct width of the symbols
+instead of the width measured by char-width."
+  (mapcar (lambda (el)
+            (setcdr el (string ?\t (cdr el)))
+            el)
+          pretty-alist))
+
+(defun my-ligature-list (ligatures codepoint-start)
+  "Create an alist of strings to replace with
+codepoints starting from codepoint-start."
+  (let ((codepoints (-iterate '1+ codepoint-start (length ligatures))))
+    (-zip-pair ligatures codepoints)))
+
+                                        ; list can be found at https://github.com/i-tu/Hasklig/blob/master/GlyphOrderAndAliasDB#L1588
+(setq my-hasklig-ligatures
+      (let* ((ligs '("&&" "***" "*>" "\\\\" "||" "|>" "::"
+                     "==" "===" "==>" "=>" "=<<" "!!" ">>"
+                     ">>=" ">>>" ">>-" ">-" "->" "-<" "-<<"
+                     "<*" "<*>" "<|" "<|>" "<$>" "<>" "<-"
+                     "<<" "<<<" "<+>" ".." "..." "++" "+++"
+                     "/=" ":::" ">=>" "->>" "<=>" "<=<" "<->")))
+        (my-correct-symbol-bounds (my-ligature-list ligs #Xe100))))
+
+;; nice glyphs for haskell with hasklig
+(defun my-set-hasklig-ligatures ()
+  (interactive)
+  "Add hasklig ligatures for use with prettify-symbols-mode."
+  (setq prettify-symbols-alist
+        (append my-hasklig-ligatures prettify-symbols-alist))
+  (prettify-symbols-mode))

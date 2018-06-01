@@ -6,23 +6,28 @@ Plug 'Shougo/deoplete.nvim'
 " Text
 Plug 'godlygeek/tabular'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'Raimondi/delimitMate'
+
+" Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
+
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/camelcasemotion'
+Plug 'mbbill/undotree'
 
+Plug 'dmwit/viaje'
 " Plug 'mhartinon/oceanic-next'
 
 " General
 "
 " Asynchronous Lint Engine
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Plug 'benekastah/neomake'
 " autocmd! BufWritePost * Neomake
 "
 " Plug 'kassio/neoterm'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Git
 Plug 'vim-scripts/gist.vim'
@@ -38,13 +43,14 @@ Plug 'mattn/emmet-vim'
 " Haskell
 " Plug 'neovimhaskell/haskell-vim', { 'for': [ 'haskell', 'cabal' ] }
 " Plug 'parsonsmatt/intero-neovim'
+" Plug 'owickstrom/neovim-ghci'
 
 " Purescript
-Plug 'parsonsmatt/purescript-vim'
-Plug 'FrigoEU/psc-ide-vim'
+" Plug 'parsonsmatt/purescript-vim'
+" Plug 'FrigoEU/psc-ide-vim'
 
 " Elm
-Plug 'ElmCast/elm-vim'
+" Plug 'ElmCast/elm-vim'
 
 " fsharp
 Plug 'fsharp/vim-fsharp', {
@@ -65,17 +71,13 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " Idris
-Plug 'idris-hackers/idris-vim'
+" Plug 'idris-hackers/idris-vim'
 
 " Plug 'neovimhaskell/nvim-hs'
 Plug 'lukerandall/haskellmode-vim', { 'for': [ 'haskell' ] }  
 " Plug 'eagletmt/neco-ghc', { 'for': [ 'haskell' ] } 
-" Plug 'eagletmt/ghcmod-vim', { 'for': [ 'haskell' ] } 
 Plug 'Shougo/vimproc.vim', {'do': 'make -f  make_unix.mak'}
 
-" Pandoc
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Lisp
 Plug 'vim-scripts/paredit.vim', { 'for': [ 'scheme', 'lisp', 'commonlisp' ] }
@@ -207,13 +209,14 @@ nnoremap <silent> <C-F2> :setlocal spell spelllang=en_us<CR>
 nnoremap <silent> <C-S-F2> :setlocal nospell<CR>
 nnoremap <silent> <F4> :bd<CR>
 nnoremap <silent> <S-F4> :bd!<CR>
+nnoremap <silent> <F5> :UndotreeToggle<cr>
 " nnoremap <silent> <F5> :NERDTreeToggle<CR>
 " nnoremap <silent> <S-F5> :NERDTree<CR><C-w>p:NERDTreeFind<CR>
-nnoremap <silent> <F9> :cwin <bar> cn<CR>
-nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
+" nnoremap <silent> <F9> :cwin <bar> cn<CR>
+" nnoremap <silent> <S-F9> :cwin <bar> cp<CR>
 " nnoremap <silent> <F10> :TlistToggle<CR>
 " nnoremap <silent> <F10> :TagbarToggle<CR>
-nnoremap <silent> <F11> :RainbowParenthesesToggle<CR>
+" nnoremap <silent> <F11> :RainbowParenthesesToggle<CR>
 " nnoremap <silent> <F12> g<C-]>
 
 " save with ctrl+s
@@ -260,10 +263,10 @@ noremap <M-j> :wincmd J<CR>
 noremap <M-k> :wincmd K<CR>
 
 " resize windows
-noremap <silent> <C-F9>  :vertical resize -10<CR>
-noremap <silent> <C-F10> :resize -10<CR>
-noremap <silent> <C-F11> :resize +10<CR>
-noremap <silent> <C-F12> :vertical resize +10<CR>
+noremap <silent> <F9>  :vertical resize -10<CR>
+noremap <silent> <F10> :resize -10<CR>
+noremap <silent> <F11> :resize +10<CR>
+noremap <silent> <F12> :vertical resize +10<CR>
 
 " focus window (only)
 nnoremap <leader>o :on<cr>
@@ -361,6 +364,7 @@ if has("autocmd")
     " vnoremap <leader>pl :!pointful<CR>
     au FileType haskell setlocal completeopt-=menuone
     au BufEnter *.hs compiler ghc 
+    au BufEnter *.xaml setf xml
   augroup end
 endif
 
@@ -376,8 +380,8 @@ let g:haskell_tabular = 0
 " Neoterm
 let g:neoterm_position = 'vertical'
 let g:neoterm_automap_keys = '<space>rr'
-" let g:haskellmode_completion_ghc=0
-" let g:haskellmode_completion_haddock=0
+let g:haskellmode_completion_ghc=0
+let g:haskellmode_completion_haddock=0
 
 nnoremap <silent> <leader>rf :TREPLSendFile<cr>
 nnoremap <silent> <leader>rs :TREPLSend<cr>
@@ -403,8 +407,8 @@ endfunction
 set tags=tags;/,codex.tags;/
 
 
-map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" map <F9> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+" \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+" \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 let g:fsharpbinding_debug = 1
