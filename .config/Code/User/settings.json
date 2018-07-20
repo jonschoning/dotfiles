@@ -1,0 +1,35 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.lineNumbers": "on",
+    "git.autofetch": false,
+
+    "editor.fontSize": 13,
+    "editor.fontFamily": "Bitstream Vera Sans Mono",
+    //"editor.fontFamily": "monaco-js",
+    "editor.cursorBlinking": "solid",
+    "editor.scrollBeyondLastLine": false,
+    "vim.useSystemClipboard": true,
+    "vim.enableNeovim": true,
+	"vim.useCtrlKeys": true,
+	"vim.insertModeKeyBindings": [
+		{
+			"before": ["j", "k"],
+			"after": ["<Esc>"]
+		}
+	]	
+,
+"editor.cursorStyle": "block",
+"window.zoomLevel": 0,
+"typescript.check.tscVersion": false,
+"vim.disableAnnoyingNeovimMessage": true,
+"files.associations": {
+    "*.julius": "javascript",
+    "*.hamlet": "html",
+  },
+"editor.tabSize": 2,
+"gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+},
+"gitlens.historyExplorer.enabled": true,
+"workbench.colorTheme": "Gotham",
+}
