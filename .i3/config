@@ -305,6 +305,13 @@ bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
 bindsym $mod+u border none
 
+# App hotkeys
+bindsym CTRL+$ALT+A [class="Slack"] focus
+bindsym CTRL+$ALT+B [class="URxvt"] focus
+bindsym CTRL+$ALT+C [class="Google-chrome-unstable"] focus
+bindsym CTRL+$ALT+E [class="Emacs"] focus
+bindsym CTRL+$ALT+F [class="Nightly"] focus
+bindsym CTRL+$ALT+V [title="nvim"] focus
 
 # exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/jon/.i3/workspace-2.json'"
 # exec --no-startup-id thunderbird
@@ -318,6 +325,7 @@ bindsym $mod+u border none
 exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/jon/.i3/workspace-9.json'"
 exec --no-startup-id emacs
 exec --no-startup-id "i3-msg 'workspace 1'
+
 
 exec_always feh --bg-scale /home/jon/fs/pic/mountains-dark.jpg
 # exec --no-startup-id bg-klein
