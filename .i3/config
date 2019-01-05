@@ -19,6 +19,17 @@ client.urgent             #6EFEB9   #000000   #d9cec3 #6EFEB9
 set $mod Mod4
 set $alt Mod1
 
+#sticky
+bindsym $mod+Shift+y sticky toggle
+
+new_window none
+# new_float none
+
+#Changing border style
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font xft:Bitstream Vera Sans Mono 9
@@ -30,7 +41,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec xfce4-terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec i3_shell.sh
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -158,105 +169,99 @@ bindsym $mod+minus scratchpad show
 # Clipd
 # bindsym $alt+e exec clipd menu
 
-# assignments
-# assign [class="Google-chrome"] 2
-# assign [class="jetbrains-idea-ce"] 3
-# assign [class="jetbrains-pycharm"] 3
-#
-for_window [class="XnView"] floating enable
-for_window [class="XnView"] border normal
-for_window [class="vlc"] floating enable
-for_window [class="vlc"] border normal
-for_window [class="Remmina"] floating enable
-for_window [class="Remmina"] border normal
-for_window [class="Audacity"] floating enable
+for_window [class="<interactive>"] border normal
+for_window [class="<interactive>"] floating enable
 for_window [class="Audacity"] border normal
-for_window [class="jetbrains-idea-ce"] border normal
-# for_window [class="processing-app-Base"] floating enable
-for_window [class="processing-app-Base"] border normal
-for_window [class="Teensy"] floating enable
-for_window [class="Teensy"] border normal
-for_window [class="Pidgin"] floating enable
-for_window [class="Pidgin"] border normal
-for_window [class="Skype"] floating enable
-for_window [class="Skype"] border normal
-for_window [class="Shutter"] floating enable
-for_window [class="Shutter"] border normal
+for_window [class="Audacity"] floating enable
+for_window [class="Genymotion"] border normal
+for_window [class="Genymotion"] floating enable
+for_window [class="Gmrun"] border 1pixel
+for_window [class="Gmrun"] floating enable
 for_window [class="Guvcview"] border normal
 for_window [class="Guvcview"] floating enable
-for_window [class="guvcview"] border normal
-for_window [class="guvcview"] floating enable
+for_window [class="LimeSuiteGUI"] border normal
+for_window [class="LimeSuiteGUI"] floating enable
 for_window [class="Nvidia-settings"] border normal
-for_window [class="Gmrun"] floating enable
-for_window [class="Gmrun"] border 1pixel
-for_window [class="Player"] floating enable
+for_window [class="Pidgin"] border normal
+for_window [class="Pidgin"] floating enable
 for_window [class="Player"] border normal
-for_window [class="Genymotion"] floating enable
-for_window [class="Genymotion"] border normal
-for_window [class="VirtualBox"] floating enable
-for_window [class="VirtualBox"] border normal
-for_window [class="R_x11"] floating enable
+for_window [class="Player"] floating enable
 for_window [class="R_x11"] border normal
-for_window [class="processing-app-Base"] floating enable
-for_window [class="processing-app-Base"] border normal
-for_window [class="obs"] floating enable
-for_window [class="obs"] border normal
-
-# for_window [class="Firefox"] floating enable
-# for_window [class="Firefox"] border normal
-
-for_window [title="Hangouts"] floating enable
-for_window [title="Hangouts"] border normal
-
-for_window [class="<interactive>"] floating enable
-for_window [class="<interactive>"] border normal
-for_window [class="com-install4j-runtime-launcher-UnixLauncher"] floating enable
-for_window [class="com-install4j-runtime-launcher-UnixLauncher"] border normal
-for_window [class="Wicd-client.py"] floating enable
+for_window [class="R_x11"] floating enable
+for_window [class="Remmina"] border normal
+for_window [class="Remmina"] floating enable
+for_window [class="Shutter"] border normal
+for_window [class="Shutter"] floating enable
+for_window [class="Simplescreenrecorder"] border normal
+for_window [class="Simplescreenrecorder"] floating enable
+for_window [class="Skype"] border normal
+for_window [class="Skype"] floating enable
+for_window [class="Teensy"] border normal
+for_window [class="Teensy"] floating enable
+for_window [class="VirtualBox"] border normal
+for_window [class="VirtualBox"] floating enable
 for_window [class="Wicd-client.py"] border 1pixel
-for_window [class="jclient-LoginFrame"] floating enable
+for_window [class="Wicd-client.py"] floating enable
+for_window [class="XnView"] border normal
+for_window [class="XnView"] floating enable
+for_window [class="Xscorch"] border normal
+for_window [class="Xscorch"] floating enable
+for_window [class="com-install4j-runtime-launcher-UnixLauncher"] border normal
+for_window [class="com-install4j-runtime-launcher-UnixLauncher"] floating enable
 for_window [class="crx_miieomcelenidlleokajkghmifldohpo"] border normal
 for_window [class="crx_miieomcelenidlleokajkghmifldohpo"] floating enable
+for_window [class="gnome-clocks"] floating enable
+for_window [class="guvcview"] border normal
+for_window [class="guvcview"] floating enable
+for_window [class="jclient-LoginFrame"] floating enable
+for_window [class="jetbrains-idea-ce"] border normal
+for_window [class="obs"] border normal
+for_window [class="obs"] floating enable
+for_window [class="org-igoweb-cgoban-CGoban"] border normal
+for_window [class="org-igoweb-cgoban-CGoban"] floating enable
+for_window [class="pavucontrol"] border normal
+for_window [class="pavucontrol"] floating enable
+for_window [class="processing-app-Base"] border normal
+for_window [class="processing-app-Base"] border normal
+for_window [class="processing-app-Base"] floating enable
+for_window [class="skypeforlinux"] border normal
+for_window [class="skypeforlinux"] floating enable
+for_window [class="system-config-printer.py"] border normal
+for_window [class="system-config-printer.py"] floating enable
+for_window [class="vlc"] border normal
+for_window [class="vlc"] floating enable
+for_window [class="zoom"] border normal
+for_window [class="zoom"] floating enable
 for_window [title="English Country Tune"] border normal
 for_window [title="English Country Tune"] floating enable
-for_window [title="ImageMagick"] floating enable
+for_window [title="Hangouts"] border normal
+for_window [title="Hangouts"] floating enable
 for_window [title="ImageMagick"] border normal
+for_window [title="ImageMagick"] floating enable
+for_window [title="diagram"] border normal
+for_window [title="diagram"] floating enable
+
+# for_window [title="Google Chrome"] border normal
+# for_window [title="Google Chrome"] floating enable
 
 for_window [window_role="popup"] no_focus
-
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-for_window [class="Xscorch"] floating enable
-for_window [class="Xscorch"] border normal
-for_window [class="skypeforlinux"] floating enable
-for_window [class="skypeforlinux"] border normal
-for_window [class="Simplescreenrecorder"] floating enable
-for_window [class="Simplescreenrecorder"] border normal
-for_window [class="org-igoweb-cgoban-CGoban"] floating enable
-for_window [class="org-igoweb-cgoban-CGoban"] border normal
+bindsym CTRL+$ALT+A [class="Slack"] focus
+bindsym CTRL+$ALT+B [class="URxvt"] focus
+bindsym CTRL+$ALT+C [title="Google Chrome"] focus
+bindsym CTRL+$ALT+D [title="DevTools"] focus
+bindsym CTRL+$ALT+E [class="Emacs"] focus
+bindsym CTRL+$ALT+F [class="Nightly"] focus
+bindsym CTRL+$ALT+K [class="Gitk"] focus
+bindsym CTRL+$ALT+V [title="nvim"] focus
+bindsym CTRL+$ALT+Z [class="zoom"] focus
 
-for_window [class="pavucontrol"] floating enable
-for_window [class="pavucontrol"] border normal
+#focus_on_window_activation none
 
-for_window [class="zoom"] floating enable
-for_window [class="zoom"] border normal
-
-for_window [title="diagram"] floating enable
-for_window [title="diagram"] border normal
-
-for_window [class="gnome-clocks"] floating enable
-
-
-for_window [class="LimeSuiteGUI"] floating enable
-for_window [class="LimeSuiteGUI"] border normal
-
-for_window [class="system-config-printer.py"] floating enable
-for_window [class="system-config-printer.py"] border normal
-
-# for_window [title="Pinboard - Save a Bookmark - Chromium"] floating enable
-# for_window [class="jetbrains-pycharm"] floating enable
-# for_window [class="jetbrains-pycharm"] border normal
+# bindings
+bindsym $mod+c exec google-chrome 2> /dev/null
 
 # autoruns
 exec --no-startup-id xrdb -merge ~/.Xresources
@@ -264,69 +269,24 @@ exec --no-startup-id xrdb -merge ~/.Xresources
 exec xrandr-on
 # exec compton
 
+# diable touchpad
+exec --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
+
 # exec --no-startup-id xset m 7/3 0
 exec --no-startup-id xinput --set-float-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Constant Deceleration' 0.5
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 
-# exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
-# exec --no-startup-id xautolock -time 90 -locker "xscreensaver-command -lock" -notify 60 -notifier "notify-send -t 60000 Activating screensaver..."
-
 exec --no-startup-id sudo wmname LG3D
-# exec --no-startup-id wicd-gtk -t
 exec --no-startup-id nm-applet
-exec --no-startup-id pidgin
+# exec --no-startup-id pidgin
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id blueman-applet
 exec --no-startup-id system-config-printer-applet
 
-# exec --no-startup-id sudo xfce4-power-manager
-# exec --no-startup-id xmodmap .xmodmap.laptop
-# exec --no-startup-id xmodmap .xmodmap
-# exec --no-startup-id udisks-glue
-# exec --no-startup-id emacs --daemon
-
-# diable touchpad
-exec --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' "Device Enabled" 0
-
-#bindings
-bindsym $mod+c exec google-chrome 2> /dev/null
-
-#sticky
-bindsym $mod+Shift+y sticky toggle
-
-#focus_on_window_activation none
-
-new_window none
-# new_float none
-
-#Changing border style
-bindsym $mod+t border normal
-bindsym $mod+y border 1pixel
-bindsym $mod+u border none
-
-# App hotkeys
-bindsym CTRL+$ALT+A [class="Slack"] focus
-bindsym CTRL+$ALT+B [class="URxvt"] focus
-bindsym CTRL+$ALT+C [class="Google-chrome-unstable"] focus
-bindsym CTRL+$ALT+E [class="Emacs"] focus
-bindsym CTRL+$ALT+F [class="Nightly"] focus
-bindsym CTRL+$ALT+V [title="nvim"] focus
-
-# exec --no-startup-id "i3-msg 'workspace 2; append_layout /home/jon/.i3/workspace-2.json'"
-# exec --no-startup-id thunderbird
-# exec --no-startup-id "i3-msg 'workspace 1; append_layout /home/jon/.i3/workspace-1b.json'"
-# exec --no-startup-id google-chrome
-# exec --no-startup-id urxvt
-# exec --no-startup-id urxvt
-# exec --no-startup-id urxvt
-# exec --no-startup-id xscreensaver -no-splash -no-capture-stderr -log ~/tmp/xscr.log 
+exec --no-startup-id  xautolock -time 30 -locker "i3lock -c 000000" -notify 10 -notifier "notify-send '[Locking]'"
+# exec --no-startup-id xautolock -time 90 -locker "xscreensaver-command -lock" -notify 60 -notifier "notify-send -t 60000 Activating screensaver..."
 
 exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/jon/.i3/workspace-9.json'"
 exec --no-startup-id emacs
 exec --no-startup-id "i3-msg 'workspace 1'
-
-
-exec_always feh --bg-scale /home/jon/fs/pic/mountains-dark.jpg
-# exec --no-startup-id bg-klein
-# exec emacs --daemon --with-x-toolkit=lucid
