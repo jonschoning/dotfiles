@@ -68,6 +68,28 @@
   (set-face-attribute 'default nil :height (+ (- 10) (face-attribute 'default :height))))
 (define-key global-map [?\C-x ?\C--] 'decrease-font-size)
 
+(defun my/org-mode-hook ()
+  "Stop the org-level headers from increasing in height relative to the other text."
+  (dolist (face '(org-level-1
+                  org-level-2
+                  org-level-3
+                  org-level-4
+                  org-level-5
+                  org-level-6
+                  org-level-7
+                  org-level-8))
+    (set-face-attribute face nil :height 1.0)))
+(add-hook 'org-mode-hook 'my/org-mode-hook)
+(defun my/markdown-mode-hook ()
+  "Stop the markdown-level headers from increasing in height relative to the other text."
+  (dolist (face '(markdown-header-face-1
+                  markdown-header-face-2
+                  markdown-header-face-3
+                  markdown-header-face-4
+                  markdown-header-face-5
+                  markdown-header-face-6))
+    (set-face-attribute face nil :height 1.0)))
+(add-hook 'markdown-mode-hook 'my/markdown-mode-hook)
 ; packages begin /********************************************************************************/ 
 (require 'package)
 (add-to-list 'package-archives
@@ -90,8 +112,8 @@
     (project (directory-files (concat dotfiles-dir ".emacs.d/vendor") t "\\w+"))
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
-(require 'elm-mode)
-(require 'rust-mode)
+;(require 'elm-mode)
+;(require 'rust-mode)
 
 (setq js-pkg-full
     '(js-terminal
@@ -323,6 +345,7 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . javascript-mode))
 
 ; rainbow
 ; (add-to-list 'load-path "~/.emacs.d/vendor/rainbow-delimiters")
