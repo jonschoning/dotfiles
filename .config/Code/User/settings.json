@@ -1,35 +1,35 @@
-// Place your settings in this file to overwrite the default settings
 {
-    "editor.lineNumbers": "on",
-    "git.autofetch": false,
-
-    "editor.fontSize": 13,
-    "editor.fontFamily": "Bitstream Vera Sans Mono",
-    //"editor.fontFamily": "monaco-js",
     "editor.cursorBlinking": "solid",
+    "editor.fontFamily": "Iosevka",
+    "editor.fontSize": 12,
     "editor.scrollBeyondLastLine": false,
+    "editor.lineNumbers": "on",
+    "editor.tabSize": 2,
+    "editor.cursorStyle": "block",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Gotham",
     "vim.useSystemClipboard": true,
-    "vim.enableNeovim": true,
-	"vim.useCtrlKeys": true,
-	"vim.insertModeKeyBindings": [
-		{
-			"before": ["j", "k"],
-			"after": ["<Esc>"]
-		}
-	]	
-,
-"editor.cursorStyle": "block",
-"window.zoomLevel": 0,
-"typescript.check.tscVersion": false,
-"vim.disableAnnoyingNeovimMessage": true,
-"files.associations": {
-    "*.julius": "javascript",
-    "*.hamlet": "html",
-  },
-"editor.tabSize": 2,
-"gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
-},
-"gitlens.historyExplorer.enabled": true,
-"workbench.colorTheme": "Gotham",
+    "vim.insertModeKeyBindings": [{
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "typescript.check.tscVersion": false,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.historyExplorer.enabled": true,
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#ff0099"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "editor.gotoLocation.multiple": "goto",
+    "files.associations": {
+        "*.julius": "javascript",
+        "*.hamlet": "html",
+    }
 }
