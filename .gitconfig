@@ -1,13 +1,14 @@
 [user]
     name = Jon Schoning
-    email = jonschoning@gmail.com
+    email = jon.schoning@polarissolutions.com
 [core]
     symlinks = false
 	#autocrlf = true
     whitespace = cr-at-eol,-trailing-space,-space-before-tab
     filemode = false
 	safecrlf = true
-	pager = less -F -X
+	pager = C:/dev/diff-so-fancy/diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = false
 [color]
     diff = auto
     status = auto
@@ -21,10 +22,11 @@
 [imap]
     folder = \"[Gmail]/Drafts\"
 [alias]
-	b = branch -a
-	l = log --graph --decorate --oneline                 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset'
-	ld = log  --graph --decorate --date=local 		   	 --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset'
-	lg = log  --graph --decorate --abbrev-commit --color --pretty=format:'%Cred%h%Creset%C(yellow bold)%d%Creset %C(white dim)%s%Creset %C(magenta dim)(%cr)%Creset %C(bold blue)<%an>%Creset'
+	b  = branch -a
+	l  = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
+	ll = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
+	lg  = log  --graph --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
+	lf  = log  --first-parent --graph --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
 	cb = checkout -b
 	db = branch -d
 	ck = checkout
@@ -40,17 +42,30 @@
 [push]
 	default = current
 [merge]
-  tool = meld_all
-# tool = nvimdiff
+	tool = meld_all
   prompt = false
+[mergetool]
+	prompt = false
 [mergetool "meld_merged"]
-    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+	keepBackup = false
+	trustExitCode = true
 [mergetool "meld_base"]
-    cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+  cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+	keepBackup = false
+	trustExitCode = true
 [mergetool "meld_all"]
-    cmd = meld --diff "$LOCAL" "$MERGED" "$REMOTE" --diff "$BASE $LOCAL" --diff "$BASE $REMOTE" --output "$MERGED"
+  cmd = meld --diff "$LOCAL" "$MERGED" "$REMOTE" --diff "$BASE $LOCAL" --diff "$BASE $REMOTE" --output "$MERGED"
+	keepBackup = false
+	trustExitCode = true
 [mergetool "nvimdiff"]
-    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd l' -c 'wincmd l' -c '$wincmd l' -c 'wincmd J' 
+  cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd l' -c 'wincmd l' -c '$wincmd l' -c 'wincmd J' 
+	keepBackup = false
+	trustExitCode = true
+[mergetool "vsdiffmerge"]
+	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+	keepBackup = false
+	trustExitCode = true
 [github]
 	user = jonschoning
 [gui]
@@ -58,9 +73,19 @@
 	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
 [credential]
 	helper = cache
-[web]
-	browser = surf
-[browser "surf"]
-	cmd = surf
 [pull]
   ff = only
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red reverse
+	newNormal = green bold
+	newHighlight = green reverse
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff]
+	tool = meld
