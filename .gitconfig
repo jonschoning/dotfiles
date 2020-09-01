@@ -1,6 +1,6 @@
 [user]
     name = Jon Schoning
-    email = jon.schoning@polarissolutions.com
+    email = jon@polaris.llc
 [core]
     symlinks = false
 	#autocrlf = true
@@ -23,6 +23,8 @@
     folder = \"[Gmail]/Drafts\"
 [alias]
 	b  = branch -a
+  	p = pull -p
+  	f = fetch -p
 	l  = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
 	ll = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
 	lg  = log  --graph --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
@@ -39,6 +41,7 @@
 	aa = add -A
 	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
 	pushf = push --force-with-lease
+	rsa = !git fetch origin master:master -p && git rebase master && git sa
 [push]
 	default = current
 [merge]
@@ -74,7 +77,7 @@
 [credential]
 	helper = cache
 [pull]
-  ff = only
+#  ff = only
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red reverse
