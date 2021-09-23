@@ -15,6 +15,12 @@
 (global-set-key (kbd "M-[") 'previous-buffer)
 (global-set-key (kbd "C-x C-e") 'eval-region)
 (global-set-key (kbd "C-S-u") 'universal-argument)
+
+;; (global-set-key (kbd "M-l") (lambda () (interactive) (insert "λ"))) ;lambda
+;; (global-set-key (kbd "M-f") (lambda () (interactive) (insert "→"))) ;function
+;; (global-set-key (kbd "M--") (lambda () (interactive) (insert "←"))) ;right arrow
+;; (global-set-key (kbd "M-\\") (lambda () (interactive) (insert "⫽"))) ;right-sided merge
+
 ; (setq debug-on-error t)
 (setq ensime-startup-snapshot-notification nil) 
 (server-start)
@@ -68,32 +74,32 @@
   (set-face-attribute 'default nil :height (+ (- 10) (face-attribute 'default :height))))
 (define-key global-map [?\C-x ?\C--] 'decrease-font-size)
 
-(defun my/org-mode-hook ()
-  "Stop the org-level headers from increasing in height relative to the other text."
-  (dolist (face '(org-level-1
-                  org-level-2
-                  org-level-3
-                  org-level-4
-                  org-level-5
-                  org-level-6
-                  org-level-7
-                  org-level-8))
-    (set-face-attribute face nil :height 1.0)))
-(add-hook 'org-mode-hook 'my/org-mode-hook)
-(defun my/markdown-mode-hook ()
-  "Stop the markdown-level headers from increasing in height relative to the other text."
-  (dolist (face '(markdown-header-face-1
-                  markdown-header-face-2
-                  markdown-header-face-3
-                  markdown-header-face-4
-                  markdown-header-face-5
-                  markdown-header-face-6))
-    (set-face-attribute face nil :height 1.0)))
-(add-hook 'markdown-mode-hook 'my/markdown-mode-hook)
+;; (defun my/org-mode-hook ()
+;;   "Stop the org-level headers from increasing in height relative to the other text."
+;;   (dolist (face '(org-level-1
+;;                   org-level-2
+;;                   org-level-3
+;;                   org-level-4
+;;                   org-level-5
+;;                   org-level-6
+;;                   org-level-7
+;;                   org-level-8))
+;;     (set-face-attribute face nil :height 1.0)))
+;; (add-hook 'org-mode-hook 'my/org-mode-hook)
+;; (defun my/markdown-mode-hook ()
+;;   "Stop the markdown-level headers from increasing in height relative to the other text."
+;;   (dolist (face '(markdown-header-face-1
+;;                   markdown-header-face-2
+;;                   markdown-header-face-3
+;;                   markdown-header-face-4
+;;                   markdown-header-face-5
+;;                   markdown-header-face-6))
+;;     (set-face-attribute face nil :height 1.0)))
+;; (add-hook 'markdown-mode-hook 'my/markdown-mode-hook)
 ; packages begin /********************************************************************************/ 
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  '("melpa" . "http://melpa.org/packages/") t)
 ;; (add-to-list 'package-archives
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
@@ -152,13 +158,13 @@
     (disable-theme (car custom-enabled-themes)))
   (load-theme theme t))
 
-(load-theme2 'danneskjold t)
+(load-theme2 'leuven-dark t)
+;(load-theme2 'danneskjold t)
 ;(load-theme2 'lab-light t)
 ;(load-theme2 'lab-dark t)
 ;(load-theme2 'ample-flat t)
 ;(load-theme2 'doom-tomorrow-night t)
 ;(load-theme2 'doom-one-light t)
-;(load-theme2 'leuven t)
 ;(load-theme2 'badwolf t)
 
 
@@ -187,20 +193,23 @@
  '(foreground-color "#cccccc")
  '(haskell-interactive-popup-errors nil)
  '(haskell-process-show-debug-tips nil)
+ '(hl-sexp-background-color "#efebe9")
  '(jdee-db-active-breakpoint-face-colors (cons "#0d0d0d" "#41728e"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#0d0d0d" "#b5bd68"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#0d0d0d" "#5a5b5a"))
  '(line-number-mode nil)
+ '(markdown-header-scaling nil)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
-    (dhall-mode srcery-theme eziam-theme danneskjold-theme noctilux-theme avk-emacs-themes color-theme ample-theme brutalist-theme airline-themes lab-themes csharp-mode ac-html-csswatcher rg inkpot-theme js-format nodejs-repl typescript-mode gotham-theme rust-mode dante kaolin-theme afternoon-theme flatui-dark-theme flatui-theme material-theme doom-themes mustache-mode mustache lsp-rust lsp-mode ox-gfm racket-mode flycheck-haskell zenburn-theme zeal-at-point yaml-mode w3m use-package tuareg tle tao-theme strace-mode smex scala-mode2 rustfmt rjsx-mode rinari restart-emacs react-snippets rainbow-delimiters psci psc-ide powershell persp-mode-projectile-bridge pdf-tools oceanic-theme multi-term mu4e-maildirs-extension mu4e-alert markdown-mode key-chord jsx-mode jist iy-go-to-char ir-black-theme intero idris-mode ido-vertical-mode ido-ubiquitous ido-grid-mode hydra hindent haskell-emacs go-mode go gh fstar-mode fsharp-mode format-sql flymd flymake-rust flycheck-stack flycheck-rust flycheck-purescript flycheck-ocaml flycheck-elm evil-surround evil-paredit evil-org evil-matchit evil-magit evil-leader evil-commentary ess-view ess-R-object-popup ess-R-data-view ensime elm-mode elixir-mode eink-theme ein ediprolog docker discover-my-major dired+ deferred darktooth-theme company-ghci company-ghc circe cargo blackboard-theme badwolf-theme atom-one-dark-theme aria2 anzu ahk-mode ack-menu ack ac-emmet ac-cider)))
+    (lsp-haskell lsp-ui lsp-mode leuven-theme markdown-mode ox-reveal org-re-reveal-ref htmlize nix-haskell-mode jist magit-popup magit evil-magit toml-mode flycheck-rust racer dockerfile-mode dhall-mode srcery-theme eziam-theme danneskjold-theme noctilux-theme avk-emacs-themes color-theme ample-theme brutalist-theme airline-themes lab-themes csharp-mode ac-html-csswatcher rg inkpot-theme js-format nodejs-repl typescript-mode gotham-theme rust-mode dante kaolin-theme afternoon-theme flatui-dark-theme flatui-theme material-theme doom-themes mustache-mode mustache ox-gfm racket-mode flycheck-haskell zenburn-theme zeal-at-point yaml-mode w3m use-package tuareg tle tao-theme strace-mode smex scala-mode2 rjsx-mode rinari restart-emacs react-snippets rainbow-delimiters psci psc-ide powershell persp-mode-projectile-bridge pdf-tools oceanic-theme multi-term mu4e-maildirs-extension mu4e-alert key-chord jsx-mode iy-go-to-char ir-black-theme idris-mode ido-vertical-mode ido-ubiquitous ido-grid-mode hydra hindent haskell-emacs go-mode go gh fstar-mode fsharp-mode format-sql flymd flymake-rust flycheck-stack flycheck-purescript flycheck-ocaml flycheck-elm evil-surround evil-paredit evil-org evil-matchit evil-leader evil-commentary ess-view ess-R-object-popup ess-R-data-view ensime elm-mode elixir-mode eink-theme ein ediprolog discover-my-major dired+ deferred darktooth-theme company-ghci company-ghc circe blackboard-theme badwolf-theme atom-one-dark-theme aria2 anzu ahk-mode ack-menu ack ac-emmet ac-cider)))
  '(pdf-view-midnight-colors (quote ("#eeeeee" . "#000000")))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
  '(safe-local-variable-values
    (quote
-    ((intero-targets "AOC2018:lib" "AOC2018:exe:AOC2018" "AOC2018:test:spec")
+    ((org-reveal-title-slide . "<h1 class='title'>%t</h1> <h2 class='subtitle'>%s</h2> <h3 class='author'>%a</h3>")
+     (intero-targets "AOC2018:lib" "AOC2018:exe:AOC2018" "AOC2018:test:spec")
      (haskell-process-use-ghci . t)
      (haskell-indent-spaces . 4)
      (intero-targets "grotesque:lib")
@@ -239,7 +248,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Iosevka" :slant normal :weight normal :height 100 :width normal))))
- '(cursor ((t (:background "#ff0099")))))
+ '(cursor ((t (:background "#ff0099"))))
+ '(markdown-code-face ((t (:background "gray25" :family "Iosevka"))))
+ '(markdown-inline-code-face ((t (:inherit font-lock-constant-face)))))
 
 ;; (custom-set-faces '(default ((t (:family "Iosevka" :height 110)))))
 ;; (custom-set-faces '(default ((t (:family "Monoid" :height 110)))))
@@ -248,14 +259,14 @@
 
 (require 'evil)    
 (evil-mode 1)  
-(require 'undo-tree)
+;; (require 'undo-tree)
 (require 'evil-matchit)
 (global-evil-matchit-mode 1)
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 (evil-commentary-mode)
-(require 'magit)
-(require 'evil-magit)
+;(require 'magit)
+;(require 'evil-magit)
 
 (electric-pair-mode)
 
@@ -264,6 +275,8 @@
 ; (ess-toggle-underscore nil)
 ;(pdf-tools-install)
 ; (define-key evil-normal-state-map (kbd "C-]") (kbd "\\ M-.")
+
+(setq company-tooltip-align-annotations t)
 
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
@@ -299,7 +312,7 @@
                     (comint-mode . emacs)
                     (gnus-tree-mode . emacs)
                     (haskell-interactive-mode . emacs)
-                    (intero-repl-mode . emacs)
+                    ;; (intero-repl-mode . emacs)
                     (idris-repl-mode . emacs)
                     (idris-info-mode . emacs)
                     (idris-hole-list-mode . emacs)
@@ -398,9 +411,9 @@
 (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
 (eval-after-load "haskell-mode"
   '(progn
-     (define-key haskell-mode-map (kbd "<f12>") 'intero-goto-definition)
-     (define-key haskell-mode-map (kbd "C-c C-g") 'intero-goto-definition)
-     (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+     (define-key haskell-mode-map (kbd "<f12>") 'haskell-mode-jump-to-def)
+     (define-key haskell-mode-map (kbd "C-c C-g") 'haskell-mode-jump-to-def)
+     ;; (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
      ))
 (defun hackage-doc (&optional pkg)
   "Open browser pointing to stackage for the given pkg. Precede with C-u to open in hackage."
@@ -431,13 +444,13 @@
   (browse-local-hackage-doc
    (funcall 'ido-completing-read "Package name: "
             (list-sandbox-docs))))
-(defun intero-targets-quiet (targets)
-  "intero-targets that never saves a dir-local of your decision"
-  (interactive (list (intero-read-targets)))
-  (intero-targets targets nil))
+;; (defun intero-targets-quiet (targets)
+;;   "intero-targets that never saves a dir-local of your decision"
+;;   (interactive (list (intero-read-targets)))
+;;   (intero-targets targets nil))
 (defalias 'hd 'hackage-doc)
 (defalias 'hpr 'haskell-process-restart)
-(defalias 'itq 'intero-targets-quiet)
+;; (defalias 'itq 'intero-targets-quiet)
 (defalias 'lhd 'local-hackage-doc)
 
 ; (with-eval-after-load 'intero
@@ -586,3 +599,40 @@ codepoints starting from codepoint-start."
   (setq prettify-symbols-alist
         (append my-hasklig-ligatures prettify-symbols-alist))
   (prettify-symbols-mode))
+
+
+(add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
+(add-hook 'purescript-mode-hook
+          (lambda ()
+            ;; (push '("->" . ?→) prettify-symbols-alist)
+            ;; (push '("=>" . ?⇒) prettify-symbols-alist)
+            (psc-ide-mode)
+            (turn-on-purescript-indentation)
+            ))
+
+(add-hook 'dhall-mode-hook
+          (lambda ()
+            (define-key dhall-mode-map (kbd "M-/") (lambda () (interactive) (insert "⫽")))
+            (define-key dhall-mode-map (kbd "M-l") (lambda () (interactive) (insert "λ")))
+            (define-key dhall-mode-map (kbd "M-f") (lambda () (interactive) (insert "→")))
+            ))
+
+;; Rust
+(require 'rust-mode)
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode)
+  (define-key rust-mode-map (kbd "C-SPC") #'company-indent-or-complete-common)
+  )
+(add-hook 'rust-mode-hook
+  (lambda ()
+    (racer-mode)
+    (company-mode)
+    (flycheck-mode)
+    (cargo-minor-mode)
+  ))
+
+;; Reveal
+(require 'ox-reveal)
+(setq org-reveal-root "file:///home/jon/node_modules/reveal.js")

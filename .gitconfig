@@ -1,30 +1,31 @@
 [user]
-    name = Jon Schoning
-    email = jon@polaris.llc
+  name = Jon Schoning
+  email = jonschoning@gmail.com
 [core]
-    symlinks = false
+  symlinks = true
 	#autocrlf = true
-    whitespace = cr-at-eol,-trailing-space,-space-before-tab
-    filemode = false
+  whitespace = cr-at-eol,-trailing-space,-space-before-tab
+  filemode = false
 	safecrlf = true
-	pager = C:/dev/diff-so-fancy/diff-so-fancy | less --tabs=4 -RFX
-	autocrlf = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[commit]
+	gpgsign = true
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = true
 	ui = true
 [pack]
-    packSizeLimit = 2g
+  packSizeLimit = 2g
 [help]
-    format = html
+  format = html
 [imap]
-    folder = \"[Gmail]/Drafts\"
+  folder = \"[Gmail]/Drafts\"
 [alias]
 	b  = branch -a
-  	p = pull -p
-  	f = fetch -p
+  p = pull -p
+  f = fetch -p
 	l  = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
 	ll = log  --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
 	lg  = log  --graph --decorate --abbrev-commit --color --date=format:%y-%m-%d --pretty=format:'%Cred%h%Creset %C(magenta dim)(%cd)%Creset %C(bold blue)<%an%Creset%C(dim blue)|%cn%Creset%C(bold blue)>%Creset %C(white dim)%s%Creset%C(yellow bold)%d%Creset %C(dim blue)%G? %GK%Creset'
@@ -41,48 +42,48 @@
 	aa = add -A
 	rl = rev-list --ancestry-path --first-parent tfs/default..HEAD
 	pushf = push --force-with-lease
-	rsa = !git fetch origin master:master -p && git rebase master && git sa
+  rsa = !git fetch origin master:master -p && git rebase master && git sa
+  br = config --get-regexp "branch\\..+\\.remote"
+  # brc = config --get-regexp "branch\\.$(git branch --show-current)\\.remote"
 [push]
 	default = current
 [merge]
-	tool = meld_all
+  tool = meld_all
+# tool = nvimdiff
   prompt = false
-[mergetool]
-	prompt = false
 [mergetool "meld_merged"]
-  cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-	keepBackup = false
-	trustExitCode = true
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 [mergetool "meld_base"]
-  cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
-	keepBackup = false
-	trustExitCode = true
+    cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 [mergetool "meld_all"]
-  cmd = meld --diff "$LOCAL" "$MERGED" "$REMOTE" --diff "$BASE $LOCAL" --diff "$BASE $REMOTE" --output "$MERGED"
-	keepBackup = false
-	trustExitCode = true
+    cmd = meld --diff "$LOCAL" "$MERGED" "$REMOTE" --diff "$BASE $LOCAL" --diff "$BASE $REMOTE" --output "$MERGED"
 [mergetool "nvimdiff"]
-  cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd l' -c 'wincmd l' -c '$wincmd l' -c 'wincmd J' 
-	keepBackup = false
-	trustExitCode = true
-[mergetool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
-	keepBackup = false
-	trustExitCode = true
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd l' -c 'wincmd l' -c '$wincmd l' -c 'wincmd J' 
 [github]
 	user = jonschoning
 [gui]
 	fontui = -family \"Gravur Condensed\" -size 11 -weight normal -slant roman -underline 0 -overstrike 0
 	fontdiff = -family \"Bitstream Vera Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
 [credential]
-	helper = cache
+	helper = store
+[web]
+	browser = browser
+[browser "browser"]
+	cmd = brave-browser-f
+[diff]
+	compactionHeuristic = true
+	algorithm = histogram
+#[pager]
+#	log = diff-highlight | less
+#	show = diff-highlight | less
+#	diff = diff-highlight | less
 [pull]
-#  ff = only
+	ff = only
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = red reverse
+	oldHighlight = red bold 52
 	newNormal = green bold
-	newHighlight = green reverse
+	newHighlight = green bold 22
 [color "diff"]
 	meta = yellow
 	frag = magenta bold
@@ -90,5 +91,3 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
-[diff]
-	tool = meld
