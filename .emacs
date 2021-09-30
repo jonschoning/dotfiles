@@ -16,13 +16,6 @@
 (global-set-key (kbd "C-x C-e") 'eval-region)
 (global-set-key (kbd "C-S-u") 'universal-argument)
 
-;; (global-set-key (kbd "M-l") (lambda () (interactive) (insert "λ"))) ;lambda
-;; (global-set-key (kbd "M-f") (lambda () (interactive) (insert "→"))) ;function
-;; (global-set-key (kbd "M--") (lambda () (interactive) (insert "←"))) ;right arrow
-;; (global-set-key (kbd "M-\\") (lambda () (interactive) (insert "⫽"))) ;right-sided merge
-
-; (setq debug-on-error t)
-(setq ensime-startup-snapshot-notification nil) 
 (server-start)
 
 (electric-indent-mode +1)
@@ -30,72 +23,34 @@
 
 (global-linum-mode t)
 
-;(require 'ensime)
-;(define-key ensime-mode-map (kbd "M-.") 'ensime-inspect-type-at-point)
-;(add-hook 'prog-mode-hook (lambda () (subword-mode 0)))
-;(add-hook 'haskell-mode-hook (lambda () (subword-mode 1)))
-
-;(require 'rg)
-
-;; Always ALWAYS use UTF-8
+;; always use UTF-8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (load-library "iso-transl")
 
 (setq abbrev-mode t)
-
-;; Automatically save buffers before compiling
-(setq compilation-ask-about-save nil)
-
-;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
-(defalias 'yes-or-no-p 'y-or-n-p)
-
+(setq compilation-ask-about-save nil) ;; Automatically save buffers before compiling
+(defalias 'yes-or-no-p 'y-or-n-p) ;; Always ask for y/n keypress instead of typing out 'yes' or 'no'
 (setq make-backup-files nil)
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-(setq browse-url-browser-function 'browse-url-generic
-    browse-url-generic-program "google-chrome")
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq browse-url-browser-function 'browse-url-generic browse-url-generic-program "google-chrome")
 
 (defun font-size (n)
    "Prompt the user for font-size n, and apply to set-face-attribute :height"
   (interactive "nfont-size: ")
   (set-face-attribute 'default nil :height (* 10 n)))
-
 (defun increase-font-size ()
   (interactive)
   (set-face-attribute 'default nil :height (+ 10 (face-attribute 'default :height))))
 (define-key global-map [?\C-x ?\C-=] 'increase-font-size)
-
 (defun decrease-font-size ()
   (interactive)
   (set-face-attribute 'default nil :height (+ (- 10) (face-attribute 'default :height))))
 (define-key global-map [?\C-x ?\C--] 'decrease-font-size)
 
-;; (defun my/org-mode-hook ()
-;;   "Stop the org-level headers from increasing in height relative to the other text."
-;;   (dolist (face '(org-level-1
-;;                   org-level-2
-;;                   org-level-3
-;;                   org-level-4
-;;                   org-level-5
-;;                   org-level-6
-;;                   org-level-7
-;;                   org-level-8))
-;;     (set-face-attribute face nil :height 1.0)))
-;; (add-hook 'org-mode-hook 'my/org-mode-hook)
-;; (defun my/markdown-mode-hook ()
-;;   "Stop the markdown-level headers from increasing in height relative to the other text."
-;;   (dolist (face '(markdown-header-face-1
-;;                   markdown-header-face-2
-;;                   markdown-header-face-3
-;;                   markdown-header-face-4
-;;                   markdown-header-face-5
-;;                   markdown-header-face-6))
-;;     (set-face-attribute face nil :height 1.0)))
-;; (add-hook 'markdown-mode-hook 'my/markdown-mode-hook)
+
 ; packages begin /********************************************************************************/ 
 (require 'package)
 (add-to-list 'package-archives
@@ -106,40 +61,18 @@
 
 (defun package-require (pkg)
   "Install a package only if it's not already installed."
-  (when (not (package-installed-p pkg))
-    (package-install pkg)))
+  (when (not (package-installed-p pkg)) (package-install pkg)))
 
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
+(setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path (concat dotfiles-dir ".emacs.d/init"))
 
 ;; Add every subdirectory of ~/.emacs.d/vendor to the load path
-(dolist
-    (project (directory-files (concat dotfiles-dir ".emacs.d/vendor") t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
-;(require 'elm-mode)
-;(require 'rust-mode)
-
-(setq js-pkg-full
-    '(js-terminal
-      js-dired
-      js-nav
-      js-ido
-      js-git
-      js-org
-      ;;js-mail
-       ))
-
-;; Now load other things
-(dolist (file js-pkg-full)
-  (require file))
+(dolist (project (directory-files (concat dotfiles-dir ".emacs.d/vendor") t "\\w+"))
+  (when (file-directory-p project) (add-to-list 'load-path project)))
 
 ;; Macro for X specific code
-(defmacro Xlaunch (&rest x)
-  (list 'if (eq window-system 'x) (cons 'progn x)))
-(Xlaunch (require 'js-x11))
-
+; (defmacro Xlaunch (&rest x) (list 'if (eq window-system 'x) (cons 'progn x)))
+; (Xlaunch (require 'js-x11))
 
 ;; theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
@@ -160,13 +93,6 @@
 
 (load-theme2 'leuven-dark t)
 ;(load-theme2 'danneskjold t)
-;(load-theme2 'lab-light t)
-;(load-theme2 'lab-dark t)
-;(load-theme2 'ample-flat t)
-;(load-theme2 'doom-tomorrow-night t)
-;(load-theme2 'doom-one-light t)
-;(load-theme2 'badwolf t)
-
 
 (defun new-buffer ()
   (interactive)
@@ -252,45 +178,22 @@
  '(markdown-code-face ((t (:background "gray25" :family "Iosevka"))))
  '(markdown-inline-code-face ((t (:inherit font-lock-constant-face)))))
 
-;; (custom-set-faces '(default ((t (:family "Iosevka" :height 110)))))
-;; (custom-set-faces '(default ((t (:family "Monoid" :height 110)))))
-
-;; '(default ((t (:family "Bitstream Vera Sans Mono" :slant normal :weight normal :height 100 :width normal))))
-
 (require 'evil)    
 (evil-mode 1)  
 ;; (require 'undo-tree)
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
+;; (require 'evil-matchit)
+;; (global-evil-matchit-mode 1)
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 (evil-commentary-mode)
 ;(require 'magit)
 ;(require 'evil-magit)
 
-(electric-pair-mode)
-
-; (load "ess-site")
-; (require 'ess-view)
-; (ess-toggle-underscore nil)
-;(pdf-tools-install)
-; (define-key evil-normal-state-map (kbd "C-]") (kbd "\\ M-.")
+;;(electric-pair-mode)
 
 (setq company-tooltip-align-annotations t)
 
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'sgml-mode-hook 'auto-complete-mode)
-(add-hook 'html-mode-hook 'emmet-mode)
-(add-hook 'html-mode-hook 'auto-complete-mode)
-(add-hook 'html-mode-hook 'linum-mode)
-(add-hook 'css-mode-hook  'emmet-mode)
-(add-hook 'css-mode-hook  'auto-complete-mode)
-(add-hook 'css-mode-hook  'ac-emmet-css-setup)
-(add-hook 'css-mode-hook  'linum-mode)
-
 (define-key evil-normal-state-map (kbd "M-.") nil)
-
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-insert-state-map (kbd "C-u")
@@ -298,7 +201,6 @@
     (interactive)
     (evil-delete (point-at-bol) (point))))
 (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
-(define-key evil-insert-state-map (kbd "C-@") 'company-complete)
 
 (require 'key-chord)
 (key-chord-mode 1)
@@ -307,26 +209,13 @@
 (key-chord-mode 1)
 
 ;; modes to map to different default states
-(dolist (mode-map '((ag-mode . emacs)
-                    (cider-repl-mode . emacs)
-                    (comint-mode . emacs)
+(dolist (mode-map '((comint-mode . emacs)
                     (gnus-tree-mode . emacs)
                     (haskell-interactive-mode . emacs)
-                    ;; (intero-repl-mode . emacs)
-                    (idris-repl-mode . emacs)
-                    (idris-info-mode . emacs)
-                    (idris-hole-list-mode . emacs)
-                    (idris-prover-script-mode . emacs)
-                    (idris-tree-info-mode . emacs)
                     (eshell-mode . emacs)
                     (fundamental-mode . emacs)
                     (error-mode . emacs)
-                    (git-commit-mode . insert)
-                    (git-rebase-mode . emacs)
-                    (circe-server-mode . emacs)
-                    (circe-channel-mode . emacs)
                     (help-mode . emacs)
-                    (pdf-view-mode . emacs)
                     (term-mode . emacs)))
   (evil-set-initial-state `,(car mode-map) `,(cdr mode-map)))
 (global-set-key (kbd "C-z") 'evil-mode)
@@ -335,17 +224,8 @@
 (setq auto-mode-alist (cons '("\.hamlet$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.julius$" . javascript-mode) auto-mode-alist))
 
-; (company-quickhelp-mode 1) 
-;(add-to-list 'company-backends 'company-ghc)
-
 ; ibuffer
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
-
-;gnus
-(setq gnus-select-method '(nntp "news.gmane.org")
-      ;gnus-use-trees 't
-      )
-
 
 ; paredit
 (add-to-list 'load-path "~/.emacs.d/vendor/paredit")
@@ -358,6 +238,8 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+; typescript
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . javascript-mode))
 
 ; rainbow
@@ -376,31 +258,8 @@
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-; (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
-; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-
-; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 ; (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
-; (setq haskell-process-show-debug-tips nil)
-
-; (autoload 'ghc-init "ghc" nil t)
-; (autoload 'ghc-debug "ghc" nil t)
-; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-; (add-hook 'haskell-mode-hook (lambda () 
-;  (local-set-key (kbd "<f12>") 'ghc-show-type)
-;  (local-set-key (kbd "<S-f12>") 'ghc-show-info)
-;  (local-set-key (kbd "<tab>") 'ghc-complete)
-;  (setq zeal-at-point-docset "haskell")
-;  ))
-
-;; circe
-(setq circe-reduce-lurker-spam t)
-(setq circe-network-options
-      `(("Freenode"
-         :nick "_platz"
-         :host "irc.freenode.net"
-         :port (6667 . 6697))))
 
 ; ; haskell
 (require 'f)
@@ -444,20 +303,13 @@
   (browse-local-hackage-doc
    (funcall 'ido-completing-read "Package name: "
             (list-sandbox-docs))))
-;; (defun intero-targets-quiet (targets)
-;;   "intero-targets that never saves a dir-local of your decision"
-;;   (interactive (list (intero-read-targets)))
-;;   (intero-targets targets nil))
 (defalias 'hd 'hackage-doc)
 (defalias 'hpr 'haskell-process-restart)
 ;; (defalias 'itq 'intero-targets-quiet)
 (defalias 'lhd 'local-hackage-doc)
 
-; (with-eval-after-load 'intero
-;   (setf (flycheck-checker-get 'intero 'next-checkers) '((warning . haskell-hlint))))
-
+; ; purescript
 (require 'psc-ide)
-
 (add-hook 'purescript-mode-hook
   (lambda ()
     (psc-ide-mode)
@@ -472,80 +324,6 @@
   "bower_components/purescript-*/src/**/*.purs"))
 
 (setq psc-ide-use-npm-bin t)
-
-; (autoload 'ghc-init "ghc" nil t)
-; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-; (eval-after-load "haskell-mode"
-;   '(progn
-;      (define-key haskell-mode-map (kbd "C-x C-d") nil)
-;      (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-;      (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
-;      (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
-;      (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
-;      (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-;      (define-key haskell-mode-map (kbd "C-c M-.") nil)
-;      (define-key haskell-mode-map (kbd "C-c C-d") nil)))
-
-; ; (add-hook 'haskell-mode-hook 'turn-on-haskell-font-lock)
-; ; (let ((font "Hasklig"))
-; ;   (set-default-font font nil t)
-; ;   (set-fontset-font t '(8500 . 8800) font))
-; ; (setq haskell-font-lock-symbols t)
-
-;; (require 'iy-go-to-char)
-;; (global-set-key (kbd "C-c f") 'iy-go-to-char)
-;; (global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
-;; (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
-;; (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
-;; (global-set-key (kbd "C-c t") 'iy-go-up-to-char)
-;; (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
-
-;; specify the path to the plugin directory
-; (add-to-list 'load-path "~/.emacs.d/lisp/psc-ide-emacs/")
-;; specify path to the 'psc-ide' executable
-; (customize-set-variable 'psc-ide-executable "/home/jon/.local/bin/psc-ide")
-; (require 'psc-ide)
-; (add-hook 'purescript-mode-hook
-;  (lambda ()
-;    (psc-ide-mode)
-;    (company-mode)))
-
-
-
-; ; (require 'yasnippet)
-; ; (yas-global-mode 1)
-
-; (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
-; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-
-; (projectile-global-mode)
-
-; ; arduino
-; (add-to-list 'load-path "~/.emacs.d/vendor/arduino-mode")
-; (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-; (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
-
-(defun my-flymd-browser-function (url)
-  (let ((browse-url-browser-function 'browse-url-firefox))
-    (browse-url url)))
-(setq flymd-browser-open-function 'my-flymd-browser-function)
-
-
-;; (require 'json)
-;; (require 'cl-lib)
-;; (require 'files)
-;; (require 'ido)
-;; (require 'thingatpt)
-;; (require 'dash)
-;; (require 'compile)
-;; (require 'dired)
-;; (require 'popup)
-;; (require 'etags)
-;; (require 'flycheck)
-;; (require 's)
-
-;; (add-to-list 'load-path (expand-file-name (concat (file-name-directory (or load-file-name buffer-file-name)) "/src/")))
-;; (add-to-list 'load-path (expand-file-name (concat (file-name-directory (or load-file-name buffer-file-name)) "/src/actions")))
 
 
 (defun shell-command-on-region-replace (start end command)
@@ -566,57 +344,6 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 
-(defun my-correct-symbol-bounds (pretty-alist)
-  "Prepend a TAB character to each symbol in this alist,
-this way compose-region called by prettify-symbols-mode
-will use the correct width of the symbols
-instead of the width measured by char-width."
-  (mapcar (lambda (el)
-            (setcdr el (string ?\t (cdr el)))
-            el)
-          pretty-alist))
-
-(defun my-ligature-list (ligatures codepoint-start)
-  "Create an alist of strings to replace with
-codepoints starting from codepoint-start."
-  (let ((codepoints (-iterate '1+ codepoint-start (length ligatures))))
-    (-zip-pair ligatures codepoints)))
-
-                                        ; list can be found at https://github.com/i-tu/Hasklig/blob/master/GlyphOrderAndAliasDB#L1588
-(setq my-hasklig-ligatures
-      (let* ((ligs '("&&" "***" "*>" "\\\\" "||" "|>" "::"
-                     "==" "===" "==>" "=>" "=<<" "!!" ">>"
-                     ">>=" ">>>" ">>-" ">-" "->" "-<" "-<<"
-                     "<*" "<*>" "<|" "<|>" "<$>" "<>" "<-"
-                     "<<" "<<<" "<+>" ".." "..." "++" "+++"
-                     "/=" ":::" ">=>" "->>" "<=>" "<=<" "<->")))
-        (my-correct-symbol-bounds (my-ligature-list ligs #Xe100))))
-
-;; nice glyphs for haskell with hasklig
-(defun my-set-hasklig-ligatures ()
-  (interactive)
-  "Add hasklig ligatures for use with prettify-symbols-mode."
-  (setq prettify-symbols-alist
-        (append my-hasklig-ligatures prettify-symbols-alist))
-  (prettify-symbols-mode))
-
-
-(add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
-(add-hook 'purescript-mode-hook
-          (lambda ()
-            ;; (push '("->" . ?→) prettify-symbols-alist)
-            ;; (push '("=>" . ?⇒) prettify-symbols-alist)
-            (psc-ide-mode)
-            (turn-on-purescript-indentation)
-            ))
-
-(add-hook 'dhall-mode-hook
-          (lambda ()
-            (define-key dhall-mode-map (kbd "M-/") (lambda () (interactive) (insert "⫽")))
-            (define-key dhall-mode-map (kbd "M-l") (lambda () (interactive) (insert "λ")))
-            (define-key dhall-mode-map (kbd "M-f") (lambda () (interactive) (insert "→")))
-            ))
-
 ;; Rust
 (require 'rust-mode)
 (with-eval-after-load 'rust-mode
@@ -636,3 +363,226 @@ codepoints starting from codepoint-start."
 ;; Reveal
 (require 'ox-reveal)
 (setq org-reveal-root "file:///home/jon/node_modules/reveal.js")
+
+;; (global-set-key (kbd "M-l") (lambda () (interactive) (insert "λ"))) ;lambda
+;; (global-set-key (kbd "M-f") (lambda () (interactive) (insert "→"))) ;function
+;; (global-set-key (kbd "M--") (lambda () (interactive) (insert "←"))) ;right arrow
+;; (global-set-key (kbd "M-\\") (lambda () (interactive) (insert "⫽"))) ;right-sided merge
+
+; (setq debug-on-error t)
+
+;; (defun my/org-mode-hook ()
+;;   "Stop the org-level headers from increasing in height relative to the other text."
+;;   (dolist (face '(org-level-1
+;;                   org-level-2
+;;                   org-level-3
+;;                   org-level-4
+;;                   org-level-5
+;;                   org-level-6
+;;                   org-level-7
+;;                   org-level-8))
+;;     (set-face-attribute face nil :height 1.0)))
+;; (add-hook 'org-mode-hook 'my/org-mode-hook)
+;; (defun my/markdown-mode-hook ()
+;;   "Stop the markdown-level headers from increasing in height relative to the other text."
+;;   (dolist (face '(markdown-header-face-1
+;;                   markdown-header-face-2
+;;                   markdown-header-face-3
+;;                   markdown-header-face-4
+;;                   markdown-header-face-5
+;;                   markdown-header-face-6))
+;;     (set-face-attribute face nil :height 1.0)))
+;; (add-hook 'markdown-mode-hook 'my/markdown-mode-hook)
+
+
+;;; js-nav.el -- Navigation things.
+
+(package-require 'dash)
+(require 'dash)
+
+;; Make PgUp/Dn move the point.
+(setq scroll-error-top-bottom t)
+
+;; Smart home key
+(defun smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line."
+  (interactive "^")
+  (let ((oldpos (point)))
+    (back-to-indentation)
+    (and (= oldpos (point))
+         (beginning-of-line))))
+(global-set-key (kbd "<home>") 'smart-beginning-of-line)
+(global-set-key (kbd "C-a") 'smart-beginning-of-line)
+
+;; Subword mode (consider CamelCase chunks as words)
+(global-subword-mode 0)
+
+;; anzu: display incremental search stats in modeline
+(package-require 'anzu)
+(global-anzu-mode 1)
+
+;;; Project Explorer
+
+;; Transpose (rotate if multiple) windows
+(defun rotate-windows ()
+  "Rotate your windows"
+  (interactive)
+  (cond ((not (> (count-windows)1))
+         (message "You can't rotate a single window!"))
+        (t
+         (setq i 1)
+         (setq numWindows (count-windows))
+         (while  (< i numWindows)
+           (let* (
+                  (w1 (elt (window-list) i))
+                  (w2 (elt (window-list) (+ (% i numWindows) 1)))
+
+                  (b1 (window-buffer w1))
+                  (b2 (window-buffer w2))
+
+                  (s1 (window-start w1))
+                  (s2 (window-start w2))
+                  )
+             (set-window-buffer w1  b2)
+             (set-window-buffer w2 b1)
+             (set-window-start w1 s2)
+             (set-window-start w2 s1)
+             (setq i (1+ i)))))))
+
+(global-set-key (kbd "C-x C-o") 'rotate-windows)
+
+;; Help for major modes
+(package-require 'discover-my-major)
+(global-set-key (kbd "C-h C-m") 'discover-my-major)
+
+(defun open-dotemacs-file ()
+  "Rotate your windows"
+  (interactive)
+  (find-file (concat dotfiles-dir ".emacs"))
+  )
+
+;; (global-set-key (kbd "C-x C-e") 'open-dotemacs-file)
+
+;; Kill buffer in other window
+(global-set-key (kbd "C-x p")
+                (lambda () (interactive)
+                  (save-excursion
+                    (other-window 1)
+                    (quit-window))))
+
+;;; js-dired.el -- Dired extensions
+
+(package-require 'dired+)
+(require 'dired+)
+(set-face-foreground 'diredp-file-name nil)
+(setq-default diredp-hide-details-initially-flag nil)
+(diredp-toggle-find-file-reuse-dir 1) 
+
+;; left-click opens in same buffer insted of other-window
+(define-key dired-mode-map (kbd "<mouse-2>") 'diredp-mouse-find-file)
+
+;; Auto refresh buffers
+(global-auto-revert-mode 1)
+
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+(setq dired-listing-switches "-laGh1v --group-directories-first")
+
+;; File management shortcuts
+
+(defun delete-current-buffer-file ()
+  "Removes file connected to current buffer and kills buffer."
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (buffer (current-buffer))
+        (name (buffer-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (ido-kill-buffer)
+      (when (yes-or-no-p "Are you sure you want to remove this file? ")
+        (delete-file filename)
+        (kill-buffer buffer)
+        (message "File '%s' successfully removed" filename)))))
+
+(defun rename-current-buffer-file ()
+  "Renames current buffer and file it is visiting."
+  (interactive)
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (error "Buffer '%s' is not visiting a file!" name)
+      (let ((new-name (read-file-name "New name: " filename)))
+        (if (get-buffer new-name)
+            (error "A buffer named '%s' already exists!" new-name)
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (message "File '%s' successfully renamed to '%s'"
+                   name (file-name-nondirectory new-name)))))))
+
+(global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
+
+;;; js-ido.el -- IDO
+;; Enable
+(ido-mode t)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-max-prospects 10)
+
+;; If thing-at-point looks like something openable, default to it
+(setq ido-use-filename-at-point (quote guess))
+(setq ido-use-url-at-point t)
+
+;; Show previously opened buffers in ido-switch-buffer
+(setq ido-use-virtual-buffers t)
+
+;; Make sure ido is really everywhere
+(package-require 'ido-ubiquitous)
+(ido-ubiquitous-mode)
+
+;; Use smex to provide ido-like interface for M-x
+(package-require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is the old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; Vertical ido
+(package-require 'ido-grid-mode)
+(ido-grid-mode)
+
+;;; js-git.el
+(package-require 'magit)
+(package-require 'magit-popup)
+(package-require 'evil-magit)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x l") 'magit-log-all)
+
+;; Github integration
+(package-require 'jist)
+(setq jist-enable-default-authorized 't)
+
+;;; js-org.el
+(setq org-export-with-planning t
+      )
+
+(setq org-html-validation-link nil
+      org-export-with-author nil
+      org-export-with-toc nil
+      org-export-time-stamp-file nil)
+
+; Add a time stamp to the task when completed
+(setq org-log-done 'time)
+
+(eval-after-load "org"
+  '(progn
+     (require 'ox-md nil t)
+     ;(package-require 'ox-gfm)
+     ;(require 'ox-gfm nil t)
+     )
+  )
