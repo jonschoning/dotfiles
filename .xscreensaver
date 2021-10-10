@@ -1,12 +1,12 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.30 for jon on Tue Dec 29 16:43:33 2015.
-# http://www.jwz.org/xscreensaver/
+# Written by xscreensaver-demo 5.42 for jon on Sun Oct 10 10:43:12 2021.
+# https://www.jwz.org/xscreensaver/
 
-timeout:	0:10:00
-cycle:		0:10:00
-lock:		False
+timeout:	6:00:00
+cycle:		6:00:00
+lock:		True
 lockTimeout:	0:00:00
-passwdTimeout:	0:00:30
+passwdTimeout:	0:05:00
 visualID:	default
 installColormap:    True
 verbose:	False
@@ -23,7 +23,7 @@ fadeSeconds:	0:00:03
 fadeTicks:	20
 captureStderr:	True
 ignoreUninstalledPrograms:False
-font:		*-medium-r-*-140-*-m-*
+font:		-*-verdana-medium-r-*-*-20-*-*-*-*-*-*-*
 dpmsEnabled:	False
 dpmsQuickOff:	False
 dpmsStandby:	2:00:00
@@ -35,9 +35,9 @@ chooseRandomImages: True
 imageDirectory:	/home/jon/fs/pic
 
 mode:		random
-selected:	-1
+selected:	107
 
-textMode:	url
+textMode:	literal
 textLiteral:	XScreenSaver
 textFile:	
 textProgram:	fortune
@@ -49,29 +49,29 @@ programs:								      \
 -				attraction -root			    \n\
 -				blitspin -root				    \n\
 -				greynetic -root -delay 245575		    \n\
--				helix -root				    \n\
+				helix -root				    \n\
 -				hopalong -root				    \n\
 				imsmap -root -delay 60			    \n\
 -				noseguy -root				    \n\
 -				pyro -root				    \n\
--				qix -root				    \n\
+				qix -root -delay 92035 -hollow		    \n\
 -				rocks -root				    \n\
 -				rorschach -root				    \n\
 -				decayscreen -root			    \n\
--				flame -root -delay 96460		    \n\
+				flame -root -delay 96460		    \n\
 -				halo -root				    \n\
 -				slidescreen -root			    \n\
 -				pedal -root				    \n\
 -				bouboule -root				    \n\
 -				braid -root				    \n\
-				coral -root				    \n\
+				coral -root -delay2 44249		    \n\
 				deco -root -delay 51 -ncolors 12	      \
 				  -min-width 40 -min-height 40		      \
 				  -smooth-colors			    \n\
--				drift -root				    \n\
+				drift -root				    \n\
 -				fadeplot -root				    \n\
--				galaxy -root				    \n\
-				goop -root -delay 100000 -torque 0.0002	      \
+-				galaxy -root -delay 30088		    \n\
+				goop -root -delay 66372 -torque 0.0002	      \
 				  -max-velocity 0.1			    \n\
 -				grav -root				    \n\
 -				ifs -root				    \n\
@@ -82,10 +82,10 @@ programs:								      \
 - GL: 				moebius -root				    \n\
 				moire -root -delay 20			    \n\
 - GL: 				morph3d -root				    \n\
--				mountain -root				    \n\
+				mountain -root				    \n\
 				munch -root -delay 500000		    \n\
 -				penrose -root -ncolors 1		    \n\
-- GL: 				pipes -root -delay 20354 -factory 0	    \n\
+  GL: 				pipes -root -delay 20354 -factory 0	    \n\
 				rd-bomb -root				    \n\
 - GL: 				rubik -root				    \n\
 				sierpinski -root			    \n\
@@ -104,7 +104,7 @@ programs:								      \
 -				crystal -root				    \n\
 -				cynosure -root -delay 973451 -iterations      \
 				  193					    \n\
--				discrete -root -delay 96460		    \n\
+				discrete -root -delay 96460		    \n\
 -				distort -root				    \n\
 				epicycle -root -delay 95575		    \n\
 -				flow -root				    \n\
@@ -122,11 +122,11 @@ programs:								      \
 				ccurve -root -pause 4.6903		    \n\
 -				compass -root -delay 39823		    \n\
 -				deluxe -root				    \n\
-				demon -root -delay 5000000 -ncolors 28	    \n\
+				demon -root -delay 5000000		    \n\
 - GL: 				extrusion -root -delay 39823		    \n\
 -				loop -root				    \n\
 -				penetrate -root				    \n\
--				petri -root				    \n\
+				petri -root				    \n\
 -				phosphor -root				    \n\
 - GL: 				pulsar -root				    \n\
 -				ripples -root				    \n\
@@ -158,11 +158,11 @@ programs:								      \
 -				zoom -root -pixspacex 0 -pixspacey 0	    \n\
 -				anemone -root				    \n\
 -				apollonian -root -no-label		    \n\
-  GL: 				boxed -root -speed 0.0005		    \n\
+- GL: 				boxed -root -speed 0.0005		    \n\
 - GL: 				cubenetic -root -no-wander -wave-speed 5    \n\
-- GL: 				endgame -root				    \n\
+  GL: 				endgame -root -delay 0			    \n\
 -				euler2d -root -delay 47788		    \n\
--				fluidballs -root -delay 81416 -gravity	      \
+				fluidballs -root -delay 81416 -gravity	      \
 				  0.0027				    \n\
 - GL: 				flurry -root				    \n\
 - GL: 				glblur -root				    \n\
@@ -183,7 +183,7 @@ programs:								      \
 - GL: 				blinkbox -root				    \n\
 - GL: 				blocktube -root -delay 97345		    \n\
 - GL: 				bouncingcow -root			    \n\
-				cloudlife -root				    \n\
+				cloudlife -root -cycle-delay 78761	    \n\
   GL: 				cubestorm -root -speed 0.005		    \n\
 -				eruption -root				    \n\
 - GL: 				flipflop -root				    \n\
@@ -217,7 +217,7 @@ programs:								      \
 -				pacman -root				    \n\
 - GL: 				pinion -root				    \n\
 - GL: 				polyhedra -root				    \n\
-- GL: 				providence -root			    \n\
+- GL: 				providence -root -delay 46903 -wireframe    \n\
 -				substrate -root				    \n\
 -				wormhole -root -zspeed 5 -stars 41	    \n\
 - GL: 				antmaze -root				    \n\
@@ -227,8 +227,8 @@ programs:								      \
 -				celtic -root				    \n\
 - GL: 				crackberg -root -delay 54867 -visibility      \
 				  0.8938				    \n\
-  GL: 				cube21 -root -rotspeed 1.3982 -spinspeed      \
-				  0.1512 -wanderspeed 0.0045		    \n\
+- GL: 				cube21 -root -rotspeed 1.3982 -spinspeed      \
+				  0.1159 -wanderspeed 0.0045		    \n\
 -				fiberlamp -root				    \n\
 - GL: 				fliptext -root				    \n\
 - GL: 				glhanoi -root				    \n\
@@ -254,19 +254,55 @@ programs:								      \
 -				lcdscrub -root				    \n\
 - GL: 				photopile -root				    \n\
 - GL: 				skytentacles -root			    \n\
-  GL: 				rubikblocks -root -cubesize 0.7257	      \
-				  -rotspeed 1.1593 -wanderspeed 0.0028	    \n\
+- GL: 				rubikblocks -root -cubesize 0.7257	      \
+				  -rotspeed 1.1593 -spinspeed 0.01	      \
+				  -wanderspeed 0.0028			    \n\
 - GL: 				companioncube -root			    \n\
-  GL: 				hilbert -root -speed 0.02		    \n\
+  GL: 				hilbert -root -speed 0.02 -thickness 0.0976 \n\
 - GL: 				tronbit -root				    \n\
   GL: 				geodesic -root -speed 0.01		    \n\
 -				hexadrop -root -speed 0.1 -uniform-speed    \n\
-  GL: 				kaleidocycle -root -speed 0.005		    \n\
+- GL: 				kaleidocycle -root -speed 0.005		    \n\
 - GL: 				quasicrystal -root -speed 0.001		    \n\
 - GL: 				unknownpleasures -root			    \n\
-- GL: 				projectiveplane -root			    \n\
+- GL: 				projectiveplane -root -speed-wx -0.0354	      \
+				  -speed-wy 0.177 -speed-wz 0.0354	      \
+				  -speed-xy 0.3894 -speed-xz 0.3186	      \
+				  -speed-yz 0.2478 -walk-direction 4.7788     \
+				  -walk-speed 1 -view-mode walk		    \n\
 -				tessellimage -root			    \n\
 - GL: 				winduprobot -root			    \n\
+				binaryring -root			    \n\
+  GL: 				cityflow -root -delay 0 -count 330 -skew      \
+				  2 -wave-speed 5 -wave-radius 404 -waves     \
+				  3					    \n\
+- GL: 				geodesicgears -root			    \n\
+  GL: 				romanboy -root -view-mode walk -no-deform     \
+				  -deformation-speed 1 -speed-x -0.0354	      \
+				  -speed-y 0.1062 -speed-z 0.0354	      \
+				  -walk-speed 1				    \n\
+- GL: 				splitflap -root				    \n\
+- GL: 				cubestack -root				    \n\
+  GL: 				cubetwist -root -speed 0.4504		    \n\
+- GL: 				discoball -root				    \n\
+- GL: 				dymaxionmap -root			    \n\
+- GL: 				energystream -root			    \n\
+  GL: 				hexstrut -root				    \n\
+- GL: 				hydrostat -root				    \n\
+- GL: 				raverhoop -root				    \n\
+- GL: 				splodesic -root				    \n\
+- GL: 				unicrud -root				    \n\
+- GL: 				esper -root				    \n\
+- GL: 				vigilance -root				    \n\
+  GL: 				crumbler -root -delay 16814 -speed 0.05	    \n\
+-				filmleader -root			    \n\
+-				glitchpeg -root				    \n\
+- GL: 				handsy -root				    \n\
+- GL: 				maze3d -root				    \n\
+- GL: 				peepers -root				    \n\
+  GL: 				razzledazzle -root -speed 0.1 -density	      \
+				  5.6031 -thickness 0.5069 -mode flat	    \n\
+-				vfeedback -root				    \n\
 
 
 pointerPollTime:    0:00:05
