@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.42 for jon on Sun Oct 10 10:43:12 2021.
+# Written by xscreensaver-demo 5.45 for jon on Thu Dec 30 14:11:48 2021.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	6:00:00
@@ -160,7 +160,7 @@ programs:								      \
 -				apollonian -root -no-label		    \n\
 - GL: 				boxed -root -speed 0.0005		    \n\
 - GL: 				cubenetic -root -no-wander -wave-speed 5    \n\
-  GL: 				endgame -root -delay 0			    \n\
+- GL: 				endgame -root -delay 0			    \n\
 -				euler2d -root -delay 47788		    \n\
 				fluidballs -root -delay 81416 -gravity	      \
 				  0.0027				    \n\
@@ -219,7 +219,8 @@ programs:								      \
 - GL: 				polyhedra -root				    \n\
 - GL: 				providence -root -delay 46903 -wireframe    \n\
 -				substrate -root				    \n\
--				wormhole -root -zspeed 5 -stars 41	    \n\
+				wormhole -root -delay 68702 -zspeed 1	      \
+				  -stars 100				    \n\
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
 				boxfit -root -delay 100000		    \n\
@@ -303,6 +304,16 @@ programs:								      \
   GL: 				razzledazzle -root -speed 0.1 -density	      \
 				  5.6031 -thickness 0.5069 -mode flat	    \n\
 -				vfeedback -root				    \n\
+				scooter -root -cycles 0 -count 34 -size	      \
+				  200 -ncolors 93			    \n\
+- GL: 				deepstars -root				    \n\
+  GL: 				gravitywell -root			    \n\
+- GL: 				beats -root				    \n\
+- GL: 				covid19 -root				    \n\
+- GL: 				etruscanvenus -root			    \n\
+  GL: 				gibson -root				    \n\
+- GL: 				headroom -root				    \n\
+- GL: 				sphereeversion -root			    \n\
 
 
 pointerPollTime:    0:00:05
